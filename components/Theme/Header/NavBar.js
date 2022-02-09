@@ -4,7 +4,7 @@ import SearchForm from "./searchForm";
 export default function Navbar() {
   return (
     <nav className="">
-      <ul className="flex p-2 bg-gray-900 text-white justify-between items-center">
+      <ul className="flex p-3 bg-gray-900 text-white justify-between items-center">
         <span className="flex items-center gap-5">
           <li>
             <svg
