@@ -13,7 +13,7 @@ export default function SearchForm() {
         name="searchTerm"
         type="text"
         placeholder="Search services"
-        className="py-1 px-2 rounded-lg min-w-[600px] text-gray-900"
+        className="py-1 px-2 min-w-[600px] text-gray-900"
       />
       <button type="submit" className="ml-5 font-bold">
         Search
