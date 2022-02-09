@@ -1,6 +1,6 @@
 export default function AsideLeft() {
   return (
-    <aside className="h-screen bg-gray-800 text-white w-[250px] sticky top-0 p-4">
+    <aside className="h-screen overflow-y-scroll bg-gray-800 text-white w-[250px] sticky top-0 p-4">
       <ul className="space-y-10">
         {[
           "Design & Graphics",
@@ -13,10 +13,10 @@ export default function AsideLeft() {
           "Trending",
         ].map((item, key) => {
           return (
-            <li key={key} className="flex gap-2">
+            <li key={key} className="">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className="h-6 w-6 float-left mr-2"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -29,6 +29,12 @@ export default function AsideLeft() {
                 />
               </svg>
               {item}
+
+              <ul>
+                {["item 1", "item 2", "item 3", "item 4"].map((item, key) => {
+                  return <li key={key}>{item}</li>;
+                })}
+              </ul>
             </li>
           );
         })}
