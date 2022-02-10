@@ -1,9 +1,9 @@
 import Head from "next/head";
-import CategoriesSection from "../components/CategoriesSection/CategoriesSection";
-import HeroSection from "../components/HeroSection/HeroSection";
-import AsideRight from "../components/Theme/AsideRight/AsideRight";
-import styles from "../styles/Home.module.css";
-import AsideLeft from "./../components/Theme/AsideLeft/AsideLeft";
+import CategoriesSection from "../../components/CategoriesSection/CategoriesSection";
+import HeroSection from "../../components/HeroSection/HeroSection";
+import AsideRight from "../../components/Theme/AsideRight/AsideRight";
+import styles from "../../styles/Home.module.css";
+import AsideLeft from "./../../components/Theme/AsideLeft/AsideLeft";
 
 export default function Home() {
   return (
@@ -24,9 +24,15 @@ export default function Home() {
         </div>
 
         <div className="col-span-10">
-          <main className="">
-            <HeroSection />
-            <CategoriesSection />
+          <HeroSection />
+          <main className="grid grid-cols-10">
+            <div className="col-span-8">
+              <CategoriesSection />
+            </div>
+
+            <div className="col-span-2">
+              <AsideRight />
+            </div>
           </main>
         </div>
       </div>
