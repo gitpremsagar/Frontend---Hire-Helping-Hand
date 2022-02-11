@@ -14,14 +14,14 @@ export default function SearchForm() {
         <input
           name="searchTerm"
           type="text"
-          placeholder="Search services"
+          placeholder="Search freelancing services"
           className="min-w-[600px] text-gray-900 border-2 border-gray-900 p-2"
         />
         <button
           type="submit"
           className="text-white p-2 font-bold border-2 border-gray-900 bg-gray-900"
         >
-          Search
+          Find Freelancer
         </button>
       </div>
 
