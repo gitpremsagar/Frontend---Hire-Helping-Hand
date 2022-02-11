@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SelectMenu from "../others/Select";
 
 export default function SearchForm() {
   const [formData, setformData] = useState([]);
@@ -9,7 +10,7 @@ export default function SearchForm() {
   }
   return (
     <form onSubmit={handleSearchTermSubmit} className="">
-      <div className="flex items-center justify-evenly">
+      <div className="flex items-center justify-center">
         <input
           name="searchTerm"
           type="text"
@@ -24,25 +25,10 @@ export default function SearchForm() {
         </button>
       </div>
 
-      <div className="mt-5 flex justify-evenly">
-        <span>Location</span>
-        <select className="text-black">
-          <option>India</option>
-          <option>India</option>
-          <option>India</option>
-        </select>
-        <span>Location</span>
-        <select className="text-black">
-          <option>India</option>
-          <option>India</option>
-          <option>India</option>
-        </select>
-        <span>Location</span>
-        <select className="text-black">
-          <option>India</option>
-          <option>India</option>
-          <option>India</option>
-        </select>
+      <div className="mt-10 flex justify-evenly">
+        <SelectMenu label="Location" />
+        <SelectMenu label="Service" />
+        <SelectMenu label="Online status" />
       </div>
     </form>
   );

@@ -1,9 +1,12 @@
+import SearchForm from "./searchForm";
+
 export default function HeroSection() {
   return (
-    <section className="h-[30vh] p-20">
-      <h3 className="text-4xl font-bold mb-10 my-auto text-center">
-        Hire freelancer and get the job done.
+    <section className="p-20">
+      <h3 className="text-8xl text-gray-800 font-bold mb-20 my-auto text-center">
+        Hire freelancer <br /> Get the job done
       </h3>
+      <SearchForm />
     </section>
   );
 }

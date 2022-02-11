@@ -26,6 +26,7 @@ export default function Home() {
         <div className="col-span-10">
           <main className="">
             <HeroSection />
+            <hr />
             <CategoriesSection />
           </main>
         </div>
