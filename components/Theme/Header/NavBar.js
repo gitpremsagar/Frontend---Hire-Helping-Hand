@@ -41,9 +41,6 @@ export default function Navbar() {
         </span>
         <span className="flex justify-evenly items-center gap-5">
           <li>
-            <SearchForm />
-          </li>
-          <li>
             <Link href="/notification">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
