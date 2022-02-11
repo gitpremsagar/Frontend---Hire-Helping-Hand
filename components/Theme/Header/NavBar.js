@@ -1,5 +1,4 @@
 import Link from "next/link";
-import SearchForm from "./searchForm";
 
 export default function Navbar() {
   return (

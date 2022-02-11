@@ -1,6 +1,6 @@
 export default function CategoryCard({ category }) {
   return (
-    <div class="category-card hover:cursor-pointer">
+    <div className="category-card hover:cursor-pointer">
       <div className="flex justify-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
