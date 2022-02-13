@@ -19,7 +19,7 @@ body {
 }
 
 .showSubCategory {
-  @apply mt-5 h-auto;
+  @apply mt-2 h-auto;
 }
 
 .activeCategory {

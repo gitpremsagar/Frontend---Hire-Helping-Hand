@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { categoriesObject } from "../../CategoriesSection/categoriesObject";
 
 export default function AsideLeft() {
@@ -42,6 +43,7 @@ export default function AsideLeft() {
               />
             </svg>
           </li>
+
           {Object.keys(categoriesObject).map((category, key) => {
             return (
               <li key={key} className=" hover:bg-gray-900">
@@ -96,11 +98,14 @@ export default function AsideLeft() {
                               categoriesObject[category][subCategory].map(
                                 (serivceList, key) => {
                                   return (
-                                    <li
-                                      key={key}
-                                      className="hover:bg-gray-400 p-2 rounded cursor-pointer"
-                                    >
-                                      {serivceList}
+                                    <li key={key}>
+                                      <Link
+                                        href={`/${category}/${serivceList}`}
+                                      >
+                                        <a className="block p-2 hover:bg-gray-500 rounded">
+                                          {serivceList}
+                                        </a>
+                                      </Link>
                                     </li>
                                   );
                                 }
