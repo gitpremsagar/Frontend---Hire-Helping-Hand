@@ -45,7 +45,10 @@ export default function AsideLeft() {
           {Object.keys(categoriesObject).map((category, key) => {
             return (
               <li key={key} className=" hover:bg-gray-900">
-                <div onClick={showListOfSubCategories} className="px-2 py-4">
+                <div
+                  onClick={showListOfSubCategories}
+                  className="px-2 py-4 cursor-pointer"
+                >
                   {/* Category icons */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +98,7 @@ export default function AsideLeft() {
                                   return (
                                     <li
                                       key={key}
-                                      className="hover:bg-gray-400 p-2 rounded"
+                                      className="hover:bg-gray-400 p-2 rounded cursor-pointer"
                                     >
                                       {serivceList}
                                     </li>

@@ -15,15 +15,15 @@ body {
 }
 
 .subCategory {
-  @apply ml-10 h-0 overflow-hidden transition-all ease-linear duration-200;
-}
-
-.activeCategory {
-  @apply bg-gray-900;
+  @apply ml-10 pr-4 h-0 overflow-hidden transition-all ease-linear duration-200;
 }
 
 .showSubCategory {
   @apply mt-5 h-auto;
+}
+
+.activeCategory {
+  @apply bg-gray-900;
 }
 
 /* width */
