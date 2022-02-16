@@ -1,7 +1,6 @@
 import Head from "next/head";
 import CategoriesSection from "../components/CategoriesSection/CategoriesSection";
 import HeroSection from "../components/HeroSection/HeroSection";
-import AsideRight from "../components/Theme/AsideRight/AsideRight";
 import styles from "../styles/Home.module.css";
 import AsideLeft from "./../components/Theme/AsideLeft/AsideLeft";
 
