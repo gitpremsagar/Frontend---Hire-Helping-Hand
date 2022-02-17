@@ -3,6 +3,10 @@ import { useState } from "react";
 import { envVars } from "../../Services/envVars";
 import axios from "axios";
 
+// some tasks that have to be handled later
+// 1. Handle 400 response from server propery while submitting signup form
+// 2. Handle 500 response from server propery while submitting signup form
+// 3. Remove all console.log()
 export default function SignupForm() {
   // initializing state to store signup form data
   const [signupFormData, setsignupFormData] = useState({
@@ -23,7 +27,13 @@ export default function SignupForm() {
         console.log("Response = ", response);
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response.status === 400) alert("Bad request");
+        if (error.response.status === 500) {
+          alert(
+            "There is some problem with the server. Kindly report this at 'premsagar9113@gmail.com'"
+          );
+        }
+        console.log(error.response);
       });
   }
 
