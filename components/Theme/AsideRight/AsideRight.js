@@ -1,6 +1,6 @@
 export default function AsideRight() {
   return (
-    <aside className="h-screen overflow-y-scroll w-full sticky top-0 border-2 border-gray-800">
+    <aside className="h-screen overflow-y-scroll w-full sticky top-14 border-2 border-gray-800 rounded">
       <h6 className=" px-2 py-4 font-bold">Online Freelancers</h6>
       <ul className="">
         {[
@@ -16,7 +16,7 @@ export default function AsideRight() {
           return (
             <li
               key={key}
-              className=" px-2 py-4 hover:border-gray-600 border-t-2 border-b-2 border-gray-100 "
+              className="text-blue-600 cursor-pointer px-2 py-4 hover:border-gray-600 border-t-2 border-b-2 border-gray-100 transition-all ease-linear"
             >
               {/* User icons */}
               <svg

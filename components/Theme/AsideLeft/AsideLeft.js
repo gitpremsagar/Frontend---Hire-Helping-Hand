@@ -23,7 +23,7 @@ export default function AsideLeft() {
   }
 
   return (
-    <aside className="h-screen overflow-y-scroll bg-gray-800 text-white w-full sticky top-0">
+    <aside className="h-screen overflow-y-scroll bg-gray-800 text-white w-full sticky top-12">
       <nav>
         <ul>
           <li className=" px-2 py-4 hover:bg-gray-900">
