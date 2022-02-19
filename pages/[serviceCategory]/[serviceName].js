@@ -22,7 +22,7 @@ export default function DynamicPage() {
       {/* Header */}
       <div className="lg:grid lg:grid-cols-12">
         <div className="col-span-2">
-          <AsideLeft router={router} />
+          <AsideLeft />
         </div>
 
         <div className="col-span-10">

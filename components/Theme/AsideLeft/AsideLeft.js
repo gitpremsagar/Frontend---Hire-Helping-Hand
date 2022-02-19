@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 export default function AsideLeft() {
   const router = useRouter();
-  console.log("router = ", router);
   function showListOfSubCategories(e) {
     // change background colour of clicked list item to make it look active
     const category_li = e.currentTarget.parentElement;
