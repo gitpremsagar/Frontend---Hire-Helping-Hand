@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { categoriesObject } from "../../CategoriesSection/categoriesObject";
+import { useRouter } from "next/router";
 
 export default function AsideLeft() {
+  const router = useRouter();
+  console.log("router = ", router);
   function showListOfSubCategories(e) {
     // change background colour of clicked list item to make it look active
     const category_li = e.currentTarget.parentElement;
@@ -46,7 +49,15 @@ export default function AsideLeft() {
 
           {Object.keys(categoriesObject).map((category, key) => {
             return (
-              <li key={key} className=" hover:bg-gray-900">
+              <li
+                key={key}
+                className={
+                  router.query.serviceCategory &&
+                  category === router.query.serviceCategory
+                    ? `hover:bg-gray-900 activeCategory`
+                    : `hover:bg-gray-900`
+                }
+              >
                 <div
                   onClick={showListOfSubCategories}
                   className="px-2 py-4 cursor-pointer"
@@ -85,7 +96,15 @@ export default function AsideLeft() {
                 </div>
 
                 {/* List of items within the category */}
-                <ul className="subCategory">
+
+                <ul
+                  className={
+                    router.query.serviceCategory &&
+                    category === router.query.serviceCategory
+                      ? `subCategory showSubCategory`
+                      : `subCategory`
+                  }
+                >
                   {Object.keys(categoriesObject[category]).map(
                     (subCategory, key) => {
                       return (
