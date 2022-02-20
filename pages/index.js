@@ -4,7 +4,9 @@ import HeroSection from "../components/HeroSection/HeroSection";
 import styles from "../styles/Home.module.css";
 import AsideLeft from "./../components/Theme/AsideLeft/AsideLeft";
 
-export default function Home() {
+export default function Home(props) {
+  const { token } = props;
+  console.log(token);
   return (
     <div className="">
       <Head>
@@ -35,3 +37,7 @@ export default function Home() {
     </div>
   );
 }
+
+// FIXME:
+// 1. components\login\LoginForm.js
+// 2. components\signup\SignupForm.js

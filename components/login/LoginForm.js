@@ -2,8 +2,11 @@ import Input from "../signup/Input";
 import axios from "axios";
 import { envVars } from "../../Services/envVars";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function LoginForm() {
+  const router = useRouter();
+
   // initializing state to store signup form data
   const [loginFormData, setloginFormData] = useState({
     email: "",
@@ -11,15 +14,23 @@ export default function LoginForm() {
     rMe: false,
   });
 
+  const [loginResponseError, setloginResponseError] = useState();
+
   function handleLoginFormSubmit(e) {
     e.preventDefault();
-    // FIXME: use correct api url to post login form
     axios
-      .post(envVars.BACKEND_API_FOR_USERS, loginFormData)
+      .post(envVars.BACKEND_API_FOR_LOGGING_IN_USERS, loginFormData)
       .then((response) => {
-        console.log("Response = ", response);
+        localStorage.setItem("token", response.headers["x-auth-token"]);
+        router.push("/");
       })
       .catch((error) => {
+        // FIXME: handle 400 and 500 response properly
+        //    TODO: provide proper feedback message to user regarding what went wrong
+
+        // FIXME: when server stops for some reason then error.response.status is undefined and its crashing the page
+
+        setloginResponseError(error.response);
         if (error.response.status === 400) alert("Bad request");
         if (error.response.status === 500) {
           alert(

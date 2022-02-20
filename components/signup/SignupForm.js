@@ -24,7 +24,8 @@ export default function SignupForm() {
     axios
       .post(envVars.BACKEND_API_FOR_USERS, signupFormData)
       .then((response) => {
-        console.log("Response = ", response);
+        // console.log("Response = ", response);
+        //TODO: if user is registered successfull then send hom to confirmation page and there give him option to redirect to login page
       })
       .catch((error) => {
         if (error.response.status === 400) alert("Bad request");
