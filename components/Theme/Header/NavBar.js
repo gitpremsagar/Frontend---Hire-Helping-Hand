@@ -1,8 +1,8 @@
 import Link from "next/link";
+import UserDropdown from "./UserDropdown";
 
 export default function Navbar(props) {
   const { loggedInUserInfo } = props;
-  console.log("user info from nav = ", loggedInUserInfo);
   return (
     <nav className="">
       <ul className="flex p-3 bg-gray-900 text-white justify-between items-center">
@@ -67,7 +67,7 @@ export default function Navbar(props) {
 
           <li>
             {loggedInUserInfo ? (
-              <Link href={`/user-profile`}>{loggedInUserInfo.first_name}</Link>
+              <UserDropdown loggedInUserInfo={loggedInUserInfo} />
             ) : (
               <Link href="/login">Log In</Link>
             )}
