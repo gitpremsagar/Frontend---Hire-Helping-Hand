@@ -114,14 +114,14 @@ export default function AsideLeft() {
                           <ul className="ml-5 mt-4 mb-4">
                             {Object.values(
                               categoriesObject[category][subCategory].map(
-                                (serivceList, key) => {
+                                (serivceName, key) => {
                                   return (
                                     <li key={key}>
                                       <Link
-                                        href={`/${category}/${serivceList}`}
+                                        href={`/services/${category}/${serivceName}`}
                                       >
                                         <a className="block p-2 hover:bg-gray-500 rounded">
-                                          {serivceList}
+                                          {serivceName}
                                         </a>
                                       </Link>
                                     </li>

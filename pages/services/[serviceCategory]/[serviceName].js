@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import HeroSection from "../../components/HeroSection/HeroSection";
-import ServiceCard from "../../components/serviceCategory/serviceCard";
-import AsideLeft from "../../components/Theme/AsideLeft/AsideLeft";
-import AsideRight from "../../components/Theme/AsideRight/AsideRight";
-import styles from "../../styles/Home.module.css";
+import HeroSection from "../../../components/HeroSection/HeroSection";
+import ServiceCard from "../../../components/serviceCategory/serviceCard";
+import AsideLeft from "../../../components/Theme/AsideLeft/AsideLeft";
+import AsideRight from "../../../components/Theme/AsideRight/AsideRight";
+import styles from "../../../styles/Home.module.css";
 export default function DynamicPage(props) {
   const { loggedInUserInfo } = props;
   const router = useRouter();
