@@ -34,13 +34,13 @@ function MyApp({ Component, pageProps }) {
   }
 
   useEffect(() => {
-    // TODO: verify token before storing it into loggedInUserInfo stateHook
+    //verify token before storing it into loggedInUserInfo stateHook
     const token = window.localStorage.getItem("token");
     if (token) verifyTokenThenUpdate_loggedInUserInfo(token);
   }, []);
   return (
     <Fragment>
-      <Header />
+      <Header loggedInUserInfo={loggedInUserInfo} />
       <Component {...pageProps} loggedInUserInfo={loggedInUserInfo} />
     </Fragment>
   );

@@ -22,9 +22,11 @@ export default function LoginForm() {
       .post(envVars.BACKEND_API_FOR_LOGGING_IN_USERS, loginFormData)
       .then((response) => {
         localStorage.setItem("token", response.headers["x-auth-token"]);
-        router.push("/");
+        //router.push("/");
+        window.location.replace("/");
       })
       .catch((error) => {
+        console.log(error);
         // FIXME: handle 400 and 500 response properly
         //    TODO: provide proper feedback message to user regarding what went wrong
 
@@ -37,7 +39,6 @@ export default function LoginForm() {
             "There is some problem with the server. Kindly report this at 'premsagar9113@gmail.com'"
           );
         }
-        console.log(error.response);
       });
   }
 

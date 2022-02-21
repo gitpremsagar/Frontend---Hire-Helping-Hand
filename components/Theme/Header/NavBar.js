@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-export default function Navbar() {
+export default function Navbar(props) {
+  const { loggedInUserInfo } = props;
+  console.log("user info from nav = ", loggedInUserInfo);
   return (
     <nav className="">
       <ul className="flex p-3 bg-gray-900 text-white justify-between items-center">
@@ -40,7 +42,7 @@ export default function Navbar() {
         </span>
         <span className="flex justify-evenly items-center gap-5">
           <li>
-            <Link href="/notification">
+            <Link href="/user-notification">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -57,11 +59,18 @@ export default function Navbar() {
               </svg>
             </Link>
           </li>
+          {loggedInUserInfo ? null : (
+            <li>
+              <Link href="/signup">Sign Up</Link>
+            </li>
+          )}
+
           <li>
-            <Link href="/signup">Sign Up</Link>
-          </li>
-          <li>
-            <Link href="/login">Log In</Link>
+            {loggedInUserInfo ? (
+              <Link href={`/user-profile`}>{loggedInUserInfo.first_name}</Link>
+            ) : (
+              <Link href="/login">Log In</Link>
+            )}
           </li>
         </span>
       </ul>

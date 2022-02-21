@@ -6,7 +6,7 @@ import AsideLeft from "./../components/Theme/AsideLeft/AsideLeft";
 
 export default function Home(props) {
   const { loggedInUserInfo } = props;
-  console.log(loggedInUserInfo);
+
   return (
     <div className="">
       <Head>
@@ -41,4 +41,4 @@ export default function Home(props) {
 // FIXME:
 // 1. components\login\LoginForm.js
 // 2. components\signup\SignupForm.js
-// TODO: 3. pages\_app.js
+// TODO: 3. make logout system work
