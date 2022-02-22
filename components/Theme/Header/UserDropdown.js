@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ChevronDown } from "../../svg/heroicons";
 import LogoutButton from "./LogoutButton";
 
 export default function UserDropdown(props) {
@@ -13,12 +14,12 @@ export default function UserDropdown(props) {
     <div>
       {/* DropDown triggering button */}
       <button
-        id="userDropdown"
+        className=" flex items-center"
         onClick={() => {
           setshowDropdown(!showDropdown);
         }}
       >
-        {loggedInUserInfo.first_name}
+        {loggedInUserInfo.first_name} <ChevronDown className="w-4 h-4 ml-1" />
       </button>
 
       {/* DropDown list */}
