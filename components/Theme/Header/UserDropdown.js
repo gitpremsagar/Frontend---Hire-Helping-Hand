@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { useState } from "react";
+import LogoutButton from "./LogoutButton";
 
 export default function UserDropdown(props) {
   const [showDropdown, setshowDropdown] = useState(false);
   const { loggedInUserInfo } = props;
-  console.log("showDropdown = ", showDropdown);
   return (
     <div>
       {/* DropDown triggering button */}
@@ -27,7 +27,9 @@ export default function UserDropdown(props) {
             </Link>
           </li>
           <li>Settings</li>
-          <li>Log out</li>
+          <li>
+            <LogoutButton />
+          </li>
         </ul>
       </div>
     </div>
