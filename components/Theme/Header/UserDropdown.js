@@ -1,14 +1,19 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogoutButton from "./LogoutButton";
 
 export default function UserDropdown(props) {
   const [showDropdown, setshowDropdown] = useState(false);
+
+  // hiding dropdown on clicking on anywhere on document
+  document.addEventListener("click", () => setshowDropdown(false), true);
+
   const { loggedInUserInfo } = props;
   return (
     <div>
       {/* DropDown triggering button */}
       <button
+        id="userDropdown"
         onClick={() => {
           setshowDropdown(!showDropdown);
         }}

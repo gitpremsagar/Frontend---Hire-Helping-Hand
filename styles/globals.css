@@ -27,7 +27,7 @@ body {
 }
 
 .navDropdown_Ul li {
-  @apply p-3 cursor-pointer;
+  @apply p-3 cursor-pointer hover:bg-gray-500 rounded;
 }
 
 .navDropdown {

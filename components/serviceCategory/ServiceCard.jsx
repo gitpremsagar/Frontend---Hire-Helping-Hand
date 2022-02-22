@@ -20,7 +20,7 @@ export default function ServiceCard() {
         {/* Service offer details */}
         <div className="col-span-3 p-6 ">
           {/* Service title */}
-          <Link href={`/`}>
+          <Link href={`/service-detail/45`}>
             <h3 className="text-xl font-semibold mb-2 cursor-pointer text-blue-600 hover:text-blue-500">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo,
               veniam?
