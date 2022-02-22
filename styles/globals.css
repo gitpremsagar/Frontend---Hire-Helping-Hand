@@ -38,6 +38,13 @@ body {
   @apply block h-auto;
 }
 
+.AsideLeftOfDashboard {
+  @apply h-screen overflow-y-scroll bg-gray-800 text-white w-full sticky top-12;
+}
+
+.AsideLeftOfDashboard li {
+  @apply py-4 px-2 hover:bg-gray-900;
+}
 /* ========= custom scrollbar ============*/
 /* width */
 ::-webkit-scrollbar {

@@ -1,9 +1,34 @@
-import { useRouter } from "next/router";
+import Head from "next/head";
+import CategoriesSection from "../../components/CategoriesSection/CategoriesSection";
+import HeroSection from "../../components/HeroSection/HeroSection";
+import AsideLeftOfDashboard from "../../components/userDashboard/AsideLeftOfDashboard";
+import styles from "../../styles/Home.module.css";
 
-export default function UserDashboard() {
-  const router = useRouter();
-  console.log("user id = ", router.query.idusers);
+export default function Home(props) {
+  const { loggedInUserInfo } = props;
+
   return (
-    <div>This is user's dashboard page for user {router.query.idusers} </div>
+    <div className="">
+      <Head>
+        <title>Dashboard</title>
+
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      {/* Header */}
+      <div className="lg:grid lg:grid-cols-12">
+        <div className="col-span-2">
+          <AsideLeftOfDashboard />
+        </div>
+
+        <div className="col-span-10">
+          <main className="">
+            <p>This is Dashboard</p>
+          </main>
+        </div>
+      </div>
+
+      <footer className={styles.footer}></footer>
+    </div>
   );
 }
