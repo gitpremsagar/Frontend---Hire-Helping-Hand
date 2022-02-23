@@ -6,6 +6,7 @@ import {
   PresentationChartBarIcon,
   UserGroupIcon,
 } from "../../svg/heroicons";
+import NotificationDropdown from "./NotificationDropdown";
 import UserDropdown from "./UserDropdown";
 
 export default function Navbar(props) {
@@ -60,12 +61,7 @@ export default function Navbar(props) {
           {loggedInUserInfo ? (
             <>
               <li>
-                <Link href="/user-notification">
-                  <a className="flex items-center">
-                    <BellIconSVG className="h-5 w-5 mr-1" />
-                    Notification
-                  </a>
-                </Link>
+                <NotificationDropdown loggedInUserInfo={loggedInUserInfo} />
               </li>
               <li>
                 <Link href={`/user-dashboard/${26}`}>

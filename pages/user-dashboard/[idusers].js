@@ -1,10 +1,8 @@
 import Head from "next/head";
-import CategoriesSection from "../../components/CategoriesSection/CategoriesSection";
-import HeroSection from "../../components/HeroSection/HeroSection";
 import AsideLeftOfDashboard from "../../components/userDashboard/AsideLeftOfDashboard";
 import styles from "../../styles/Home.module.css";
 
-export default function Home(props) {
+export default function UserDashboardPage(props) {
   const { loggedInUserInfo } = props;
 
   return (

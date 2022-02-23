@@ -31,18 +31,24 @@ body {
 }
 
 .navDropdown {
-  @apply absolute bg-gray-700 p-5 right-2 rounded h-0 hidden transition-all ease-linear;
+  @apply absolute bg-gray-700 p-5 right-2 rounded hidden transition-all ease-linear;
+}
+
+.notificationDropdown {
+  @apply absolute bg-gray-700 p-5 rounded hidden transition-all ease-linear;
 }
 
 .showNavDropdown {
-  @apply block h-auto;
+  @apply block;
 }
 
-.AsideLeftOfDashboard {
+.AsideLeftOfDashboard,
+.AsideLeftOfCommunity {
   @apply h-screen overflow-y-scroll bg-gray-800 text-white w-full sticky top-12;
 }
 
-.AsideLeftOfDashboard li {
+.AsideLeftOfDashboard li,
+.AsideLeftOfCommunity li {
   @apply py-4 px-2 hover:bg-gray-900;
 }
 /* ========= custom scrollbar ============*/
