@@ -51,10 +51,13 @@ export default function ServiceCard() {
               <span className="mr-2">23 Ratings</span>
               <span>3 Answered questions</span>
             </div>
-            <div>
-              <button className="flex items-center border-2 border-gray-200 px-3 py-2 rounded-full">
+            <div className="flex">
+              <button className="flex items-center border-2 border-green-300 px-3 py-2 rounded-full">
                 <div className="w-4 h-4 rounded-full bg-green-600 mr-2"></div>
                 Chat
+              </button>
+              <button className="ml-1 items-center border-2 border-green-600 text-green-600 font-semibold px-3 py-2 rounded-full">
+                Order
               </button>
             </div>
           </div>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import {
   BellIconSVG,
   BriefcaseIcon,
+  ChatAltIcon,
   CloudeUpload,
   PresentationChartBarIcon,
   UserGroupIcon,
@@ -39,7 +40,7 @@ export default function Navbar(props) {
           {loggedInUserInfo ? (
             <>
               <li>
-                <Link href={`/become-freelancer`}>
+                <Link href={`/post-service/${loggedInUserInfo.idusers}`}>
                   <a className="flex items-center">
                     <BriefcaseIcon className="w-5 h-5 mr-1" />
                     Post Service
@@ -50,7 +51,7 @@ export default function Navbar(props) {
           ) : (
             <>
               <li>
-                <Link href={`/become-freelancer`}>Become Freelancer</Link>
+                <Link href={`/post-service`}>Become Freelancer</Link>
               </li>
             </>
           )}
@@ -61,15 +62,23 @@ export default function Navbar(props) {
           {loggedInUserInfo ? (
             <>
               <li>
-                <NotificationDropdown loggedInUserInfo={loggedInUserInfo} />
-              </li>
-              <li>
                 <Link href={`/user-dashboard/${26}`}>
                   <a className="flex items-center">
                     <PresentationChartBarIcon className="h-5 w-5 mr-1" />
                     Dashboard
                   </a>
                 </Link>
+              </li>
+              <li>
+                <Link href={`/user-messages/${26}`}>
+                  <a className="flex items-center">
+                    <ChatAltIcon className="h-5 w-5 mr-1" />
+                    Message
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <NotificationDropdown loggedInUserInfo={loggedInUserInfo} />
               </li>
               <li>
                 <UserDropdown loggedInUserInfo={loggedInUserInfo} />

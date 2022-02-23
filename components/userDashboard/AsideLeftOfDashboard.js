@@ -7,10 +7,12 @@ export default function AsideLeftOfDashboard() {
     <aside className="AsideLeftOfDashboard">
       <nav>
         <ul>
-          <li>Notifications</li>
-          <li>Messages</li>
+          <li>Freelancer / Client</li>
+          <li>Earning</li>
+          <li>Spending</li>
           <li>Posted Jobs</li>
           <li>Services Offered</li>
+          <li>Team members</li>
           <li>Settings</li>
         </ul>
       </nav>

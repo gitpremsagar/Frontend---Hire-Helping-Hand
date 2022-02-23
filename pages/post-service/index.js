@@ -12,7 +12,7 @@ export default function becomeFreelancer() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>Become a freelancer</main>
+      <main>Become a freelancer and sell your service</main>
 
       <footer></footer>
     </div>
