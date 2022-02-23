@@ -40,10 +40,10 @@ export default function Navbar(props) {
           {loggedInUserInfo ? (
             <>
               <li>
-                <Link href={`/post-service/${loggedInUserInfo.idusers}`}>
+                <Link href={`/sell-service/${loggedInUserInfo.idusers}`}>
                   <a className="flex items-center">
                     <BriefcaseIcon className="w-5 h-5 mr-1" />
-                    Post Service
+                    Sell Service
                   </a>
                 </Link>
               </li>
@@ -51,7 +51,7 @@ export default function Navbar(props) {
           ) : (
             <>
               <li>
-                <Link href={`/post-service`}>Become Freelancer</Link>
+                <Link href={`/sell-service`}>Become Freelancer</Link>
               </li>
             </>
           )}
