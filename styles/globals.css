@@ -53,11 +53,11 @@ body {
 }
 
 .serviceOfferCol {
-  @apply p-5 min-h-[100vh];
+  @apply p-10 rounded-2xl;
 }
 
 .serviceOfferCol h2 {
-  @apply text-center font-bold text-4xl text-white;
+  @apply text-center font-bold text-4xl text-white p-10;
 }
 
 /* ========= custom scrollbar ============*/

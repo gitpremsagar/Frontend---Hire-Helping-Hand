@@ -7,8 +7,12 @@ export default function InputField({
 }) {
   return (
     <>
-      <label htmlFor={`${label}id`} className="block text-gray-800 mb-2">
-        {label}{" "}
+      <label
+        htmlFor={`${label}id`}
+        className="block font-bold text-lg mb-2 text-white"
+      >
+        {label}
+        {" :"}
       </label>
       <input
         id={`${label}id`}
