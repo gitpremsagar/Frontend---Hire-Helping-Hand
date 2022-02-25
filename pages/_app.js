@@ -4,6 +4,7 @@ import Header from "../components/Theme/Header/Header";
 import "../styles/globals.css";
 import { envVars } from "./../Services/envVars";
 import axios from "axios";
+import Footer from "../components/Theme/Footer/footer";
 
 function MyApp({ Component, pageProps }) {
   const [loggedInUserInfo, setloggedInUserInfo] = useState(null);
@@ -42,6 +43,7 @@ function MyApp({ Component, pageProps }) {
     <Fragment>
       <Header loggedInUserInfo={loggedInUserInfo} />
       <Component {...pageProps} loggedInUserInfo={loggedInUserInfo} />
+      <Footer />
     </Fragment>
   );
 }
