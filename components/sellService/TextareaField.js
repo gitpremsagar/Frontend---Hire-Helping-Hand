@@ -11,13 +11,14 @@ export default function TextareaField({
     <>
       <label
         htmlFor={`${label}id`}
-        className={`block text-gray-800 mb-2 ${labelClass}`}
+        className={`block mb-2 font-bold text-lg ${labelClass}`}
       >
-        {label}{" "}
+        {label}
+        {" :"}
       </label>
       <textarea
         id={`${label}id`}
-        className={`block w-full p-2 rounded mb-5 ${textareaClass}`}
+        className={`block w-full p-2 rounded mb-5 max-h-[300px] min-h-[300px] border-2 border-blue-400 overflow-y-scroll ${textareaClass}`}
         name={name}
         type={type}
         placeholder={placeholder}

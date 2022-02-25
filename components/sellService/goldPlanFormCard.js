@@ -3,17 +3,10 @@ import TextareaField from "./TextareaField";
 
 export default function GoldPlanFormCard({ handleChange }) {
   return (
-    <div className="bg-green-400 serviceOfferCol">
-      <h2>Basic</h2>
+    <div className="serviceOfferCol">
+      <h2 className="text-yellow-400">Gold</h2>
       <form method="POST">
-        {/* service title */}
-        <InputField
-          type="text"
-          label="Service Title"
-          name="serviceTitle"
-          placeholder="I will do <the service you provide>"
-        />
-        {/* service title */}
+        {/* Cost */}
         <InputField
           type="number"
           label="Cost"
@@ -23,11 +16,11 @@ export default function GoldPlanFormCard({ handleChange }) {
         {/* service description */}
         <TextareaField
           name="basicOfferDetail"
-          label="Freelancing service description"
+          label="Short description of Gold Package"
           type="text"
           placeholder="Write detail of service offered by you..."
           labelClass="text-white"
-          textareaClass="h-[200px]"
+          textareaClass=""
           handleChange={handleChange}
         />
       </form>
