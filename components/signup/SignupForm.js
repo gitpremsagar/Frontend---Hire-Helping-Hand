@@ -7,7 +7,7 @@ import axios from "axios";
 // 1. Handle 400 response from server propery while submitting signup form
 // 2. Handle 500 response from server propery while submitting signup form
 // 3. Remove all console.log()
-export default function SignupForm() {
+export default function SignupForm({ className }) {
   // initializing state to store signup form data
   const [signupFormData, setsignupFormData] = useState({
     firstname: "",
@@ -53,7 +53,7 @@ export default function SignupForm() {
   }
 
   return (
-    <form method="POST" onSubmit={handleSignupFormSubmit}>
+    <form method="POST" onSubmit={handleSignupFormSubmit} className={className}>
       <Input
         name="firstname"
         label="Firstname"

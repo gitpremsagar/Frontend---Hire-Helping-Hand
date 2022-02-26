@@ -7,7 +7,7 @@ export default function Input({
 }) {
   return (
     <>
-      <label htmlFor={`${label}id`} className="block text-gray-800 mb-2">
+      <label htmlFor={`${label}id`} className="block mb-2">
         {label}{" "}
       </label>
       <input

@@ -17,10 +17,13 @@ export default function becomeFreelancer() {
       </Head>
 
       <main>
-        <h1 className="text-center font-bold text-6xl text-gray-800 p-20">
-          Create new service offer
-        </h1>
-        <div className="p-20 bg-gray-800 text-white">
+        <div className="bg-gray-800 text-white">
+          <h1 className="text-center font-bold text-6xl p-20">
+            Create new service offer
+          </h1>
+        </div>
+
+        <div className="p-20 bg-gray-900 text-white">
           <InputField
             type="text"
             label="Title for the freelancing service you provide"
@@ -41,13 +44,21 @@ export default function becomeFreelancer() {
             placeholder="#hashTags..."
           />
         </div>
-        <div className="p-5 grid lg:grid-cols-3 gap-5">
+        <div className="p-5 grid lg:grid-cols-3 gap-5 ">
           {/* basic */}
           <BasicPlanFormCard handleChange={handleChange} />
           {/* silver */}
           <SilverPlanFromCard handleChange={handleChange} />
           {/* gold */}
           <GoldPlanFromCard handleChange={handleChange} />
+        </div>
+        <div className="px-20 py-10 bg-gray-800 text-white flex justify-end items-center">
+          <button className="border-2 border-white rounded-full px-3 py-2 mr-2">
+            Save to Drafts
+          </button>{" "}
+          <button className="bg-blue-400 rounded-full px-4 py-3 ">
+            Publish
+          </button>
         </div>
       </main>
 
