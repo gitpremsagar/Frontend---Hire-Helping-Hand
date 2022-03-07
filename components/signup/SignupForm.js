@@ -2,12 +2,15 @@ import Input from "./Input";
 import { useState } from "react";
 import { envVars } from "../../Services/envVars";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 // some tasks that have to be handled later
 // 1. Handle 400 response from server propery while submitting signup form
 // 2. Handle 500 response from server propery while submitting signup form
 // 3. Remove all console.log()
 export default function SignupForm({ className }) {
+  const router = useRouter();
+
   // initializing state to store signup form data
   const [signupFormData, setsignupFormData] = useState({
     firstname: "",
@@ -24,8 +27,14 @@ export default function SignupForm({ className }) {
     axios
       .post(envVars.BACKEND_API_FOR_USERS, signupFormData)
       .then((response) => {
-        // console.log("Response = ", response);
-        //TODO: if user is registered successfull then send hom to confirmation page and there give him option to redirect to login page
+        console.log("Response = ", response.data[0].affectedRows);
+        if (response.data[0].affectedRows === 1) {
+          alert(
+            "You have been successfully registered. You need to login now."
+          );
+          router.push("/login");
+        }
+        //TODO: if user is registered successfull then send him to confirmation page and there give him option to redirect to login page
       })
       .catch((error) => {
         if (error.response.status === 400) alert("Bad request");
