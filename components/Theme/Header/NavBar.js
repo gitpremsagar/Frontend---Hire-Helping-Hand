@@ -3,7 +3,7 @@ import {
   BellIconSVG,
   BriefcaseIcon,
   ChatAltIcon,
-  CloudeUpload,
+  CloudeUploadIcon,
   PresentationChartBarIcon,
   UserGroupIcon,
 } from "../../svg/heroicons";
@@ -29,16 +29,17 @@ export default function Navbar(props) {
               </a>
             </Link>
           </li>
-          <li>
-            <Link href={`/post-job`}>
-              <a className=" flex items-center">
-                <CloudeUpload className="h-5 w-5 mr-1" />
-                Post Job
-              </a>
-            </Link>
-          </li>
+
           {loggedInUserInfo ? (
             <>
+              <li>
+                <Link href={`/post-job/${45}`}>
+                  <a className=" flex items-center">
+                    <CloudeUploadIcon className="h-5 w-5 mr-1" />
+                    Post Job
+                  </a>
+                </Link>
+              </li>
               <li>
                 <Link href={`/sell-service/${loggedInUserInfo.idusers}`}>
                   <a className="flex items-center">
@@ -50,6 +51,14 @@ export default function Navbar(props) {
             </>
           ) : (
             <>
+              <li>
+                <Link href={`/post-job`}>
+                  <a className=" flex items-center">
+                    <CloudeUploadIcon className="h-5 w-5 mr-1" />
+                    Post Job
+                  </a>
+                </Link>
+              </li>
               <li>
                 <Link href={`/sell-service`}>Become Freelancer</Link>
               </li>

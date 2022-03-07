@@ -74,7 +74,7 @@ export function ChevronDown({ className }) {
   );
 }
 
-export function CloudeUpload({ className }) {
+export function CloudeUploadIcon({ className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

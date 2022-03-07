@@ -34,6 +34,12 @@ export default function UserDropdown(props) {
           </li>
           <li>Settings</li>
           <li>
+            <Link href={`/help-and-support`}>
+              <a>Help and Support</a>
+            </Link>
+          </li>
+
+          <li>
             <LogoutButton />
           </li>
         </ul>
