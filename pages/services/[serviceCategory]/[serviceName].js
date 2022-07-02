@@ -36,7 +36,7 @@ export default function DynamicPage(props) {
             </h1>
 
             <div className="grid grid-cols-5">
-              <section className="col-span-4 p-2 pt-0">
+              <section className="col-span-5 p-2 pt-0">
                 <ServiceCard />
                 <ServiceCard />
                 <ServiceCard />
@@ -48,9 +48,11 @@ export default function DynamicPage(props) {
                 <ServiceCard />
                 <ServiceCard />
               </section>
-              <div className="col-span-1">
+
+              {/*The following AsideRight was used to show no. of peoples who are online*/}
+              {/* <div className="col-span-1">
                 <AsideRight />
-              </div>
+              </div> */}
             </div>
           </main>
         </div>

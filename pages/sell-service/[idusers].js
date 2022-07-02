@@ -4,10 +4,27 @@ import SilverPlanFromCard from "./../../components/sellService/silverPlanFormCar
 import GoldPlanFromCard from "./../../components/sellService/goldPlanFormCard";
 import InputField from "../../components/sellService/InputField";
 import TextareaField from "../../components/sellService/TextareaField";
+import { useState } from "react";
 
 export default function becomeFreelancer() {
+  const [extraOptions, setextraOptions] = useState([
+    "first extra option",
+    "second",
+    "third",
+  ]);
+  function addMoreOptions() {
+    setextraOptions((preItem) => {
+      return [...preItem, "new item"];
+    });
+  }
+
+  const [textValue, setTextvalue] = useState("");
+
   function handleChange(e) {
     console.log("changed value = ", e.target.value);
+    setTextvalue((prevVal) => {
+      return prevVal + "s";
+    });
   }
   return (
     <div>
@@ -46,7 +63,12 @@ export default function becomeFreelancer() {
         </div>
         <div className="p-5 grid lg:grid-cols-3 gap-5 ">
           {/* basic */}
-          <BasicPlanFormCard handleChange={handleChange} />
+          <BasicPlanFormCard
+            handleChange={handleChange}
+            extraOptions={extraOptions}
+            addMoreOptions={addMoreOptions}
+            textValue={textValue}
+          />
           {/* silver */}
           <SilverPlanFromCard handleChange={handleChange} />
           {/* gold */}

@@ -41,4 +41,6 @@ export default function Home(props) {
 // FIXME:
 // 1. components\login\LoginForm.js
 // 2. components\signup\SignupForm.js
+// 3. When the backend server is not running the frontend app is getting crashed (while logging in). Fix it by proper error handlling
+
 // TODO: 3. make logout system work
