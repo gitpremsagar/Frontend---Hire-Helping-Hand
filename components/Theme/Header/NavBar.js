@@ -21,15 +21,6 @@ export default function Navbar(props) {
             <Link href={`/`}>H-H-H</Link>
           </li>
 
-          <li>
-            <Link href={`/community`}>
-              <a className="flex items-center">
-                <UserGroupIcon w={5} h={5} className="mr-1" />
-                Community
-              </a>
-            </Link>
-          </li>
-
           {loggedInUserInfo ? (
             <>
               <li>
