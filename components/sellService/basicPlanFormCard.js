@@ -23,6 +23,42 @@ export default function BasicPlanFormCard({ handleChange }) {
           textareaClass="h-[200px]"
           handleChange={handleChange}
         />
+
+        {/* No. of revisions */}
+        <InputField
+          type="number"
+          label="No. revisions"
+          name="cost"
+          placeholder="enter no. of revisions"
+        />
+
+        {/* No. of revisions */}
+        <InputField
+          type="number"
+          label="No. revisions"
+          name="cost"
+          placeholder="enter no. of revisions"
+        />
+
+        {/* No. of revisions */}
+        <InputField
+          type="number"
+          label="No. revisions"
+          name="cost"
+          placeholder="enter no. of revisions"
+        />
+
+        {/* No. of revisions */}
+        <InputField
+          type="number"
+          label="No. revisions"
+          name="cost"
+          placeholder="enter no. of revisions"
+        />
+
+        <button className="rounded-full py-2 px-5 text-sm float-right bg-blue-500">
+          Add More Options
+        </button>
       </form>
     </div>
   );

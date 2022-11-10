@@ -18,7 +18,7 @@ export default function InputField({
       </label>
       <input
         id={`${label}id`}
-        className={`block w-full p-2 rounded mb-5 border-2 border-blue-400 ${inputClass}`}
+        className={`block w-full p-2 rounded mb-5 border-2 text-gray-800 border-blue-400 ${inputClass}`}
         name={name}
         type={type}
         placeholder={placeholder}
