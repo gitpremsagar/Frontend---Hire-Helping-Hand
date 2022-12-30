@@ -1,7 +1,20 @@
 export const categoriesObject = {
   "Design & Graphics": {
-    "Logo and Brand": ["Logo", "Brand Style"],
-    Art: ["Illustration", "NFT Art", "Others"],
+    "Logo and Brand": [
+      "Logo Design",
+      "Brand Style",
+      "Fonts & Typography",
+      "Business cards",
+      "Stationary",
+    ],
+    Art: [
+      "Illustration",
+      "NFT Art",
+      "Patern Design",
+      "Portraits & Caricatures",
+      "Cartoons & Comics",
+    ],
+    Gaming: ["Game Art", "Graphics for streamers", "twitch store"],
   },
   "Web Devlopment": {
     Frontend: ["React", "Next", "Veu", "Other"],

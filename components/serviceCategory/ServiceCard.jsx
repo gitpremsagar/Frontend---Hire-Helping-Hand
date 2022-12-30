@@ -21,22 +21,26 @@ export default function ServiceCard() {
         <div className="col-span-3 p-6 ">
           {/* Service title */}
           <Link href={`/service-detail/45`}>
-            <h3 className="text-xl font-semibold mb-2 cursor-pointer text-blue-600 hover:text-blue-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo,
-              veniam?
-            </h3>
+            <a>
+              <h3 className="text-xl font-semibold mb-2 cursor-pointer text-blue-600 hover:text-blue-500">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo,
+                veniam?
+              </h3>
+            </a>
           </Link>
           {/* Offer poster profile name with link */}
           <Link href={`/freelancer/${23}`}>
-            <div className="flex mb-2">
-              <div className="rounded-full w-10 h-10 bg-pink-300 text-center">
-                PS
+            <a>
+              <div className="flex mb-2">
+                <div className="rounded-full w-10 h-10 bg-pink-300 text-center">
+                  PS
+                </div>
+                <div className="">
+                  <h6 className="font-bold text-xs ml-2">Freelancer Name</h6>
+                  <span className="text-xs ml-2">57 points</span>
+                </div>
               </div>
-              <div className="">
-                <h6 className="font-bold text-xs ml-2">Freelancer Name</h6>
-                <span className="text-xs ml-2">57 points</span>
-              </div>
-            </div>
+            </a>
           </Link>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis

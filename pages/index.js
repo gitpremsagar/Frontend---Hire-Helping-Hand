@@ -32,8 +32,6 @@ export default function Home(props) {
           </main>
         </div>
       </div>
-
-      <footer className={styles.footer}></footer>
     </div>
   );
 }
