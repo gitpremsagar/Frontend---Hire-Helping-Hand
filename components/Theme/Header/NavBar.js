@@ -27,7 +27,7 @@ export default function Navbar(props) {
                 <Link href={`/post-job/${45}`}>
                   <a className=" flex items-center">
                     <CloudeUploadIcon className="h-5 w-5 mr-1" />
-                    Post Job
+                    Post a Job
                   </a>
                 </Link>
               </li>
@@ -51,7 +51,7 @@ export default function Navbar(props) {
                 </Link>
               </li>
               <li>
-                <Link href={`/sell-service`}>Become Freelancer</Link>
+                <Link href={`/sell-service`}>Get a Job</Link>
               </li>
             </>
           )}
