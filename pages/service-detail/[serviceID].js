@@ -5,6 +5,7 @@ import Link from "next/link";
 import FreelancerQualitySection from "../../components/service-detail/freelancer-quality-section";
 import SimilarServicesSection from "../../components/service-detail/SimilarServicesSection";
 import ServiceDescription from "../../components/service-detail/ServiceDescription";
+import SimilarFreelancers from "../../components/service-detail/SimilarFreelancers";
 
 export default function ServiceDetailPage() {
   const router = useRouter();
@@ -74,12 +75,13 @@ export default function ServiceDetailPage() {
 
       <hr />
       <FreelancerQualitySection />
-      <hr />
 
-      <h3 className="text-2xl font-bold">Other Similar Services</h3>
-      <SimilarServicesSection />
       <hr />
-      <FreelancerQualitySection />
+      <SimilarServicesSection />
+
+      <hr />
+      <SimilarFreelancers />
+
       <hr />
       <FreelancerQualitySection />
     </frameElement>

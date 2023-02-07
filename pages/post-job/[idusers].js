@@ -61,8 +61,6 @@ export default function becomeFreelancer() {
           </button>
         </div>
       </main>
-
-      <footer></footer>
     </div>
   );
 }

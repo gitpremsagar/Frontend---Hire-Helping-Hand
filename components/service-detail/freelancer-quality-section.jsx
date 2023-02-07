@@ -1,6 +1,6 @@
 export default function FreelancerQualitySection() {
   return (
-    <section>
+    <section className="p-4">
       <strong>Top Rated Freelancer</strong>
       <div>30+ Happy customers</div>
       <div>40+ Completed Orders in last 120 days</div>

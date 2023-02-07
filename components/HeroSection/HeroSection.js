@@ -8,7 +8,8 @@ export default function HeroSection() {
           Hire Helping Hand
         </h1>
         <h2 className="text-2xl">
-          Community of freelancers and clients in one platform
+          Marketplace for freelancers and clients to connect and collaborate on
+          projects.
         </h2>
       </div>
       <SearchForm />

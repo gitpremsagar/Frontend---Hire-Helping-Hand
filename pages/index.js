@@ -28,7 +28,7 @@ export default function Home(props) {
           <main className="">
             <HeroSection />
             <hr />
-            <CategoriesSection />
+            Here should be something.
           </main>
         </div>
       </div>

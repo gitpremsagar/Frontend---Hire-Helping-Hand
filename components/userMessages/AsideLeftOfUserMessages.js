@@ -6,12 +6,16 @@ export default function AsideLeftOfUserMessages() {
   return (
     <aside className="AsideLeftOfDashboard">
       <nav>
+        <h4 class="text-lg font-medium m-2">Inbox</h4>
         <ul>
-          <li>All</li>
-          <li>Freelancers Only</li>
-          <li>Clients Only</li>
-          <li>Your Team</li>
-          <li>Settings</li>
+          <li>User 1</li>
+          <li>User 2</li>
+          <li>User 3</li>
+          <li>User 4</li>
+          <li>User 5</li>
+          <li>User 6</li>
+          <li>User 7</li>
+          <li>User 8</li>
         </ul>
       </nav>
     </aside>
