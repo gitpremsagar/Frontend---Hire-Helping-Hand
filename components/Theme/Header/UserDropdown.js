@@ -27,11 +27,12 @@ export default function UserDropdown(props) {
         className={showDropdown ? `navDropdown showNavDropdown` : `navDropdown`}
       >
         <ul className="navDropdown_Ul">
-          <li>
-            <Link href={`/user-profile/${loggedInUserInfo.idusers}`}>
-              <a>My Profile</a>
-            </Link>
-          </li>
+          <Link href={`/user-profile/${loggedInUserInfo.idusers}`}>
+            <a>
+              <li>My Profile</li>
+            </a>
+          </Link>
+
           <li>Settings</li>
           <li>
             <Link href={`/help-and-support`}>

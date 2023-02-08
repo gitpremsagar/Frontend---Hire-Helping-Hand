@@ -25,8 +25,6 @@ export default function UserDashboardPage(props) {
           </main>
         </div>
       </div>
-
-      <footer className={styles.footer}></footer>
     </div>
   );
 }

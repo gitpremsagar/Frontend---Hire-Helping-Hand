@@ -14,7 +14,8 @@ export default function ServiceDetailPage() {
     <frameElement>
       {/* Service full detail section */}
       <section className="lg:grid lg:grid-cols-12">
-        <aside className="col-span-4">
+        {/* Service(Product) Image) */}
+        <div className="col-span-4">
           <Image
             width={400}
             height={300}
@@ -23,7 +24,7 @@ export default function ServiceDetailPage() {
             layout="responsive"
             priority={false}
           />
-        </aside>
+        </div>
         <section className="col-span-5 p-4">
           <main>
             <h1 className="text-4xl">
@@ -48,6 +49,7 @@ export default function ServiceDetailPage() {
             <ServiceDescription />
           </main>
         </section>
+        {/* Checkout Details */}
         <aside className="col-span-3 p-2">
           <div className="border-2 rounded-md border-gray-400 p-4">
             <h6>500/-</h6>
@@ -66,9 +68,13 @@ export default function ServiceDetailPage() {
             <div className="bg-amber-400 rounded-md p-4 text-center">
               Add to Cart
             </div>
-            <div className="bg-amber-500 mt-2 rounded-md p-4 text-center">
-              Order Now
-            </div>
+            <Link href={`/checkout/${router.query.serviceID}`}>
+              <a>
+                <div className="bg-amber-500 mt-2 rounded-md p-4 text-center">
+                  Order Now
+                </div>
+              </a>
+            </Link>
           </div>
         </aside>
       </section>
