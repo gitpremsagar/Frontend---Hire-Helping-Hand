@@ -29,7 +29,7 @@ export default function ServiceCard() {
             </a>
           </Link>
           {/* Offer poster profile name with link */}
-          <Link href={`/freelancer/${23}`}>
+          <Link href={`/user-profile/${23}`}>
             <a>
               <div className="flex mb-2">
                 <div className="rounded-full w-10 h-10 bg-pink-300 text-center">

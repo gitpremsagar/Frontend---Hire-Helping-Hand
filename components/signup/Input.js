@@ -12,7 +12,7 @@ export default function Input({
       </label>
       <input
         id={`${label}id`}
-        className="block w-full p-2 rounded mb-5"
+        className="block w-full p-2 rounded mb-5 text-black"
         name={name}
         type={type}
         placeholder={placeholder}

@@ -14,7 +14,11 @@ export default function LoginForm() {
     rMe: false,
   });
 
-  const [loginResponseError, setloginResponseError] = useState();
+  //initialize state to store errormessage while logging in user
+  const [loginResponseError, setloginResponseError] = useState("");
+
+  //initialize error dilogue box state
+  const [errorBoxState, seterrorBoxState] = useState("hidden");
 
   function handleLoginFormSubmit(e) {
     e.preventDefault();
@@ -26,16 +30,23 @@ export default function LoginForm() {
         window.location.replace("/");
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
         // FIXME: handle 400 and 500 response properly
         //    TODO: provide proper feedback message to user regarding what went wrong
 
         // FIXME: when server stops for some reason then error.response.status is undefined and its crashing the page
 
-        setloginResponseError(error.response);
-        if (error.response.status === 400) alert("Bad request");
+        if (error.response.status === 400) {
+          seterrorBoxState("block");
+          if (error.response.data === "emailPasswordWrong") {
+            setloginResponseError("User with this email does not exist!");
+          } else {
+            setloginResponseError("");
+          }
+        }
         if (error.response.status === 500) {
-          alert(
+          seterrorBoxState("block");
+          setloginResponseError(
             "There is some problem with the server. Kindly report this at 'premsagar9113@gmail.com'"
           );
         }
@@ -56,34 +67,45 @@ export default function LoginForm() {
     }
   }
   return (
-    <form method="post" onSubmit={handleLoginFormSubmit}>
-      <Input
-        name="email"
-        label="E-Mail"
-        type="text"
-        placeholder="email"
-        handleChange={handleChange}
-      />
-      <Input
-        name="password"
-        label="Password"
-        type="password"
-        placeholder="password"
-        handleChange={handleChange}
-      />
-
-      <input id="idrMe" name="rMe" type="checkbox" onChange={handleChange} />
-      <label className="ml-2" htmlFor="#idrMe">
-        Keep me logged in.
-      </label>
-
-      <br />
-      <button
-        className="bg-blue-500 hover:bg-blue-600 rounded-full text-white px-5 py-3 mt-5"
-        type="submit"
+    <>
+      {/* div for showing error messages while logging in the user */}
+      <div
+        className={`bg-red-500 text-white p-4 rounded mt-4 ${errorBoxState}`}
       >
-        Submit
-      </button>
-    </form>
+        <p className="font-bold">Error</p>
+        <p className="text-sm" id="errorMessage">
+          {loginResponseError}
+        </p>
+      </div>
+
+      {/* login form */}
+      <form method="post" onSubmit={handleLoginFormSubmit}>
+        <Input
+          name="email"
+          label="E-Mail"
+          type="text"
+          placeholder="email"
+          handleChange={handleChange}
+        />
+        <Input
+          name="password"
+          label="Password"
+          type="password"
+          placeholder="password"
+          handleChange={handleChange}
+        />
+        <input id="idrMe" name="rMe" type="checkbox" onChange={handleChange} />
+        <label className="ml-2" htmlFor="#idrMe">
+          Keep me logged in.
+        </label>
+        <br />
+        <button
+          className="bg-blue-500 hover:bg-blue-600 rounded-full text-white px-5 py-3 mt-5"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </>
   );
 }

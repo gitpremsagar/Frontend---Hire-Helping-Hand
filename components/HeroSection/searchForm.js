@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SelectMenu from "../others/Select";
+import SelectMenuForCountries from "../others/SelectMenuForCountries";
 
 export default function SearchForm() {
   const [formData, setformData] = useState([]);
@@ -26,7 +27,7 @@ export default function SearchForm() {
       </div>
 
       <div className="mt-10 flex justify-evenly">
-        <SelectMenu label="Location" />
+        <SelectMenuForCountries label="Location" />
         <SelectMenu label="Service" />
         <SelectMenu label="Online status" />
       </div>

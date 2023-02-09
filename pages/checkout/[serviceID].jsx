@@ -1,6 +1,6 @@
 export default function CheckoutPage() {
   return (
-    <div className="container mx-auto px-4">
+    <div className="container mx-auto px-4 w-[500px]">
       <h1 className="text-2xl font-bold mb-6">Checkout</h1>
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="mb-4">
@@ -74,6 +74,9 @@ export default function CheckoutPage() {
             Expiry Date
           </label>
         </div>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Order Now
+        </button>
       </div>
     </div>
   );
