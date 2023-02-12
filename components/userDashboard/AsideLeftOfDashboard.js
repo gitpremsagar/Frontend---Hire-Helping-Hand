@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function AsideLeftOfDashboard() {
@@ -14,7 +15,11 @@ export default function AsideLeftOfDashboard() {
 
           <li>Reviews</li>
           <li>Settings</li>
-          <li>Help and Support</li>
+          <Link href={`/help-and-support`}>
+            <a>
+              <li>Help and Support</li>
+            </a>
+          </Link>
         </ul>
       </nav>
     </aside>
