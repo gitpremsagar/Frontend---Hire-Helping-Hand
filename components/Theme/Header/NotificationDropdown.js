@@ -31,21 +31,23 @@ export default function NotificationDropdown(props) {
         }
       >
         <ul className="navDropdown_Ul">
-          <li>
-            <Link href={`/`}>
-              <a>info 1</a>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/`}>
-              <a>info 2</a>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/`}>
-              <a>info 3</a>
-            </Link>
-          </li>
+          <div className="w-[150px]">
+            <li>
+              <Link href={`/`}>
+                <a>info 1</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={`/`}>
+                <a>info 2</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={`/`}>
+                <a>info 3</a>
+              </Link>
+            </li>
+          </div>
         </ul>
       </div>
     </div>
