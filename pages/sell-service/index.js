@@ -13,8 +13,6 @@ export default function becomeFreelancer() {
       </Head>
 
       <main>Become a freelancer and sell your service</main>
-
-      <footer></footer>
     </div>
   );
 }

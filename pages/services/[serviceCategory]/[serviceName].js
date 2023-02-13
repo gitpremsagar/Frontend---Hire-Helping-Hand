@@ -1,10 +1,9 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import HeroSection from "../../../components/HeroSection/HeroSection";
-import ServiceCard from "../../../components/serviceCategory/serviceCard";
+import SearchForm from "../../../components/HeroSection/searchForm";
+import ProposalCard from "../../../components/proposal-detail/ProposalCard";
 import AsideLeft from "../../../components/Theme/AsideLeft/AsideLeft";
 import AsideRight from "../../../components/Theme/AsideRight/AsideRight";
-import styles from "../../../styles/Home.module.css";
 export default function DynamicPage(props) {
   const { loggedInUserInfo } = props;
   const router = useRouter();
@@ -28,37 +27,35 @@ export default function DynamicPage(props) {
 
         <div className="col-span-10">
           <main className="">
-            <HeroSection />
+            <SearchForm />
             <hr />
             <h1 className="font-bold text-center mt-20 text-6xl mb-20 text-gray-800">
               Service -{" "}
               <span className="text-blue-600">{`${router.query.serviceName}`}</span>{" "}
             </h1>
+            <div>
+              <p className="p-2">Filters</p>
+            </div>
+            <section className="p-2">
+              <ProposalCard />
+              <ProposalCard />
+              <ProposalCard />
+              <ProposalCard />
+              <ProposalCard />
+              <ProposalCard />
+              <ProposalCard />
+              <ProposalCard />
+              <ProposalCard />
+              <ProposalCard />
+            </section>
 
-            <div className="grid grid-cols-5">
-              <section className="col-span-5 p-2 pt-0">
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
-              </section>
-
-              {/*The following AsideRight was used to show no. of peoples who are online*/}
-              {/* <div className="col-span-1">
+            {/*The following AsideRight was used to show no. of peoples who are online*/}
+            {/* <div className="col-span-1">
                 <AsideRight />
               </div> */}
-            </div>
           </main>
         </div>
       </div>
-
-      <footer className={styles.footer}></footer>
     </div>
   );
 }

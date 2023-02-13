@@ -1,4 +1,5 @@
 import { categoriesObject } from "../CategoriesSection/categoriesObject";
+import { Fragment } from "react";
 
 export default function SelectOptionsOfServices({ label }) {
   return (
@@ -18,7 +19,7 @@ export default function SelectOptionsOfServices({ label }) {
               {Object.keys(categoriesObject[category]).map(
                 (subCategory, key) => {
                   return (
-                    <>
+                    <Fragment key={key}>
                       {Object.values(
                         categoriesObject[category][subCategory].map(
                           (serivceName, key) => {
@@ -26,7 +27,7 @@ export default function SelectOptionsOfServices({ label }) {
                           }
                         )
                       )}
-                    </>
+                    </Fragment>
                   );
                 }
               )}

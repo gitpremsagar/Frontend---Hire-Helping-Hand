@@ -31,9 +31,9 @@ export default function HelpAndSupportPage() {
               using the "Contact" button to send them a message.
             </p>
           </li>
-          {frequentlyAskedQuestions.map((faqSet) => {
+          {frequentlyAskedQuestions.map((faqSet, key) => {
             return (
-              <li className="mb-2">
+              <li className="mb-2" key={key}>
                 <h3 className="text-lg font-bold">{faqSet.question}</h3>
                 <p className="text-base">{faqSet.answer}</p>
               </li>

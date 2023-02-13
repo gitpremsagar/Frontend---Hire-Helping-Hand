@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SelectMenu from "../others/Select";
+import SelectMenuOnlineStatus from "../others/Select";
 import SelectMenuForCountries from "../others/SelectMenuForCountries";
 import SelectOptionsOfServices from "../others/SelectOptionsOfServices";
 
@@ -11,7 +11,7 @@ export default function SearchForm() {
     console.log("search form submitted!");
   }
   return (
-    <form onSubmit={handleSearchTermSubmit} className="">
+    <form onSubmit={handleSearchTermSubmit} className="mt-20">
       <div className="flex items-center justify-center">
         <input
           name="searchTerm"
@@ -30,7 +30,7 @@ export default function SearchForm() {
       <div className="mt-10 flex justify-evenly">
         <SelectMenuForCountries label="Location" />
         <SelectOptionsOfServices label="Service" />
-        <SelectMenu label="Online status" />
+        <SelectMenuOnlineStatus label="Online status" />
       </div>
     </form>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,11 +7,11 @@ import SimilarServicesSection from "../../components/service-detail/SimilarServi
 import ServiceDescription from "../../components/service-detail/ServiceDescription";
 import SimilarFreelancers from "../../components/service-detail/SimilarFreelancers";
 
-export default function ServiceDetailPage() {
+export default function ProposalDetailPage() {
   const router = useRouter();
   //console.log("Router in service detail = ", router);
   return (
-    <frameElement>
+    <Fragment>
       {/* Service full detail section */}
       <section className="lg:grid lg:grid-cols-12">
         {/* Service(Product) Image) */}
@@ -28,7 +28,7 @@ export default function ServiceDetailPage() {
         <section className="col-span-5 p-4">
           <main>
             <h1 className="text-4xl">
-              Service Detail Page for {router.query.serviceID}
+              Service Detail Page for {router.query.proposalID}
             </h1>
             <Link href={"/user-profile/34"}>
               <a className="text-blue-500">
@@ -66,9 +66,9 @@ export default function ServiceDetailPage() {
               Helping Hand
             </p>
             <div className="bg-amber-400 rounded-md p-4 text-center">
-              Add to Cart
+              Add to Favourites
             </div>
-            <Link href={`/checkout/${router.query.serviceID}`}>
+            <Link href={`/checkout/${router.query.proposalID}`}>
               <a>
                 <div className="bg-amber-500 mt-2 rounded-md p-4 text-center">
                   Order Now
@@ -90,6 +90,6 @@ export default function ServiceDetailPage() {
 
       <hr />
       <FreelancerQualitySection />
-    </frameElement>
+    </Fragment>
   );
 }

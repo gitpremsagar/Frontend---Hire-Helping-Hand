@@ -1,4 +1,4 @@
-export default function SelectMenu({ label }) {
+export default function SelectMenuOnlineStatus({ label }) {
   return (
     <div>
       <label htmlFor={label}>{label} : </label>
