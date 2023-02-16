@@ -12,3 +12,4 @@ export default function signupPage() {
     </div>
   );
 }
+// TODO: 1. Send a verification link to user's email and show user the message to verify the email account

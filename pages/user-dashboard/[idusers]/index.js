@@ -1,8 +1,9 @@
 import Head from "next/head";
-import AsideLeftOfDashboard from "../../components/userDashboard/AsideLeftOfDashboard";
-import styles from "../../styles/Home.module.css";
-
+import AsideLeftOfDashboard from "../../../components/userDashboard/AsideLeftOfDashboard";
+import { useRouter } from "next/router";
 export default function UserDashboardPage(props) {
+  const router = useRouter();
+
   const { loggedInUserInfo } = props;
 
   return (
@@ -21,7 +22,7 @@ export default function UserDashboardPage(props) {
 
         <div className="col-span-10">
           <main className="">
-            <p>This is Dashboard</p>
+            <p>This is Dashboard of {router.query.idusers}</p>
           </main>
         </div>
       </div>

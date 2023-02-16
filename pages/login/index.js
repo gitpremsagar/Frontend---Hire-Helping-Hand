@@ -10,3 +10,5 @@ export default function LoginPage() {
     </div>
   );
 }
+// TODO:1. check if the user has verified her email and phone number only then let the user Access thier account
+// TODO:2. Check if the login attept is from any malicious location or user then notify the account ower through email
