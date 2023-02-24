@@ -36,7 +36,7 @@ export default function becomeFreelancer() {
       <main>
         <div className="bg-gray-800 text-white">
           <h1 className="text-center font-bold text-6xl p-20">
-            Create new service offer
+            Create New Proposal
           </h1>
         </div>
 

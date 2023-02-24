@@ -6,7 +6,7 @@ export default function AsideLeftOfUserMessages() {
   return (
     <aside className="AsideLeftOfDashboard">
       <nav>
-        <h4 class="text-lg font-medium m-2">Inbox</h4>
+        <h4 className="text-lg font-medium m-2">Inbox</h4>
         <ul>
           <li>User 1</li>
           <li>User 2</li>

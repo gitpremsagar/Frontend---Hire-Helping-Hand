@@ -9,9 +9,30 @@ import {
 } from "../../svg/heroicons";
 import NotificationDropdown from "./NotificationDropdown";
 import UserDropdown from "./UserDropdown";
+import { useEffect, useState } from "react";
 
 export default function Navbar(props) {
   const { loggedInUserInfo } = props;
+
+  const [isUserFreelancer, setisUserFreelancer] = useState(false);
+
+  useEffect(() => {
+    let freelancerMode = localStorage.getItem("freelancerMode");
+    setisUserFreelancer(freelancerMode);
+    console.log("freelancer Mode = ", freelancerMode);
+  }, []);
+
+  function handleFreelancerModeRequest() {
+    localStorage.setItem("freelancerMode", true);
+    setisUserFreelancer(true);
+    console.log("freelancer mode requested!");
+  }
+  function handleClientModeRequest() {
+    localStorage.setItem("freelancerMode", false);
+    setisUserFreelancer(false);
+    console.log("client mode requested!");
+  }
+
   return (
     <nav className="">
       <ul className="flex p-5 bg-gray-900 text-white justify-between items-center">
@@ -19,6 +40,34 @@ export default function Navbar(props) {
         <span className="flex items-center gap-10">
           <li className="font-bold">
             <Link href={`/`}>H-H-H</Link>
+          </li>
+          <li>
+            I'm a{" "}
+            <Link href={`/as-freelancer`}>
+              <a
+                onClick={handleFreelancerModeRequest}
+                className={
+                  isUserFreelancer
+                    ? "text-blue-400"
+                    : "line-through text-red-600 hover:no-underline hover:text-blue-400"
+                }
+              >
+                Freelancer
+              </a>
+            </Link>{" "}
+            /{" "}
+            <Link href={`/`}>
+              <a
+                onClick={handleClientModeRequest}
+                className={
+                  isUserFreelancer
+                    ? "line-through text-red-600 hover:no-underline hover:text-blue-400"
+                    : "text-blue-400"
+                }
+              >
+                Client
+              </a>
+            </Link>
           </li>
 
           {loggedInUserInfo ? (
