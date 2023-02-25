@@ -135,7 +135,11 @@ export default function AsideLeft() {
                                   return (
                                     <li key={key}>
                                       <Link
-                                        href={`/services/${category}/${serivceName}`}
+                                        href={
+                                          isUserFreelancer
+                                            ? `/services/${category}/${serivceName}?useHireHelpingHandAs=freelancer`
+                                            : `/services/${category}/${serivceName}`
+                                        }
                                       >
                                         <a className="block p-2 hover:bg-gray-500 rounded">
                                           {serivceName}
