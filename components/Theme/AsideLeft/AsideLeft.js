@@ -1,9 +1,26 @@
 import Link from "next/link";
 import { categoriesObject } from "../../CategoriesSection/categoriesObject";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function AsideLeft() {
   const router = useRouter();
+  const [currentPathname, setcurrentPathname] = useState("/");
+
+  // get current pathname and store it in the state `currentPathname`
+  useEffect(() => {
+    const pathName = router.pathname;
+    setcurrentPathname(pathName);
+  }, [router]);
+
+  // set `isUserFreelancer` state based on `useHireHelpingHandAs` param value in url
+  const [isUserFreelancer, setisUserFreelancer] = useState(false);
+  useEffect(() => {
+    const { query } = router;
+    const useHireHelpingHandAs = query.useHireHelpingHandAs || "client"; //Note that we're also setting a default value of client for the `useHireHelpingHand` parameter in case it's not present in the URL. This ensures that our code doesn't break if the parameter is not provided.
+    setisUserFreelancer(useHireHelpingHandAs === "freelancer");
+  }, [router]);
+
   function showListOfSubCategories(e) {
     // change background colour of clicked list item to make it look active
     const category_li = e.currentTarget.parentElement;

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   BellIconSVG,
   BriefcaseIcon,
@@ -14,24 +15,22 @@ import { useEffect, useState } from "react";
 export default function Navbar(props) {
   const { loggedInUserInfo } = props;
 
-  const [isUserFreelancer, setisUserFreelancer] = useState(false);
+  const router = useRouter();
+  const [currentPathname, setcurrentPathname] = useState("/");
 
+  // get current pathname and store it in the state `currentPathname`
   useEffect(() => {
-    let freelancerMode = localStorage.getItem("freelancerMode");
-    setisUserFreelancer(freelancerMode);
-    console.log("freelancer Mode = ", freelancerMode);
-  }, []);
+    const pathName = router.pathname;
+    setcurrentPathname(pathName);
+  }, [router]);
 
-  function handleFreelancerModeRequest() {
-    localStorage.setItem("freelancerMode", true);
-    setisUserFreelancer(true);
-    console.log("freelancer mode requested!");
-  }
-  function handleClientModeRequest() {
-    localStorage.setItem("freelancerMode", false);
-    setisUserFreelancer(false);
-    console.log("client mode requested!");
-  }
+  // set `isUserFreelancer` state based on `useHireHelpingHandAs` param value in url
+  const [isUserFreelancer, setisUserFreelancer] = useState(false);
+  useEffect(() => {
+    const { query } = router;
+    const useHireHelpingHandAs = query.useHireHelpingHandAs || "client"; //Note that we're also setting a default value of client for the `useHireHelpingHand` parameter in case it's not present in the URL. This ensures that our code doesn't break if the parameter is not provided.
+    setisUserFreelancer(useHireHelpingHandAs === "freelancer");
+  }, [router]);
 
   return (
     <nav className="">
@@ -39,70 +38,58 @@ export default function Navbar(props) {
         {/* left side item */}
         <span className="flex items-center gap-10">
           <li className="font-bold">
-            <Link href={`/`}>H-H-H</Link>
+            <Link
+              href={
+                isUserFreelancer ? `/?useHireHelpingHandAs=freelancer` : `/`
+              }
+            >
+              H-H-H
+            </Link>
           </li>
           <li>
             I'm a{" "}
-            <Link href={`/as-freelancer`}>
+            <Link href={`${currentPathname}?useHireHelpingHandAs=freelancer`}>
               <a
-                onClick={handleFreelancerModeRequest}
                 className={
                   isUserFreelancer
-                    ? "text-blue-400"
-                    : "line-through text-red-600 hover:no-underline hover:text-blue-400"
+                    ? "cursor-pointer text-blue-400"
+                    : "cursor-pointer line-through text-red-600 hover:no-underline hover:text-blue-400"
                 }
               >
                 Freelancer
               </a>
             </Link>{" "}
             /{" "}
-            <Link href={`/`}>
+            <Link href={`${currentPathname}`}>
               <a
-                onClick={handleClientModeRequest}
                 className={
                   isUserFreelancer
-                    ? "line-through text-red-600 hover:no-underline hover:text-blue-400"
-                    : "text-blue-400"
+                    ? "cursor-pointer line-through text-red-600 hover:no-underline hover:text-blue-400"
+                    : "cursor-pointer text-blue-400"
                 }
               >
                 Client
               </a>
             </Link>
           </li>
-
-          {loggedInUserInfo ? (
-            <>
-              <li>
-                <Link href={`/post-job/${45}`}>
-                  <a className=" flex items-center">
-                    <CloudeUploadIcon className="h-5 w-5 mr-1" />
-                    Post a Job
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href={`/sell-service/${loggedInUserInfo.idusers}`}>
-                  <a className="flex items-center">
-                    <BriefcaseIcon className="w-5 h-5 mr-1" />
-                    Sell Service
-                  </a>
-                </Link>
-              </li>
-            </>
+          {isUserFreelancer ? (
+            <li>
+              <Link href={`/sell-service`}>
+                <a className="flex items-center">
+                  <BriefcaseIcon className="w-5 h-5 mr-1" />
+                  Sell Service
+                </a>
+              </Link>
+            </li>
           ) : (
-            <>
-              <li>
-                <Link href={`/post-job`}>
-                  <a className=" flex items-center">
-                    <CloudeUploadIcon className="h-5 w-5 mr-1" />
-                    Post Job
-                  </a>
-                </Link>
-              </li>
-              <li>
-                <Link href={`/sell-service`}>Get a Job</Link>
-              </li>
-            </>
+            <li>
+              <Link href={`/post-job`}>
+                <a className=" flex items-center">
+                  <CloudeUploadIcon className="h-5 w-5 mr-1" />
+                  Post a Job
+                </a>
+              </Link>
+            </li>
           )}
         </span>
 
