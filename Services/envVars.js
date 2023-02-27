@@ -10,4 +10,8 @@ export const envVars = {
   BACKEND_API_ENDPOINT_FOR_REPORTING_SPAM_SIGNUP: `${hhhBackendHostname}/api/report-spam-signup`,
 
   BACKEND_API_ENDPOINT_FOR_VERIFYING_EMAIL: `${hhhBackendHostname}/api/verify/email`,
+
+  BACKEND_API_ENDPOINT_FOR_PROPOSALS: `${hhhBackendHostname}/api/proposals`,
+
+  BACKEND_API_ENDPOINT_FOR_PROJECTS: `${hhhBackendHostname}/api/projects`,
 };

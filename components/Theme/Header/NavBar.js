@@ -20,10 +20,9 @@ export default function Navbar(props) {
 
   // get current pathname and store it in the state `currentPathname`
   useEffect(() => {
-    const pathName = router.asPath.split("?")[0];
+    const pathName = router.asPath.split("?")[0]; //extrcting pathName from asPath of router
     // const pathName = router.pathname;
     setcurrentPathname(pathName);
-    console.log("router = ", router);
   }, [router]);
 
   // set `isUserFreelancer` state based on `useHireHelpingHandAs` param value in url
