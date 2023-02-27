@@ -92,7 +92,11 @@ export default function Home(props) {
                   location={location}
                   setLocation={setLocation}
                 />
-                <SelectOptionsOfServices label="Service" />
+                <SelectOptionsOfServices
+                  label="Service"
+                  serviceType={serviceType}
+                  setServiceType={setServiceType}
+                />
                 <SelectMenuOnlineStatus label="Online status" />
               </div>
             </form>

@@ -1,7 +1,14 @@
 import { categoriesObject } from "../CategoriesSection/categoriesObject";
 import { Fragment } from "react";
 
-export default function SelectOptionsOfServices({ label }) {
+export default function SelectOptionsOfServices({
+  label,
+  serviceType,
+  setServiceType,
+}) {
+  const handleSelectChange = (event) => {
+    setServiceType(event.target.value);
+  };
   return (
     <div>
       <label htmlFor={label}>{label} : </label>
@@ -10,6 +17,8 @@ export default function SelectOptionsOfServices({ label }) {
         name={label}
         id={label}
         className="text-black py-1 px-2 border-2 rounded"
+        value={serviceType}
+        onChange={handleSelectChange}
       >
         <option>Service Type</option>
         {Object.keys(categoriesObject).map((category, key) => {
