@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import SearchForm from "../../../components/HeroSection/searchForm";
-import ProposalCard from "../../../components/proposal-detail/ProposalCard";
 import AsideLeft from "../../../components/Theme/AsideLeft/AsideLeft";
 import { useEffect, useState } from "react";
 import ProposalsList from "../../../components/services/proposals/ProposalsList";

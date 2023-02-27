@@ -1,4 +1,12 @@
-export default function SelectMenuForCountries({ label }) {
+export default function SelectMenuForCountries({
+  label,
+  location,
+  setLocation,
+}) {
+  const handleSelectChange = (event) => {
+    setLocation(event.target.value);
+  };
+
   return (
     <div>
       <label htmlFor={label}>{label} : </label>
@@ -6,6 +14,8 @@ export default function SelectMenuForCountries({ label }) {
         name={label}
         id={label}
         className="text-black py-1 px-2 border-2 rounded"
+        value={location}
+        onChange={handleSelectChange}
       >
         <option>Country</option>
         <option value="Afghanistan">Afghanistan</option>

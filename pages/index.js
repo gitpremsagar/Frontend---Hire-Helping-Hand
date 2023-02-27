@@ -10,10 +10,17 @@ export default function Home(props) {
   return (
     <div className="">
       <Head>
-        <title>Hire Helping Hand</title>
+        <meta charset="UTF-8"></meta>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+        <title>
+          Hire Helping Hand - Marketplace for Freelancers and Clients
+        </title>
         <meta
           name="description"
-          content="Hire helping hand is a platform to hire freelancers"
+          content="Hire Helping Hand is a marketplace connecting freelancers and clients to collaborate on projects. Our platform is designed to simplify the hiring process, making it easy for both parties to find the right match. Join us today to get started!"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

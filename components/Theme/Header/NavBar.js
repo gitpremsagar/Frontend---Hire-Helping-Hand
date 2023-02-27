@@ -17,12 +17,33 @@ export default function Navbar(props) {
 
   const router = useRouter();
   const [currentPathname, setcurrentPathname] = useState("/");
+  const [currentPathNameForClientMode, setcurrentPathNameForClientMode] =
+    useState("/");
+  const [
+    currentPathNameForFreelancerMode,
+    setcurrentPathNameForFreelancerMode,
+  ] = useState("/");
 
-  // get current pathname and store it in the state `currentPathname`
+  // get current pathname and store it in the state
   useEffect(() => {
-    const pathName = router.asPath.split("?")[0]; //extrcting pathName from asPath of router
-    // const pathName = router.pathname;
+    // const pathName = router.asPath.split("?")[0]; //extrcting pathName from asPath of router
+    const pathName = router.asPath;
+
     setcurrentPathname(pathName);
+
+    // build currentPathnameForClientMode
+    const url = new URL(pathName, "https://example.com");
+    url.searchParams.delete("useHireHelpingHandAs"); // remove useHireHelpingHandAs query parameter
+    const crntPathnameForClientMode = url.pathname + url.search; //  the updated current pathname for client mode
+    setcurrentPathNameForClientMode(crntPathnameForClientMode);
+    console.log(crntPathnameForClientMode);
+
+    // build currentPathnameForFreelancerMode
+    const url2 = new URL(pathName, "https://example.com");
+    url2.searchParams.set("useHireHelpingHandAs", "freelancer"); // add useHireHelpingHandAs query parameter
+    const crntPathnameForFreelancerMode = url2.pathname + url2.search; //  the updated current pathname for freelancer mode
+    setcurrentPathNameForFreelancerMode(crntPathnameForFreelancerMode);
+    console.log(crntPathnameForFreelancerMode);
   }, [router]);
 
   // set `isUserFreelancer` state based on `useHireHelpingHandAs` param value in url
@@ -49,7 +70,7 @@ export default function Navbar(props) {
           </li>
           <li>
             I'm a{" "}
-            <Link href={`${currentPathname}?useHireHelpingHandAs=freelancer`}>
+            <Link href={`${currentPathNameForFreelancerMode}`}>
               <a
                 className={
                   isUserFreelancer
@@ -61,7 +82,7 @@ export default function Navbar(props) {
               </a>
             </Link>{" "}
             /{" "}
-            <Link href={`${currentPathname}`}>
+            <Link href={`${currentPathNameForClientMode}`}>
               <a
                 className={
                   isUserFreelancer
