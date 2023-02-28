@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SelectMenuOnlineStatus from "../../components/others/Select";
 import SelectMenuForCountries from "../../components/others/SelectMenuForCountries";
 import SelectOptionsOfServices from "../../components/others/SelectOptionsOfServices";
+import SearchInputAutoSuggest from "../../components/search/SearchInputAutoSuggest";
 import AsideLeft from "../../components/Theme/AsideLeft/AsideLeft";
 
 export default function Home(props) {
@@ -65,24 +66,18 @@ export default function Home(props) {
         <div className="col-span-10">
           <main className="">
             <form onSubmit={handleSearchFormSubmission} className="mt-20">
-              <div className="flex items-center justify-center">
-                <input
-                  name="searchTerm"
-                  type="text"
-                  placeholder={
-                    isUserFreelancer
-                      ? `search for projects`
-                      : `search for proposals`
-                  }
-                  className="min-w-[600px] text-gray-900 border-2 border-gray-900 p-2"
-                  value={searchTerm}
-                  onChange={(event) => setSearchTerm(event.target.value)}
+              <div className="flex justify-center items-baseline">
+                <SearchInputAutoSuggest
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  isUserFreelancer={isUserFreelancer}
                 />
+
                 <button
                   type="submit"
                   className="text-white p-2 font-bold border-2 border-gray-900 bg-gray-900"
                 >
-                  {isUserFreelancer ? `Find Projects` : `Find Freelancer`}
+                  {isUserFreelancer ? `Find Clients` : `Find Freelancers`}
                 </button>
               </div>
 
