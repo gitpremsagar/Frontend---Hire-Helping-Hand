@@ -61,9 +61,9 @@ body {
 }
 
 /* react-autosuggest suggestion's div */
-#react-autowhatever-1{
+/* #react-autowhatever-1{
   @apply border-2 border-gray-400 absolute bg-white min-w-[600px];
-}
+} */
 
 /* ========= custom scrollbar ============*/
 /* width */

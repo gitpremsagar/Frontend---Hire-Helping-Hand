@@ -35,7 +35,7 @@ const SearchInputAutoSuggest = ({
     const matches = match(suggestion.title, query);
     const parts = parse(suggestion.title, matches);
     return (
-      <div className="p-2 hover:bg-gray-300">
+      <div className="">
         {parts.map((part, index) => {
           const className = part.highlight ? "font-bold" : null;
           return (
@@ -66,6 +66,13 @@ const SearchInputAutoSuggest = ({
       getSuggestionValue={getSuggestionValue}
       renderSuggestion={renderSuggestion}
       inputProps={inputProps}
+      theme={{
+        container: "relative",
+        suggestionsContainer:
+          "absolute z-10 w-full text-base bg-white border border-gray-200 rounded-md shadow-lg",
+        suggestion: "block px-4 py-2 text-gray-900 cursor-pointer",
+        suggestionHighlighted: "bg-blue-100",
+      }}
     />
   );
 };
