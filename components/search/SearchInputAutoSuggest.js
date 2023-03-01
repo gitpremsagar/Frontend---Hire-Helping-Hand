@@ -3,6 +3,7 @@ import Autosuggest from "react-autosuggest";
 import axios from "axios";
 import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";
+import { envVars } from "../../Services/envVars";
 
 const SearchInputAutoSuggest = ({
   searchTerm,
@@ -14,12 +15,21 @@ const SearchInputAutoSuggest = ({
 
   const onSuggestionsFetchRequested = async ({ value }) => {
     try {
-      //   const response = await axios.get(`/api/suggestions?q=${value}`);
-      const response = await axios.get(
-        `http://localhost:4040/api/search/suggestions?q=${value}`
-      );
-      console.log("suggesstions from server = ", response);
-      setSuggestions(response.data);
+      // in freelancer mode request to project's suggestions api endpoint
+      if (isUserFreelancer) {
+        const response = await axios.get(
+          `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROJECTS}/suggestions?q=${value}`
+        );
+        console.log("suggesstions from server = ", response);
+        setSuggestions(response.data);
+      } else {
+        // in client mode request to  proposal's suggestions api endpoint
+        const response = await axios.get(
+          `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROPOSALS}/suggestions?q=${value}`
+        );
+        console.log("suggesstions from server = ", response);
+        setSuggestions(response.data);
+      }
     } catch (error) {
       console.log("error in fetching seggestions = ", error);
     }

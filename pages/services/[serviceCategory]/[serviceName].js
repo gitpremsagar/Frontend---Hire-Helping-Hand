@@ -59,11 +59,6 @@ export default function DynamicPage(props) {
             <section className="p-2">
               {isUserFreelancer ? <ProjectsList /> : <ProposalsList />}
             </section>
-
-            {/*The following AsideRight was used to show no. of peoples who are online*/}
-            {/* <div className="col-span-1">
-                <AsideRight />
-              </div> */}
           </main>
         </div>
       </div>

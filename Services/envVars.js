@@ -14,4 +14,8 @@ export const envVars = {
   BACKEND_API_ENDPOINT_FOR_PROPOSALS: `${hhhBackendHostname}/api/proposals`,
 
   BACKEND_API_ENDPOINT_FOR_PROJECTS: `${hhhBackendHostname}/api/projects`,
+
+  BACKEND_API_ENDPOINT_FOR_SEARCHING_PROPOSALS: `${hhhBackendHostname}/api/search/proposals`,
+
+  BACKEND_API_ENDPOINT_FOR_SEARCHING_PROJECTS: `${hhhBackendHostname}/api/search/projects`,
 };

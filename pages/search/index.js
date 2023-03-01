@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import SelectMenuOnlineStatus from "../../components/others/Select";
 import SelectMenuForCountries from "../../components/others/SelectMenuForCountries";
 import SelectOptionsOfServices from "../../components/others/SelectOptionsOfServices";
+import SearchResultsForProjects from "../../components/search/projects/SearchResultsForProjects";
+import SearchResultsForProposals from "../../components/search/proposals/SearchResultsForProposals";
 import SearchInputAutoSuggest from "../../components/search/SearchInputAutoSuggest";
 import AsideLeft from "../../components/Theme/AsideLeft/AsideLeft";
 
@@ -33,6 +35,10 @@ export default function Home(props) {
     }
   }, [router]);
 
+  // define states to store Proposals and Projects
+  const [proposals, setProposals] = useState([]);
+  const [porjects, setPorjects] = useState([]);
+
   // request search result from backend whenever URL is UPDATED by search form submission
   useEffect(() => {
     console.log("requesting for search result!");
@@ -41,6 +47,7 @@ export default function Home(props) {
   const handleSearchFormSubmission = (e) => {
     e.preventDefault();
     // UPDATE url whenever search form is submited
+    // TODO: build url properly
     const url = isUserFreelancer
       ? `/search?useHireHelpingHandAs=freelancer&q=${searchTerm}&searchLocation=${location}&searchServiceType=${serviceType}`
       : `/search?q=${searchTerm}&searchLocation=${location}&searchServiceType=${serviceType}`;
@@ -97,10 +104,21 @@ export default function Home(props) {
             </form>
 
             <hr />
-            <section className="p-4">
-              <h1 className="text-4xl">Search Results</h1>
-              <div>here will be the cards</div>
-            </section>
+
+            {/* Render Search Results */}
+            {isUserFreelancer ? (
+              <SearchResultsForProjects
+                searchTerm={searchTerm}
+                location={location}
+                serviceType={serviceType}
+              />
+            ) : (
+              <SearchResultsForProposals
+                searchTerm={searchTerm}
+                location={location}
+                serviceType={serviceType}
+              />
+            )}
           </main>
         </div>
       </div>
