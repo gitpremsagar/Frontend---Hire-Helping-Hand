@@ -60,7 +60,7 @@ export default function SearchPage(props) {
     searchLocation,
     searchServiceType
   ) {
-    console.log("fetchProposals calling source = ", callingSource);
+    console.log("fetchProjects calling source = ", callingSource);
     try {
       // FIXME: build url properly
       const url = `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROJECTS}?q=${q}&searchLocation=${searchLocation}&searchServiceType=${searchServiceType}`;
@@ -136,7 +136,7 @@ export default function SearchPage(props) {
 
       <div className="lg:grid lg:grid-cols-12">
         <div className="col-span-2">
-          <AsideLeft />
+          <AsideLeft props={props} />
         </div>
 
         <div className="col-span-10">

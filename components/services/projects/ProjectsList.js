@@ -7,6 +7,7 @@ function ProjectsList() {
   const router = useRouter();
   const [projects, setProjects] = useState([]);
 
+  // fetch projects whenever router changes
   useEffect(() => {
     async function fetchProjects() {
       try {

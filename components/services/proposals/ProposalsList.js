@@ -7,7 +7,9 @@ function ProposalsList() {
   const router = useRouter();
   const [proposals, setProposals] = useState([]);
 
+  // fetch proposals whenever router changes
   useEffect(() => {
+    if (!router.query.serviceName) return; // don't send request to api until router.query.serviceName if defined
     async function fetchProposals() {
       try {
         const { serviceCategory, serviceName } = router.query; //serviceCategory and serviceName coresponds to category and sub_category columns in proposals table

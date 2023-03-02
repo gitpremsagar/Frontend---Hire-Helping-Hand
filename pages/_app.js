@@ -47,12 +47,14 @@ function MyApp({ Component, pageProps }) {
   // set freelancer/client mode based on url param `useHireHelpingHandAs`
   const [isUserFreelancer, setisUserFreelancer] = useState(false);
   useEffect(() => {
-    const currentUrl = router.asPath;
+    const currentUrl = window.location.href;
+    //console.log("url on top = ", currentUrl);
     const query = extractParamsFromURL(currentUrl);
     const useHireHelpingHandAs = query.useHireHelpingHandAs || "client"; //Note that we're also setting a default value of client for the `useHireHelpingHand` parameter in case it's not present in the URL. This ensures that our code doesn't break if the parameter is not provided.
     setisUserFreelancer(useHireHelpingHandAs === "freelancer");
   }, []);
 
+  //console.log("isUserFreelancer on top = ", isUserFreelancer);
   return (
     <Fragment>
       <Header
