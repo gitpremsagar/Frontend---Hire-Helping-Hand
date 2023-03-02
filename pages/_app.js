@@ -5,8 +5,12 @@ import "../styles/globals.css";
 import { envVars } from "./../Services/envVars";
 import axios from "axios";
 import Footer from "../components/Theme/Footer/footer";
+import { useRouter } from "next/router";
+import { extractParamsFromURL } from "../Services/extractParamsFromURL";
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+
   const [loggedInUserInfo, setloggedInUserInfo] = useState(null);
 
   function verifyTokenThenUpdate_loggedInUserInfo(token) {
@@ -39,10 +43,29 @@ function MyApp({ Component, pageProps }) {
     const token = window.localStorage.getItem("token");
     if (token) verifyTokenThenUpdate_loggedInUserInfo(token);
   }, []);
+
+  // set freelancer/client mode based on url param `useHireHelpingHandAs`
+  const [isUserFreelancer, setisUserFreelancer] = useState(false);
+  useEffect(() => {
+    const currentUrl = router.asPath;
+    const query = extractParamsFromURL(currentUrl);
+    const useHireHelpingHandAs = query.useHireHelpingHandAs || "client"; //Note that we're also setting a default value of client for the `useHireHelpingHand` parameter in case it's not present in the URL. This ensures that our code doesn't break if the parameter is not provided.
+    setisUserFreelancer(useHireHelpingHandAs === "freelancer");
+  }, []);
+
   return (
     <Fragment>
-      <Header loggedInUserInfo={loggedInUserInfo} />
-      <Component {...pageProps} loggedInUserInfo={loggedInUserInfo} />
+      <Header
+        loggedInUserInfo={loggedInUserInfo}
+        isUserFreelancer={isUserFreelancer}
+        setisUserFreelancer={setisUserFreelancer}
+      />
+      <Component
+        {...pageProps}
+        loggedInUserInfo={loggedInUserInfo}
+        isUserFreelancer={isUserFreelancer}
+        setisUserFreelancer={setisUserFreelancer}
+      />
       <Footer />
     </Fragment>
   );

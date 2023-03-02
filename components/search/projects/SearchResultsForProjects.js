@@ -1,35 +1,10 @@
-import axios from "axios";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import { envVars } from "../../../Services/envVars";
-
-function SearchResultsForProjects({ searchTerm, location, serviceType }) {
-  const router = useRouter();
-  const [projects, setProjects] = useState([]);
-
-  // request search result from backend whenever URL is UPDATED by search form submission
-  useEffect(() => {
-    async function fetchProjects() {
-      try {
-        const { serviceCategory, serviceName } = router.query; //serviceCategory and serviceName coresponds to category and sub_category columns in proposals table
-        const url = `${envVars.BACKEND_API_ENDPOINT_FOR_PROJECTS}?category=${serviceCategory}&sub_category=${serviceName}`;
-        console.log("requsting to - ", url);
-        const response = await axios.get(url);
-        setProjects(response.data); // assuming the response data is an array of projects
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchProjects();
-  }, [router]);
-
+function SearchResultsForProjects({ projects }) {
   return (
     <div>
       <h1>Projects List</h1>
       <ul>
-        {projects.map((project) => (
-          <li key={project.project_id}>
+        {projects.map((project, key) => (
+          <li key={key}>
             <h2>{project.title}</h2>
             <p>{project.description}</p>
             <p>Category: {project.category}</p>

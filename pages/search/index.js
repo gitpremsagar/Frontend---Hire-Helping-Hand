@@ -8,17 +8,14 @@ import SearchResultsForProjects from "../../components/search/projects/SearchRes
 import SearchResultsForProposals from "../../components/search/proposals/SearchResultsForProposals";
 import SearchInputAutoSuggest from "../../components/search/SearchInputAutoSuggest";
 import AsideLeft from "../../components/Theme/AsideLeft/AsideLeft";
+import { envVars } from "../../Services/envVars";
+import axios from "axios";
+import { extractParamsFromURL } from "../../Services/extractParamsFromURL";
 
-export default function Home(props) {
+export default function SearchPage(props) {
+  // console.log("props = ", props);
+  const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
   const router = useRouter();
-
-  // set `isUserFreelancer` state based on `useHireHelpingHandAs` param value in url
-  const [isUserFreelancer, setisUserFreelancer] = useState(false);
-  useEffect(() => {
-    const { query } = router;
-    const useHireHelpingHandAs = query.useHireHelpingHandAs || "client"; //Note that we're also setting a default value of client for the `useHireHelpingHand` parameter in case it's not present in the URL. This ensures that our code doesn't break if the parameter is not provided.
-    setisUserFreelancer(useHireHelpingHandAs === "freelancer");
-  }, [router]);
 
   // extracting search term, search location and search service type from url and storing it on respective states
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,31 +25,103 @@ export default function Home(props) {
     if (router.query.q) {
       //UPDATING the states only when params or router.query are not undefined
       const { q, searchLocation, searchServiceType } = router.query;
-      console.log("Router = ", router);
+      // console.log("Router = ", router);
       setSearchTerm(q);
       setLocation(searchLocation || "");
       setServiceType(searchServiceType || "");
     }
   }, [router]);
 
-  // define states to store Proposals and Projects
+  // fetch proposals from api when requested
   const [proposals, setProposals] = useState([]);
-  const [porjects, setPorjects] = useState([]);
+  async function fetchProposals(
+    callingSource,
+    q,
+    searchLocation,
+    searchServiceType
+  ) {
+    console.log("fetchProposals calling source = ", callingSource);
+    try {
+      // FIXME: build url properly
+      const url = `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROPOSALS}?q=${q}&searchLocation=${searchLocation}&searchServiceType=${searchServiceType}`;
+      console.log("requsting to - ", url);
+      const response = await axios.get(url);
+      setProposals(response.data); // assuming the response data is an array of proposals
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-  // request search result from backend whenever URL is UPDATED by search form submission
-  useEffect(() => {
-    console.log("requesting for search result!");
-  }, [router]);
+  // fetch projects from api when requested
+  const [projects, setProjects] = useState([]);
+  async function fetchProjects(
+    callingSource,
+    q,
+    searchLocation,
+    searchServiceType
+  ) {
+    console.log("fetchProposals calling source = ", callingSource);
+    try {
+      // FIXME: build url properly
+      const url = `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROJECTS}?q=${q}&searchLocation=${searchLocation}&searchServiceType=${searchServiceType}`;
+      console.log("requsting to - ", url);
+      const response = await axios.get(url);
+      setProjects(response.data); // assuming the response data is an array of projects
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const handleSearchFormSubmission = (e) => {
     e.preventDefault();
     // UPDATE url whenever search form is submited
-    // TODO: build url properly
+    // FIXME: build url properly
     const url = isUserFreelancer
       ? `/search?useHireHelpingHandAs=freelancer&q=${searchTerm}&searchLocation=${location}&searchServiceType=${serviceType}`
       : `/search?q=${searchTerm}&searchLocation=${location}&searchServiceType=${serviceType}`;
     router.push(url);
+
+    isUserFreelancer
+      ? fetchProjects("form submission", searchTerm, location, serviceType)
+      : fetchProposals("form submission", searchTerm, location, serviceType);
   };
+
+  // fetch search results when page loads for the first time and if search params are present in url
+  useEffect(() => {
+    console.log("asPath = ", router.asPath);
+    const { q, searchLocation, searchServiceType, useHireHelpingHandAs } =
+      extractParamsFromURL(router.asPath);
+    if (!q) return; //if there is no search term available in url then dont request for search result
+    if (useHireHelpingHandAs == "freelancer") {
+      //request for projects
+      fetchProjects(
+        "first time page load",
+        q,
+        searchLocation,
+        searchServiceType
+      );
+      console.log("mode = freelancer");
+    } else {
+      // request for proposals
+      fetchProposals(
+        "first time page load",
+        q,
+        searchLocation,
+        searchServiceType
+      );
+      console.log("mode = client");
+    }
+  }, []);
+
+  // console.log("isUserFreelancer = ", isUserFreelancer);
+
+  // fetch search results when freelancer/client mode changes and if search params are present in url
+  useEffect(() => {
+    if (searchTerm == "") return;
+    isUserFreelancer
+      ? fetchProjects("mode changed", searchTerm, location, serviceType)
+      : fetchProposals("mode changed", searchTerm, location, serviceType);
+  }, [isUserFreelancer]);
 
   return (
     <div className="">
@@ -74,6 +143,7 @@ export default function Home(props) {
           <main className="">
             <form onSubmit={handleSearchFormSubmission} className="mt-20">
               <div className="flex justify-center items-baseline">
+                {/* Search Bar with auto suggest functionality */}
                 <SearchInputAutoSuggest
                   searchTerm={searchTerm}
                   setSearchTerm={setSearchTerm}
@@ -108,15 +178,17 @@ export default function Home(props) {
             {/* Render Search Results */}
             {isUserFreelancer ? (
               <SearchResultsForProjects
-                searchTerm={searchTerm}
-                location={location}
-                serviceType={serviceType}
+                // searchTerm={searchTerm}
+                // location={location}
+                // serviceType={serviceType}
+                projects={projects}
               />
             ) : (
               <SearchResultsForProposals
-                searchTerm={searchTerm}
-                location={location}
-                serviceType={serviceType}
+                // searchTerm={searchTerm}
+                // location={location}
+                // serviceType={serviceType}
+                proposals={proposals}
               />
             )}
           </main>

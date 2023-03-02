@@ -10,29 +10,32 @@ const SearchInputAutoSuggest = ({
   setSearchTerm,
   isUserFreelancer,
 }) => {
-  // const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   const onSuggestionsFetchRequested = async ({ value }) => {
-    try {
-      // in freelancer mode request to project's suggestions api endpoint
-      if (isUserFreelancer) {
-        const response = await axios.get(
-          `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROJECTS}/suggestions?q=${value}`
-        );
-        console.log("suggesstions from server = ", response);
-        setSuggestions(response.data);
-      } else {
-        // in client mode request to  proposal's suggestions api endpoint
-        const response = await axios.get(
-          `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROPOSALS}/suggestions?q=${value}`
-        );
-        console.log("suggesstions from server = ", response);
-        setSuggestions(response.data);
+    async function fetchSuggestions() {
+      try {
+        // in freelancer mode request to project's suggestions api endpoint
+        if (isUserFreelancer) {
+          const response = await axios.get(
+            `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROJECTS}/suggestions?q=${value}`
+          );
+          console.log("suggesstions from server = ", response);
+          setSuggestions(response.data);
+        } else {
+          // in client mode request to  proposal's suggestions api endpoint
+          const response = await axios.get(
+            `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROPOSALS}/suggestions?q=${value}`
+          );
+          console.log("suggesstions from server = ", response);
+          setSuggestions(response.data);
+        }
+      } catch (error) {
+        console.log("error in fetching seggestions = ", error);
       }
-    } catch (error) {
-      console.log("error in fetching seggestions = ", error);
     }
+
+    fetchSuggestions();
   };
 
   const onSuggestionsClearRequested = () => {

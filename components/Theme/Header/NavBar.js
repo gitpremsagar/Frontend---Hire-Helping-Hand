@@ -13,7 +13,7 @@ import UserDropdown from "./UserDropdown";
 import { useEffect, useState } from "react";
 
 export default function Navbar(props) {
-  const { loggedInUserInfo } = props;
+  const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
 
   const router = useRouter();
   const [currentPathNameForClientMode, setcurrentPathNameForClientMode] =
@@ -41,12 +41,28 @@ export default function Navbar(props) {
   }, [router]);
 
   // set `isUserFreelancer` state based on `useHireHelpingHandAs` param value in url
-  const [isUserFreelancer, setisUserFreelancer] = useState(false);
-  useEffect(() => {
-    const { query } = router;
-    const useHireHelpingHandAs = query.useHireHelpingHandAs || "client"; //Note that we're also setting a default value of client for the `useHireHelpingHand` parameter in case it's not present in the URL. This ensures that our code doesn't break if the parameter is not provided.
-    setisUserFreelancer(useHireHelpingHandAs === "freelancer");
-  }, [router]);
+  // const [isUserFreelancer, setisUserFreelancer] = useState(false);
+  // useEffect(() => {
+  //   const { query } = router;
+  //   const useHireHelpingHandAs = query.useHireHelpingHandAs || "client"; //Note that we're also setting a default value of client for the `useHireHelpingHand` parameter in case it's not present in the URL. This ensures that our code doesn't break if the parameter is not provided.
+  //   setisUserFreelancer(useHireHelpingHandAs === "freelancer");
+  // }, [router]);
+
+  function switchToFreelancerMode(event) {
+    event.preventDefault();
+    // push useHireHelingHandAs=freelancer into url
+    router.push(currentPathNameForFreelancerMode);
+    // change isUserFreelancer state
+    setisUserFreelancer(true);
+  }
+
+  function swtichToClientMode(event) {
+    event.preventDefault();
+    // push useHireHelingHandAs=freelancer into url
+    router.push(currentPathNameForClientMode);
+    // change isUserFreelancer state
+    setisUserFreelancer(false);
+  }
 
   return (
     <nav className="">
@@ -64,29 +80,29 @@ export default function Navbar(props) {
           </li>
           <li>
             I'm a{" "}
-            <Link href={`${currentPathNameForFreelancerMode}`}>
-              <a
-                className={
-                  isUserFreelancer
-                    ? "cursor-pointer text-blue-400"
-                    : "cursor-pointer line-through text-red-600 hover:no-underline hover:text-blue-400"
-                }
-              >
-                Freelancer
-              </a>
-            </Link>{" "}
+            <a
+              onClick={switchToFreelancerMode}
+              href={`${currentPathNameForFreelancerMode}`}
+              className={
+                isUserFreelancer
+                  ? "cursor-pointer text-blue-400"
+                  : "cursor-pointer line-through text-red-600 hover:no-underline hover:text-blue-400"
+              }
+            >
+              Freelancer
+            </a>{" "}
             /{" "}
-            <Link href={`${currentPathNameForClientMode}`}>
-              <a
-                className={
-                  isUserFreelancer
-                    ? "cursor-pointer line-through text-red-600 hover:no-underline hover:text-blue-400"
-                    : "cursor-pointer text-blue-400"
-                }
-              >
-                Client
-              </a>
-            </Link>
+            <a
+              onClick={swtichToClientMode}
+              href={`${currentPathNameForClientMode}`}
+              className={
+                isUserFreelancer
+                  ? "cursor-pointer line-through text-red-600 hover:no-underline hover:text-blue-400"
+                  : "cursor-pointer text-blue-400"
+              }
+            >
+              Client
+            </a>
           </li>
           {isUserFreelancer ? (
             <li>
