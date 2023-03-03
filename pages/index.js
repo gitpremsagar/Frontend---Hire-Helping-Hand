@@ -6,6 +6,7 @@ import AsideLeft from "./../components/Theme/AsideLeft/AsideLeft";
 
 export default function Home(props) {
   const { loggedInUserInfo } = props;
+  console.log("props on homepage = ", props);
 
   return (
     <div className="">
@@ -28,7 +29,7 @@ export default function Home(props) {
       {/* Header */}
       <div className="lg:grid lg:grid-cols-12">
         <div className="col-span-2">
-          <AsideLeft />
+          <AsideLeft {...props} />
         </div>
 
         <div className="col-span-10">
