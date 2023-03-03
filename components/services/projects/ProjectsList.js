@@ -9,6 +9,7 @@ function ProjectsList() {
 
   // fetch projects whenever router changes
   useEffect(() => {
+    if (!router.query.serviceName) return; // don't send request to api until router.query.serviceName if defined
     async function fetchProjects() {
       try {
         const { serviceCategory, serviceName } = router.query; //serviceCategory and serviceName coresponds to category and sub_category columns in proposals table

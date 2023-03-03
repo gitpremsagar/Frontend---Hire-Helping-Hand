@@ -6,7 +6,7 @@ import AsideLeft from "./../components/Theme/AsideLeft/AsideLeft";
 
 export default function Home(props) {
   const { loggedInUserInfo } = props;
-  console.log("props on homepage = ", props);
+  // console.log("props on homepage = ", props);
 
   return (
     <div className="">

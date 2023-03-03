@@ -6,15 +6,6 @@ import { useEffect, useState } from "react";
 export default function AsideLeft(props) {
   const router = useRouter();
   const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
-  console.log("props on AsideLeft = ", props);
-
-  // set `isUserFreelancer` state based on `useHireHelpingHandAs` param value in url
-  // const [isUserFreelancer, setisUserFreelancer] = useState(false);
-  // useEffect(() => {
-  //   const { query } = router;
-  //   const useHireHelpingHandAs = query.useHireHelpingHandAs || "client"; //Note that we're also setting a default value of client for the `useHireHelpingHand` parameter in case it's not present in the URL. This ensures that our code doesn't break if the parameter is not provided.
-  //   setisUserFreelancer(useHireHelpingHandAs === "freelancer");
-  // }, [router]);
 
   function showListOfSubCategories(e) {
     // change background colour of clicked list item to make it look active
