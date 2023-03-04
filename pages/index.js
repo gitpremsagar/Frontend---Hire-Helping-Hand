@@ -11,7 +11,7 @@ export default function Home(props) {
   return (
     <div className="">
       <Head>
-        <meta charset="UTF-8"></meta>
+        <meta charSet="UTF-8"></meta>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
@@ -34,7 +34,7 @@ export default function Home(props) {
 
         <div className="col-span-10">
           <main className="">
-            <HeroSection />
+            <HeroSection {...props} />
             <hr />
             Here should be something.
           </main>

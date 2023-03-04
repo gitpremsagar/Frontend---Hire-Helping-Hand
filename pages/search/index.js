@@ -6,14 +6,13 @@ import SelectMenuForCountries from "../../components/others/SelectMenuForCountri
 import SelectOptionsOfServices from "../../components/others/SelectOptionsOfServices";
 import SearchResultsForProjects from "../../components/search/projects/SearchResultsForProjects";
 import SearchResultsForProposals from "../../components/search/proposals/SearchResultsForProposals";
-import SearchInputAutoSuggest from "../../components/search/SearchInputAutoSuggest";
 import AsideLeft from "../../components/Theme/AsideLeft/AsideLeft";
 import { envVars } from "../../Services/envVars";
 import axios from "axios";
 import { extractParamsFromURL } from "../../Services/extractParamsFromURL";
+import AutoSuggestInput from "../../components/search/AutosuggetInput";
 
 export default function SearchPage(props) {
-  // console.log("props = ", props);
   const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
   const router = useRouter();
 
@@ -25,7 +24,7 @@ export default function SearchPage(props) {
     if (router.query.q) {
       //UPDATING the states only when params or router.query are not undefined
       const { q, searchLocation, searchServiceType } = router.query;
-      // console.log("Router = ", router);
+
       setSearchTerm(q);
       setLocation(searchLocation || "");
       setServiceType(searchServiceType || "");
@@ -40,11 +39,9 @@ export default function SearchPage(props) {
     searchLocation,
     searchServiceType
   ) {
-    console.log("fetchProposals calling source = ", callingSource);
     try {
       // FIXME: build url properly
       const url = `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROPOSALS}?q=${q}&searchLocation=${searchLocation}&searchServiceType=${searchServiceType}`;
-      console.log("requsting to - ", url);
       const response = await axios.get(url);
       setProposals(response.data); // assuming the response data is an array of proposals
     } catch (error) {
@@ -60,11 +57,9 @@ export default function SearchPage(props) {
     searchLocation,
     searchServiceType
   ) {
-    console.log("fetchProjects calling source = ", callingSource);
     try {
       // FIXME: build url properly
       const url = `${envVars.BACKEND_API_ENDPOINT_FOR_SEARCHING_PROJECTS}?q=${q}&searchLocation=${searchLocation}&searchServiceType=${searchServiceType}`;
-      console.log("requsting to - ", url);
       const response = await axios.get(url);
       setProjects(response.data); // assuming the response data is an array of projects
     } catch (error) {
@@ -74,6 +69,7 @@ export default function SearchPage(props) {
 
   const handleSearchFormSubmission = (e) => {
     e.preventDefault();
+    if (searchTerm == "") return;
     // UPDATE url whenever search form is submited
     // FIXME: build url properly
     const url = isUserFreelancer
@@ -88,7 +84,6 @@ export default function SearchPage(props) {
 
   // fetch search results when page loads for the first time and if search params are present in url
   useEffect(() => {
-    console.log("asPath = ", router.asPath);
     const { q, searchLocation, searchServiceType, useHireHelpingHandAs } =
       extractParamsFromURL(router.asPath);
     if (!q) return; //if there is no search term available in url then dont request for search result
@@ -100,7 +95,6 @@ export default function SearchPage(props) {
         searchLocation,
         searchServiceType
       );
-      console.log("mode = freelancer");
     } else {
       // request for proposals
       fetchProposals(
@@ -109,11 +103,8 @@ export default function SearchPage(props) {
         searchLocation,
         searchServiceType
       );
-      console.log("mode = client");
     }
   }, []);
-
-  // console.log("isUserFreelancer = ", isUserFreelancer);
 
   // fetch search results when freelancer/client mode changes and if search params are present in url
   useEffect(() => {
@@ -136,7 +127,7 @@ export default function SearchPage(props) {
 
       <div className="lg:grid lg:grid-cols-12">
         <div className="col-span-2">
-          <AsideLeft props={props} />
+          <AsideLeft {...props} />
         </div>
 
         <div className="col-span-10">
@@ -144,7 +135,7 @@ export default function SearchPage(props) {
             <form onSubmit={handleSearchFormSubmission} className="mt-20">
               <div className="flex justify-center items-baseline">
                 {/* Search Bar with auto suggest functionality */}
-                <SearchInputAutoSuggest
+                <AutoSuggestInput
                   searchTerm={searchTerm}
                   setSearchTerm={setSearchTerm}
                   isUserFreelancer={isUserFreelancer}

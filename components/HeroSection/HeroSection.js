@@ -1,6 +1,6 @@
 import SearchForm from "./searchForm";
 
-export default function HeroSection() {
+export default function HeroSection(props) {
   return (
     <section className="p-20">
       <div className="mb-20 my-auto text-center">
@@ -12,7 +12,7 @@ export default function HeroSection() {
           projects.
         </h2>
       </div>
-      <SearchForm />
+      <SearchForm {...props} />
     </section>
   );
 }
