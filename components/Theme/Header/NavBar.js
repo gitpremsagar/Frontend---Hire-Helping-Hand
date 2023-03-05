@@ -40,14 +40,6 @@ export default function Navbar(props) {
     setcurrentPathNameForFreelancerMode(crntPathnameForFreelancerMode);
   }, [router]);
 
-  // set `isUserFreelancer` state based on `useHireHelpingHandAs` param value in url
-  // const [isUserFreelancer, setisUserFreelancer] = useState(false);
-  // useEffect(() => {
-  //   const { query } = router;
-  //   const useHireHelpingHandAs = query.useHireHelpingHandAs || "client"; //Note that we're also setting a default value of client for the `useHireHelpingHand` parameter in case it's not present in the URL. This ensures that our code doesn't break if the parameter is not provided.
-  //   setisUserFreelancer(useHireHelpingHandAs === "freelancer");
-  // }, [router]);
-
   function switchToFreelancerMode(event) {
     event.preventDefault();
     // push useHireHelingHandAs=freelancer into url
@@ -79,30 +71,36 @@ export default function Navbar(props) {
             </Link>
           </li>
           <li>
-            I'm a{" "}
-            <a
-              onClick={switchToFreelancerMode}
-              href={`${currentPathNameForFreelancerMode}`}
-              className={
-                isUserFreelancer
-                  ? "cursor-pointer text-blue-400"
-                  : "cursor-pointer line-through text-red-600 hover:no-underline hover:text-blue-400"
-              }
-            >
-              Freelancer
-            </a>{" "}
-            /{" "}
-            <a
-              onClick={swtichToClientMode}
-              href={`${currentPathNameForClientMode}`}
-              className={
-                isUserFreelancer
-                  ? "cursor-pointer line-through text-red-600 hover:no-underline hover:text-blue-400"
-                  : "cursor-pointer text-blue-400"
-              }
-            >
-              Client
-            </a>
+            <ul className="flex-1 flex">
+              <span className="mx-2">I'm a</span>
+              <li>
+                <a
+                  onClick={switchToFreelancerMode}
+                  href={`${currentPathNameForFreelancerMode}`}
+                  className={
+                    isUserFreelancer
+                      ? "cursor-pointer text-blue-400"
+                      : "cursor-pointer line-through text-red-600 hover:no-underline hover:text-blue-400"
+                  }
+                >
+                  Freelancer
+                </a>
+              </li>
+              <span className="mx-2">/</span>
+              <li>
+                <a
+                  onClick={swtichToClientMode}
+                  href={`${currentPathNameForClientMode}`}
+                  className={
+                    isUserFreelancer
+                      ? "cursor-pointer line-through text-red-600 hover:no-underline hover:text-blue-400"
+                      : "cursor-pointer text-blue-400"
+                  }
+                >
+                  Client
+                </a>
+              </li>
+            </ul>
           </li>
           {isUserFreelancer ? (
             <li>
