@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 
 export default function Navbar(props) {
   const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
-
+  console.log("loggedInUserInfo on navbar = ", loggedInUserInfo);
   const router = useRouter();
   const [currentPathNameForClientMode, setcurrentPathNameForClientMode] =
     useState("/");
@@ -104,7 +104,14 @@ export default function Navbar(props) {
           </li>
           {isUserFreelancer ? (
             <li>
-              <Link href={`/sell-service`}>
+              {/* FIXME: put user id on link */}
+              <Link
+                href={
+                  loggedInUserInfo
+                    ? `/sell-service/${loggedInUserInfo.idusers}`
+                    : `/sell-service`
+                }
+              >
                 <a className="flex items-center">
                   <BriefcaseIcon className="w-5 h-5 mr-1" />
                   Sell Service
@@ -113,7 +120,14 @@ export default function Navbar(props) {
             </li>
           ) : (
             <li>
-              <Link href={`/post-job`}>
+              {/* FIXME: put user id on link */}
+              <Link
+                href={
+                  loggedInUserInfo
+                    ? `/post-job/${loggedInUserInfo.idusers}`
+                    : `/post-job`
+                }
+              >
                 <a className=" flex items-center">
                   <CloudeUploadIcon className="h-5 w-5 mr-1" />
                   Post a Job

@@ -6,8 +6,10 @@ import LogoutButton from "./LogoutButton";
 export default function UserDropdown(props) {
   const [showDropdown, setshowDropdown] = useState(false);
 
-  // hiding dropdown on clicking on anywhere on document
-  document.addEventListener("click", () => setshowDropdown(false), true);
+  useEffect(() => {
+    // hiding dropdown on clicking anywhere on the page
+    document.addEventListener("click", () => setshowDropdown(false), true);
+  }, []);
 
   const { loggedInUserInfo } = props;
   return (

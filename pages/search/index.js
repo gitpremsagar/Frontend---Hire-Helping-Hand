@@ -86,7 +86,7 @@ export default function SearchPage(props) {
   useEffect(() => {
     const { q, searchLocation, searchServiceType, useHireHelpingHandAs } =
       extractParamsFromURL(router.asPath);
-    if (!q) return; //if there is no search term available in url then dont request for search result
+    if (!q) return; //if there is no search term available in url then don't request for search result
     if (useHireHelpingHandAs == "freelancer") {
       //request for projects
       fetchProjects(

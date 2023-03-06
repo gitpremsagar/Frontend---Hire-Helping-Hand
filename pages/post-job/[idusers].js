@@ -19,7 +19,7 @@ export default function becomeFreelancer() {
       <main>
         <div className="bg-gray-800 text-white">
           <h1 className="text-center font-bold text-6xl p-20">
-            Post a job and find a freelancer to get the job done
+            Create New Project
           </h1>
         </div>
 

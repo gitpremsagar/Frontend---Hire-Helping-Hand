@@ -1,9 +1,30 @@
 import React, { Fragment } from "react";
-import FreelancerAvatar from "../../components/user-profile/FreelancerAvatar";
-import RatingStars from "../../components/user-profile/RatingStars";
-import TestimonialSection from "../../components/user-profile/TestimonialSection";
+import FreelancerAvatar from "../../../components/profiles/FreelancerAvatar";
+import RatingStars from "../../../components/profiles/RatingStars";
+import TestimonialSection from "../../../components/profiles/TestimonialSection";
+import { useRouter } from "next/router";
 
-export default function UserPofilePgae() {
+export default function FreelancerProfilePage(props) {
+  // FIXME: if user id is not present in url or is not a number redirect to 404 page
+  const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
+  const router = useRouter();
+  const userIdOnUrl = router.query.idusers;
+
+  // is user logged in?
+  if (loggedInUserInfo) {
+    // is the user requesting for her own profile
+    if (userIdOnUrl == loggedInUserInfo.idusers) {
+      // show her own profile info with edit options
+      // give option to preview her own profile as someone else
+    } else {
+      // show profile info of requested user without edit options
+    }
+  } else {
+    // show profile info of requested user without edit options
+  }
+
+  console.log("user id in url on freelancer profile page = ", userIdOnUrl);
+
   return (
     <Fragment>
       <div className="flex flex-col w-full">
