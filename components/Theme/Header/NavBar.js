@@ -14,7 +14,6 @@ import { useEffect, useState } from "react";
 
 export default function Navbar(props) {
   const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
-  console.log("loggedInUserInfo on navbar = ", loggedInUserInfo);
   const router = useRouter();
   const [currentPathNameForClientMode, setcurrentPathNameForClientMode] =
     useState("/");

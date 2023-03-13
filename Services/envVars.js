@@ -18,4 +18,6 @@ export const envVars = {
   BACKEND_API_ENDPOINT_FOR_SEARCHING_PROPOSALS: `${hhhBackendHostname}/api/search/proposals`,
 
   BACKEND_API_ENDPOINT_FOR_SEARCHING_PROJECTS: `${hhhBackendHostname}/api/search/projects`,
+
+  BACKEND_API_ENDPOINT_FOR_UPLOADING_FREELANCER_AVATAR: `${hhhBackendHostname}/api/upload-avatar`,
 };
