@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   const [loggedInUserInfo, setloggedInUserInfo] = useState(null);
+  const [jwt, setJwt] = useState(null);
 
   function verifyTokenThenUpdate_loggedInUserInfo(token) {
     // make http request to backend sever
@@ -25,6 +26,7 @@ function MyApp({ Component, pageProps }) {
       })
       .then(function (response) {
         // handle success
+        setJwt(token);
         const verifiedToken = response.data;
         setloggedInUserInfo(verifiedToken);
       })
@@ -61,12 +63,15 @@ function MyApp({ Component, pageProps }) {
         loggedInUserInfo={loggedInUserInfo}
         isUserFreelancer={isUserFreelancer}
         setisUserFreelancer={setisUserFreelancer}
+        setloggedInUserInfo={setloggedInUserInfo}
       />
       <Component
         {...pageProps}
         loggedInUserInfo={loggedInUserInfo}
         isUserFreelancer={isUserFreelancer}
         setisUserFreelancer={setisUserFreelancer}
+        setloggedInUserInfo={setloggedInUserInfo}
+        jwt={jwt}
       />
       <Footer />
     </Fragment>
