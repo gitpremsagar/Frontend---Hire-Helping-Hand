@@ -8,7 +8,9 @@ import { envVars } from "./../../../Services/envVars";
 import { Pencil } from "../../../components/svg/heroicons";
 
 export default function ClientProfilePage(props) {
-  const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
+  const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer, jwt } =
+    props;
+
   const router = useRouter();
 
   const [userDetail, setuserDetail] = useState([]);
@@ -22,7 +24,6 @@ export default function ClientProfilePage(props) {
         `${envVars.BACKEND_API_FOR_USERS}/${userIdOnUrl}`
       );
       setuserDetail(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log("error in getting user information = ", error);
     }
@@ -32,15 +33,8 @@ export default function ClientProfilePage(props) {
     router.query.idusers && getUserInfoFromAPI();
   }, [router.query.idusers]);
 
-  // console.log("user id in url on client profile page = ", userIdOnUrl);
-  // function handleUpload() {
-  //   console.log("Change Avatar clicked!");
-
-  // }
-
   // handle avatar change/upload request
   const handleUpload = async () => {
-    console.log("Change Avatar clicked!");
     const fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.accept = "image/*";
@@ -53,20 +47,35 @@ export default function ClientProfilePage(props) {
 
       try {
         const response = await axios(
-          envVars.BACKEND_API_ENDPOINT_FOR_UPLOADING_FREELANCER_AVATAR,
+          `${envVars.BACKEND_API_ENDPOINT_FOR_UPLOADING_CLIENT_PROFILE_PIC}/${loggedInUserInfo.idusers}`,
           {
             method: "POST",
             data: formData,
+            headers: {
+              "x-auth-token": jwt,
+            },
           }
         );
-        if (response.ok) {
-          const newAvatarUrl = await response.text();
-          // FIXME: update the avatar image on the page
-        } else {
-          console.error("Failed to upload avatar");
+        if (response.status == 200) {
+          const newAvatarUrl = await response.data;
+          // console.log("upload response = ", newAvatarUrl);
+          setuserDetail((prevUserDetail) => {
+            const newUserDetail = [...prevUserDetail];
+            newUserDetail[0].profile_pic_as_client = newAvatarUrl;
+            return newUserDetail;
+          });
         }
       } catch (error) {
-        console.error("Failed to upload avatar:", error);
+        if (error.response.data.error == "File size too large!")
+          alert("Image size can not be more than 2MB!");
+
+        if (error.response.data.error == "Invalid file format!")
+          alert(
+            "Only jpeg images are allowed to be set set as profile picture!"
+          );
+
+        // Some Unknown error occurred
+        console.error("Failed to upload avatar unknown error :", error);
       }
     });
     fileInput.click();
@@ -90,8 +99,8 @@ export default function ClientProfilePage(props) {
             <div className="bg-gray-100 py-16 px-8">
               <div className="flex items-center">
                 <FreelancerAvatar
-                  src="https://via.placeholder.com/150"
-                  alt="User Avatar"
+                  src={`${envVars.BACKEND_API_ENDPOINT_FOR_GETTING_CLIENT_PROFILE_PIC}/${user.profile_pic_as_client}`}
+                  alt="Client Profile Pic"
                   onUpload={handleUpload}
                   {...props}
                 />

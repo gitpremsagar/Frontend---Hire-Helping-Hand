@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   const [loggedInUserInfo, setloggedInUserInfo] = useState(null);
+  const [jwt, setJwt] = useState(null);
 
   function verifyTokenThenUpdate_loggedInUserInfo(token) {
     // make http request to backend sever
@@ -41,7 +42,10 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     //verify token before storing it into loggedInUserInfo stateHook
     const token = window.localStorage.getItem("token");
-    if (token) verifyTokenThenUpdate_loggedInUserInfo(token);
+    if (token) {
+      setJwt(token);
+      verifyTokenThenUpdate_loggedInUserInfo(token);
+    }
   }, []);
 
   // set freelancer/client mode based on url param `useHireHelpingHandAs`
@@ -61,12 +65,14 @@ function MyApp({ Component, pageProps }) {
         loggedInUserInfo={loggedInUserInfo}
         isUserFreelancer={isUserFreelancer}
         setisUserFreelancer={setisUserFreelancer}
+        jwt={jwt}
       />
       <Component
         {...pageProps}
         loggedInUserInfo={loggedInUserInfo}
         isUserFreelancer={isUserFreelancer}
         setisUserFreelancer={setisUserFreelancer}
+        jwt={jwt}
       />
       <Footer />
     </Fragment>
