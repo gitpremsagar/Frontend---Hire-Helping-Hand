@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-const FreelancerProfilePic = ({ src, onUpload, loggedInUserInfo }) => {
+const FreelancerAvatar = ({ src, alt, onUpload, loggedInUserInfo }) => {
   const router = useRouter();
 
   const [isHovered, setIsHovered] = useState(false);
   const [isUserLookingAtOwnProfile, setisUserLookingAtOwnProfile] =
     useState(false);
 
-  // is the user looking at her own profile when she is logged in
+  // is the user looking at her own profile
   useEffect(() => {
     if (!router.query.idusers || !loggedInUserInfo) return;
     loggedInUserInfo.idusers == router.query.idusers
@@ -28,13 +28,9 @@ const FreelancerProfilePic = ({ src, onUpload, loggedInUserInfo }) => {
     <div
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative inline-block w-[200px] h-[200px]"
+      className="relative inline-block"
     >
-      <img
-        src={src}
-        alt="Freelancer Profile Pic"
-        className="object-cover rounded-full"
-      />
+      <img src={src} alt={alt} className=" rounded-full object-cover" />
       {isHovered && isUserLookingAtOwnProfile && (
         <div className="absolute inset-0 bg-gray-700 opacity-75 flex items-center justify-center">
           <button
@@ -49,4 +45,4 @@ const FreelancerProfilePic = ({ src, onUpload, loggedInUserInfo }) => {
   );
 };
 
-export default FreelancerProfilePic;
+export default FreelancerAvatar;

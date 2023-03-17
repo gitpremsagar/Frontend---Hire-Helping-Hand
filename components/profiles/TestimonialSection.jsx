@@ -58,7 +58,7 @@ const TestimonialSection = (
   ];
 
   return (
-    <section className="px-6 py-12 bg-gray-100">
+    <div className="px-6 py-12 bg-gray-100">
       <h2 className="text-3xl font-medium text-center text-gray-900 mb-6">
         Our Customers Love Us
       </h2>
@@ -67,7 +67,7 @@ const TestimonialSection = (
           <ReviewCard key={review.id} review={review} />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

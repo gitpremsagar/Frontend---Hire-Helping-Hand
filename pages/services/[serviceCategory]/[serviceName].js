@@ -4,6 +4,7 @@ import SearchForm from "../../../components/HeroSection/searchForm";
 import AsideLeft from "../../../components/Theme/AsideLeft/AsideLeft";
 import ProposalsList from "../../../components/services/proposals/ProposalsList";
 import ProjectsList from "../../../components/services/projects/ProjectsList";
+import { extractParamsFromURL } from "./../../../Services/extractParamsFromURL";
 
 export default function DynamicPage(props) {
   const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
