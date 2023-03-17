@@ -6,6 +6,10 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { envVars } from "./../../../Services/envVars";
 import { Pencil } from "../../../components/svg/heroicons";
+import EditButton from "../../../components/profiles/EditButton";
+import ClientAboutSection from "../../../components/profiles/client-profile/ClientAboutSection";
+import ClientLookingForSkills from "../../../components/profiles/client-profile/ClientLookingForSkills";
+import ClientProjetsSection from "../../../components/profiles/client-profile/ClientProjetsSection";
 
 export default function ClientProfilePage(props) {
   const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer, jwt } =
@@ -96,7 +100,7 @@ export default function ClientProfilePage(props) {
       {userDetail.map((user, index) => {
         return (
           <div className="flex flex-col w-full" key={index}>
-            {/* Freelancer Hero Section */}
+            {/* Client's Hero Section */}
             <div className="bg-gray-100 py-16 px-8">
               <div className="flex items-center">
                 <FreelancerAvatar
@@ -108,82 +112,23 @@ export default function ClientProfilePage(props) {
 
                 <div className="flex text-2xl font-bold ml-10 ">
                   {`${user.first_name} ${user.last_name}`}
-                  <Pencil
-                    className={`w-5 h-5 ml-2 mt-2 text-blue-400 hover:text-green-400 hover:cursor-pointer`}
+
+                  <EditButton
                     onClickHandler={handleProfileNameEditPencilClick}
-                  />{" "}
+                  />
                 </div>
               </div>
               <RatingStars rating={4} />
             </div>
 
-            {/* Freelancer About me section */}
-            <div className="bg-white py-16 px-8">
-              <div className="text-lg font-bold mb-4 flex">
-                About Me
-                <Pencil
-                  className={`w-5 h-5 ml-2 text-blue-400 hover:text-green-400 hover:cursor-pointer`}
-                  onClickHandler={handleBioEditingRequest}
-                />
-              </div>
-              <div>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                posuere erat a ante.
-              </div>
-            </div>
+            {/* Client's About me section */}
+            <ClientAboutSection />
 
-            {/* Freelancer's Skills section */}
-            <div className="bg-white py-16 px-8">
-              <div className="text-lg font-bold mb-4">Skills</div>
-              <div className="flex flex-wrap">
-                <div className="bg-gray-200 py-2 px-4 mr-4 mb-4 text-sm font-medium">
-                  Skill 1
-                </div>
-                <div className="bg-gray-200 py-2 px-4 mr-4 mb-4 text-sm font-medium">
-                  Skill 2
-                </div>
-                <div className="bg-gray-200 py-2 px-4 mr-4 mb-4 text-sm font-medium">
-                  Skill 3
-                </div>
-              </div>
-            </div>
+            {/* Client's Skills section */}
+            <ClientLookingForSkills />
 
-            {/* Freelancer Portfolio section */}
-            <div className="bg-white py-16 px-8">
-              <div className="text-lg font-bold mb-4">Portfolio</div>
-              <div className="grid grid-cols-3 gap-8">
-                <div className="p-4">
-                  <img
-                    src="https://via.placeholder.com/150"
-                    alt="Portfolio Item 1"
-                    className="w-full h-64 object-cover rounded-lg"
-                  />
-                  <div className="text-sm font-medium mt-2">
-                    Portfolio Item 1
-                  </div>
-                </div>
-                <div className="p-4">
-                  <img
-                    src="https://via.placeholder.com/150"
-                    alt="Portfolio Item 2"
-                    className="w-full h-64 object-cover rounded-lg"
-                  />
-                  <div className="text-sm font-medium mt-2">
-                    Portfolio Item 2
-                  </div>
-                </div>
-                <div className="p-4">
-                  <img
-                    src="https://via.placeholder.com/150"
-                    alt="Portfolio Item 3"
-                    className="w-full h-64 object-cover rounded-lg"
-                  />
-                  <div className="text-sm font-medium mt-2">
-                    Portfolio Item 3
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Client's Portfolio section */}
+            <ClientProjetsSection />
 
             {/* Testimonials Section */}
             <TestimonialSection />
