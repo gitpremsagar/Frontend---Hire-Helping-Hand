@@ -92,10 +92,11 @@ export default function ClientProfilePage(props) {
   }
 
   return (
-    <Fragment>
+    <div className="min-h-screen">
       {userDetail.map((user, index) => {
         return (
           <div className="flex flex-col w-full" key={index}>
+            {/* Freelancer Hero Section */}
             <div className="bg-gray-100 py-16 px-8">
               <div className="flex items-center">
                 <FreelancerAvatar
@@ -115,6 +116,8 @@ export default function ClientProfilePage(props) {
               </div>
               <RatingStars rating={4} />
             </div>
+
+            {/* Freelancer About me section */}
             <div className="bg-white py-16 px-8">
               <div className="text-lg font-bold mb-4 flex">
                 About Me
@@ -129,6 +132,7 @@ export default function ClientProfilePage(props) {
               </div>
             </div>
 
+            {/* Freelancer's Skills section */}
             <div className="bg-white py-16 px-8">
               <div className="text-lg font-bold mb-4">Skills</div>
               <div className="flex flex-wrap">
@@ -144,6 +148,7 @@ export default function ClientProfilePage(props) {
               </div>
             </div>
 
+            {/* Freelancer Portfolio section */}
             <div className="bg-white py-16 px-8">
               <div className="text-lg font-bold mb-4">Portfolio</div>
               <div className="grid grid-cols-3 gap-8">
@@ -180,10 +185,11 @@ export default function ClientProfilePage(props) {
               </div>
             </div>
 
+            {/* Testimonials Section */}
             <TestimonialSection />
           </div>
         );
       })}
-    </Fragment>
+    </div>
   );
 }

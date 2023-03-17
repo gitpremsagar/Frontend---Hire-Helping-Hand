@@ -30,9 +30,13 @@ const FreelancerAvatar = ({ src, alt, onUpload, loggedInUserInfo }) => {
       onMouseLeave={handleMouseLeave}
       className="relative inline-block"
     >
-      <img src={src} alt={alt} className=" rounded-full object-cover" />
+      <img
+        src={src}
+        alt={alt}
+        className=" rounded-full object-cover  h-[200px] w-[200px]"
+      />
       {isHovered && isUserLookingAtOwnProfile && (
-        <div className="absolute inset-0 bg-gray-700 opacity-75 flex items-center justify-center">
+        <div className="absolute inset-0 bg-gray-700 opacity-75 flex items-center justify-center rounded-full">
           <button
             onClick={onUpload}
             className="bg-white py-2 px-4 rounded text-gray-800 hover:bg-gray-300"
