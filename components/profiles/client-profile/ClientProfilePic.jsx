@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-const FreelancerAvatar = ({ src, alt, onUpload, loggedInUserInfo }) => {
+const ClientProfilePic = ({ src, alt, onUpload, loggedInUserInfo }) => {
   const router = useRouter();
 
   const [isHovered, setIsHovered] = useState(false);
@@ -41,7 +41,7 @@ const FreelancerAvatar = ({ src, alt, onUpload, loggedInUserInfo }) => {
             onClick={onUpload}
             className="bg-white py-2 px-4 rounded text-gray-800 hover:bg-gray-300"
           >
-            Change Freelancer Avatar
+            Change Client Avatar
           </button>
         </div>
       )}
@@ -49,4 +49,4 @@ const FreelancerAvatar = ({ src, alt, onUpload, loggedInUserInfo }) => {
   );
 };
 
-export default FreelancerAvatar;
+export default ClientProfilePic;
