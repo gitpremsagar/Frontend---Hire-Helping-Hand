@@ -9,6 +9,10 @@ import EditButton from "../../../components/profiles/EditButton";
 import ClientAboutSection from "../../../components/profiles/client-profile/ClientAboutSection";
 import ClientLookingForSkills from "../../../components/profiles/client-profile/ClientLookingForSkills";
 import ClientProjetsSection from "../../../components/profiles/client-profile/ClientProjetsSection";
+import FreelancerAboutSection from "./../../../components/profiles/freelancer-profile/FreelancerAboutSection";
+import FreelancerSkillsSection from "./../../../components/profiles/freelancer-profile/FreelancerSkillsSection";
+import FreelancerProposalsSection from "../../../components/profiles/freelancer-profile/FreelancerProposalsSection";
+import FreelancerPortfolioSection from "./../../../components/profiles/freelancer-profile/FreelancerPortfolioSection";
 
 export default function FreelancerProfilePage(props) {
   const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer, jwt } =
@@ -120,14 +124,17 @@ export default function FreelancerProfilePage(props) {
               <RatingStars rating={4} />
             </div>
 
-            {/* Client's About me section */}
-            <ClientAboutSection />
+            {/* Freelancer's About me section */}
+            <FreelancerAboutSection />
 
-            {/* Client's Skills section */}
-            <ClientLookingForSkills />
+            {/* Freelancer's Skills section */}
+            <FreelancerSkillsSection />
 
-            {/* Client's Portfolio section */}
-            <ClientProjetsSection />
+            {/* Freelancers Proposals Section */}
+            <FreelancerProposalsSection />
+
+            {/* Freelancer's Portfolio section */}
+            <FreelancerPortfolioSection />
 
             {/* Testimonials Section */}
             <TestimonialSection />
