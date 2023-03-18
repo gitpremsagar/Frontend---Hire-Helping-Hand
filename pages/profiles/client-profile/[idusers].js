@@ -5,7 +5,6 @@ import TestimonialSection from "../../../components/profiles/TestimonialSection"
 import { useRouter } from "next/router";
 import axios from "axios";
 import { envVars } from "./../../../Services/envVars";
-import { Pencil } from "../../../components/svg/heroicons";
 import EditButton from "../../../components/profiles/EditButton";
 import ClientAboutSection from "../../../components/profiles/client-profile/ClientAboutSection";
 import ClientLookingForSkills from "../../../components/profiles/client-profile/ClientLookingForSkills";

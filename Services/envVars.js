@@ -24,4 +24,6 @@ export const envVars = {
   BACKEND_API_ENDPOINT_FOR_UPLOADING_CLIENT_PROFILE_PIC: `${hhhBackendHostname}/api/upload-avatar/client`,
 
   BACKEND_API_ENDPOINT_FOR_GETTING_CLIENT_PROFILE_PIC: `${hhhBackendHostname}/public/uploads/clientProfileImages`,
+
+  BACKEND_API_ENDPOINT_FOR_GETTING_FREELANCER_PROFILE_PIC: `${hhhBackendHostname}/public/uploads/freelancerProfileImages`,
 };
