@@ -28,7 +28,7 @@ export default function ProposalCard() {
     "I am writing to express my interest in the freelance web developer role you have advertised. With 2 years of experience in the field, I am confident in my ability to deliver high-quality, innovative, and effective web development solutions that meet your needs and exceed your expectations.";
 
   return (
-    <div className="w-full mb-2 overflow-hidden border-2 border-gray-200 hover:shadow-[0_4px_10px_5px_rgba(0,0,0,0.3)] rounded box-border transition-all ease-linear">
+    <div className="w-full mb-10 overflow-hidden border-2 border-gray-200 hover:shadow-[0_4px_10px_5px_rgba(0,0,0,0.3)] rounded box-border transition-all ease-linear">
       <div className="grid grid-cols-5">
         {/* thumbnail image */}
         <div className="col-span-2 h-[400px] overflow-hidden">
@@ -36,7 +36,7 @@ export default function ProposalCard() {
         </div>
 
         {/* Service offer details */}
-        <div className="col-span-3 p-10 ">
+        <div className="col-span-3 ml-4 mt-4 mr-4">
           <ProposalTitle proposal_ID={proposal_ID} />
           <ProposalRating rating={rating} />
           <ServiceCost cost={cost} />

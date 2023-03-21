@@ -3,7 +3,7 @@ export default function TextareaField({
   label,
   type,
   placeholder,
-  handleChange,
+  onChangeHandler,
   labelClass,
   textareaClass,
 }) {
@@ -22,7 +22,7 @@ export default function TextareaField({
         name={name}
         type={type}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={onChangeHandler}
       />
     </>
   );

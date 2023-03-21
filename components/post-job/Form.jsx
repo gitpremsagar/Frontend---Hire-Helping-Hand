@@ -14,7 +14,7 @@ const Form = () => {
   };
 
   return (
-    <form>
+    <div>
       {inputs.map((input, index) => (
         <div className="flex mb-2" key={index}>
           <input
@@ -32,7 +32,7 @@ const Form = () => {
       >
         Add More
       </button>
-    </form>
+    </div>
   );
 };
 

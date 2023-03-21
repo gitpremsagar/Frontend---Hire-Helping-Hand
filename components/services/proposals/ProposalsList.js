@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { envVars } from "../../../Services/envVars";
+import ProposalCard from "../../proposal-detail/ProposalCard";
 
 function ProposalsList() {
   const router = useRouter();
@@ -26,7 +27,7 @@ function ProposalsList() {
   }, [router]);
 
   return (
-    <div>
+    <div className="p-10">
       <h1>Proposal List</h1>
       <ul>
         {proposals.map((proposal) => (
@@ -39,6 +40,17 @@ function ProposalsList() {
           </li>
         ))}
       </ul>
+      <ProposalCard />
+      <ProposalCard />
+      <ProposalCard />
+      <ProposalCard />
+      <ProposalCard />
+      <ProposalCard />
+      <ProposalCard />
+      <ProposalCard />
+      <ProposalCard />
+      <ProposalCard />
+      <ProposalCard />
     </div>
   );
 }

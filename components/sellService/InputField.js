@@ -3,7 +3,7 @@ export default function InputField({
   label,
   type,
   placeholder,
-  handleChange,
+  onChangeHandler,
   lableClass,
   inputClass,
 }) {
@@ -22,7 +22,7 @@ export default function InputField({
         name={name}
         type={type}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={onChangeHandler}
       />
     </>
   );

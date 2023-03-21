@@ -1,7 +1,6 @@
 import Head from "next/head";
-import CategoriesSection from "../components/CategoriesSection/CategoriesSection";
 import HeroSection from "../components/HeroSection/HeroSection";
-import styles from "../styles/Home.module.css";
+import ProposalCard from "../components/proposal-detail/ProposalCard";
 import AsideLeft from "./../components/Theme/AsideLeft/AsideLeft";
 
 export default function Home(props) {
@@ -27,16 +26,28 @@ export default function Home(props) {
       </Head>
 
       {/* Header */}
-      <div className="lg:grid lg:grid-cols-12">
+      <div className="lg:grid lg:grid-cols-12 ">
         <div className="col-span-2">
           <AsideLeft {...props} />
         </div>
 
         <div className="col-span-10">
-          <main className="">
+          <main className="p-10">
             <HeroSection {...props} />
             <hr />
             Here should be something.
+            <ProposalCard />
+            <ProposalCard />
+            <ProposalCard />
+            <ProposalCard />
+            <ProposalCard />
+            <ProposalCard />
+            <ProposalCard />
+            <ProposalCard />
+            <ProposalCard />
+            <ProposalCard />
+            <ProposalCard />
+            <ProposalCard />
           </main>
         </div>
       </div>

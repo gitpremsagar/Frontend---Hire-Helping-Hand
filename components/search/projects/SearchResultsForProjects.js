@@ -1,6 +1,8 @@
+import ProposalCard from "../../proposal-detail/ProposalCard";
+
 function SearchResultsForProjects({ projects }) {
   return (
-    <div>
+    <main className="p-10">
       <h1>Projects List</h1>
       <ul>
         {projects.map((project, key) => (
@@ -13,7 +15,7 @@ function SearchResultsForProjects({ projects }) {
           </li>
         ))}
       </ul>
-    </div>
+    </main>
   );
 }
 
