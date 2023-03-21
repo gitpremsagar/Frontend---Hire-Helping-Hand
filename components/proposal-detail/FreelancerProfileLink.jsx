@@ -1,4 +1,5 @@
 import Link from "next/link";
+import FreelancerProfilePic from "../profiles/freelancer-profile/FreelancerProfilePic";
 
 export default function FreelancerProfileLink({ freelancer_ID }) {
   return (
@@ -6,7 +7,8 @@ export default function FreelancerProfileLink({ freelancer_ID }) {
       <Link href={`/user-profile/${freelancer_ID}`}>
         <a>
           <div className="rounded-full w-10 h-10 bg-pink-300 text-center">
-            PS
+            {/* FIXME: provide src of actual profile image */}
+            <img src={`/dummy-profile-pictures/male.png`} />
           </div>
         </a>
       </Link>

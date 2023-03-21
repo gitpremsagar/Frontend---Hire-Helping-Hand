@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 const FreelancerProfilePic = ({ src, alt, onUpload, loggedInUserInfo }) => {
   const router = useRouter();
+  console.log("src of client image is  = ", src);
 
   const [isHovered, setIsHovered] = useState(false);
   const [isUserLookingAtOwnProfile, setisUserLookingAtOwnProfile] =

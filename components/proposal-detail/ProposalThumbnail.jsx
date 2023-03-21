@@ -5,7 +5,7 @@ export default function ProposalThumbnail() {
     <Image
       width={400}
       height={350}
-      src={`/service-offer-images/dummy.jpg`}
+      src={`/dummy-proposal-thumbnail/dummy-proposal-thumbnail.png`}
       alt="mycustomImage"
       layout="responsive"
       priority={false}

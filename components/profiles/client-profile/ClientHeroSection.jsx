@@ -64,7 +64,11 @@ export default function ClientHeroSection(props) {
     <section className="bg-gray-100 py-16 px-8">
       <div className="flex items-center">
         <ClientProfilePic
-          src={`${envVars.BACKEND_API_ENDPOINT_FOR_GETTING_CLIENT_PROFILE_PIC}/${user.profile_pic_as_client}`}
+          src={
+            user.profile_pic_as_client
+              ? `${envVars.BACKEND_API_ENDPOINT_FOR_GETTING_CLIENT_PROFILE_PIC}/${user.profile_pic_as_client}`
+              : "/dummy-profile-pictures/female.png"
+          }
           alt="Client Profile Pic"
           onUpload={handleUpload}
           {...props}

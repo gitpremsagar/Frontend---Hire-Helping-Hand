@@ -65,7 +65,11 @@ export default function FreelancerHeroSection(props) {
     <section className="bg-gray-100 py-16 px-8">
       <div className="flex items-center">
         <FreelancerProfilePic
-          src={`${envVars.BACKEND_API_ENDPOINT_FOR_GETTING_FREELANCER_PROFILE_PIC}/${user.profile_pic_as_freelancer}`}
+          src={
+            user.profile_pic_as_freelancer
+              ? `${envVars.BACKEND_API_ENDPOINT_FOR_GETTING_FREELANCER_PROFILE_PIC}/${user.profile_pic_as_freelancer}`
+              : "/dummy-profile-pictures/male.png"
+          }
           alt="Freelancer Profile Pic"
           onUpload={handleUpload}
           {...props}
