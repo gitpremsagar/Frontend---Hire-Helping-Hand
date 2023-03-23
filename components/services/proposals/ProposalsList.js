@@ -33,13 +33,11 @@ function ProposalsList() {
 
   return (
     <div className="p-10">
-      <h1>Proposal List</h1>
+      <h1 className="text-4xl font-bold m-10 ml-0">Proposal List</h1>
 
-      <ul>
-        {proposals.map((proposal, key) => (
-          <ProposalCard {...proposal} key={key} />
-        ))}
-      </ul>
+      {proposals.map((proposal, key) => (
+        <ProposalCard {...proposal} key={key} />
+      ))}
     </div>
   );
 }

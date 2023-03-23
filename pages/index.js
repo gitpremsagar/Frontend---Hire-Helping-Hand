@@ -2,10 +2,36 @@ import Head from "next/head";
 import HeroSection from "../components/HeroSection/HeroSection";
 import ProposalCard from "../components/proposal-detail/ProposalCard";
 import AsideLeft from "./../components/Theme/AsideLeft/AsideLeft";
+import { envVars } from "../Services/envVars";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Home(props) {
   const { loggedInUserInfo } = props;
-  // console.log("props on homepage = ", props);
+
+  const [proposals, setProposals] = useState([]);
+
+  // TODO: fetch proposals from all categories and show it on home page
+  async function fetchProposals() {
+    try {
+      const serviceCategory = "web";
+      const serviceName = "design";
+      const url = `${
+        envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS
+      }?category=${encodeURIComponent(
+        serviceCategory
+      )}&sub_category=${encodeURIComponent(serviceName)}`;
+      console.log("requsting to - ", url);
+      const response = await axios.get(url);
+      setProposals(response.data); // assuming the response data is an array of proposals
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchProposals();
+  }, []);
 
   return (
     <div className="">
@@ -35,7 +61,9 @@ export default function Home(props) {
           <main className="p-10">
             <HeroSection {...props} />
             <hr />
-            Here should be something.
+            {proposals.map((proposal, key) => {
+              return <ProposalCard {...proposal} key={key} />;
+            })}
           </main>
         </div>
       </div>

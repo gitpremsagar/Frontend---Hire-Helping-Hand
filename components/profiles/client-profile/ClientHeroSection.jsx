@@ -67,7 +67,7 @@ export default function ClientHeroSection(props) {
           src={
             user.profile_pic_as_client
               ? `${envVars.BACKEND_API_ENDPOINT_FOR_GETTING_CLIENT_PROFILE_PIC}/${user.profile_pic_as_client}`
-              : "/dummy-profile-pictures/female.png"
+              : "/dummy-profile-pictures/male.png"
           }
           alt="Client Profile Pic"
           onUpload={handleUpload}

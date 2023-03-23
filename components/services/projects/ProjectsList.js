@@ -32,7 +32,7 @@ function ProjectsList() {
 
   return (
     <div className="p-10">
-      <h1>Projects List</h1>
+      <h1 className="text-4xl font-bold m-10 ml-0">Projects List</h1>
       <ul>
         {projects.map((project) => (
           <li key={project.project_id}>
