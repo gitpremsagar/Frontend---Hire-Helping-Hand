@@ -16,7 +16,7 @@ export const categoriesObject = {
     ],
     Gaming: ["Game Art", "Graphics for streamers", "twitch store"],
   },
-  "Web Devlopment": {
+  "Web Development": {
     Frontend: ["React", "Next", "Veu", "Other"],
     Backend: ["Node", "Express", "GraphQL"],
   },

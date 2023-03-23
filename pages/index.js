@@ -36,18 +36,6 @@ export default function Home(props) {
             <HeroSection {...props} />
             <hr />
             Here should be something.
-            <ProposalCard />
-            <ProposalCard />
-            <ProposalCard />
-            <ProposalCard />
-            <ProposalCard />
-            <ProposalCard />
-            <ProposalCard />
-            <ProposalCard />
-            <ProposalCard />
-            <ProposalCard />
-            <ProposalCard />
-            <ProposalCard />
           </main>
         </div>
       </div>

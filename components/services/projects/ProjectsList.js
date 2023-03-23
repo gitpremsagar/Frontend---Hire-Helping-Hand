@@ -14,7 +14,11 @@ function ProjectsList() {
     async function fetchProjects() {
       try {
         const { serviceCategory, serviceName } = router.query; //serviceCategory and serviceName coresponds to category and sub_category columns in proposals table
-        const url = `${envVars.BACKEND_API_ENDPOINT_FOR_PROJECTS}?category=${serviceCategory}&sub_category=${serviceName}`;
+        const url = `${
+          envVars.BACKEND_API_ENDPOINT_FOR_PROJECTS
+        }?category=${encodeURIComponent(
+          serviceCategory
+        )}&sub_category=${encodeURIComponent(serviceName)}`;
         console.log("requsting to - ", url);
         const response = await axios.get(url);
         setProjects(response.data); // assuming the response data is an array of projects
@@ -40,17 +44,6 @@ function ProjectsList() {
           </li>
         ))}
       </ul>
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
     </div>
   );
 }

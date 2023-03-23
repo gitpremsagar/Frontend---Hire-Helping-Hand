@@ -11,10 +11,15 @@ function ProposalsList() {
   // fetch proposals whenever router changes
   useEffect(() => {
     if (!router.query.serviceName) return; // don't send request to api until router.query.serviceName if defined
+
     async function fetchProposals() {
       try {
         const { serviceCategory, serviceName } = router.query; //serviceCategory and serviceName coresponds to category and sub_category columns in proposals table
-        const url = `${envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS}?category=${serviceCategory}&sub_category=${serviceName}`;
+        const url = `${
+          envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS
+        }?category=${encodeURIComponent(
+          serviceCategory
+        )}&sub_category=${encodeURIComponent(serviceName)}`;
         console.log("requsting to - ", url);
         const response = await axios.get(url);
         setProposals(response.data); // assuming the response data is an array of proposals
@@ -29,28 +34,12 @@ function ProposalsList() {
   return (
     <div className="p-10">
       <h1>Proposal List</h1>
+
       <ul>
-        {proposals.map((proposal) => (
-          <li key={proposal.id}>
-            <h2>{proposal.title}</h2>
-            <p>{proposal.description}</p>
-            <p>Category: {proposal.category}</p>
-            <p>Subcategory: {proposal.sub_category}</p>
-            {/* ... */}
-          </li>
+        {proposals.map((proposal, key) => (
+          <ProposalCard {...proposal} key={key} />
         ))}
       </ul>
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
-      <ProposalCard />
     </div>
   );
 }

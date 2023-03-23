@@ -15,7 +15,7 @@ const labels = {
   5: "Excellent+",
 };
 export default function ProposalRating({ rating }) {
-  const value = 3.5;
+  const value = rating;
 
   return (
     <div className="flex">

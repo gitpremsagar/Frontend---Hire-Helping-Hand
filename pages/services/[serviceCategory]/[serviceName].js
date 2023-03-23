@@ -21,7 +21,8 @@ export default function DynamicPage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Header */}
+      {/* Navigation Bar */}
+
       <div className="lg:grid lg:grid-cols-12">
         <div className="col-span-2">
           <AsideLeft {...props} />
