@@ -3,6 +3,7 @@ import axios from "axios";
 import { envVars } from "../../Services/envVars";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -79,7 +80,11 @@ export default function LoginForm() {
       </div>
 
       {/* login form */}
-      <form method="post" onSubmit={handleLoginFormSubmit}>
+      <form
+        method="post"
+        onSubmit={handleLoginFormSubmit}
+        className="min-w-[300px]"
+      >
         <Input
           name="email"
           label="E-Mail"
@@ -98,13 +103,20 @@ export default function LoginForm() {
         <label className="ml-2" htmlFor="#idrMe">
           Keep me logged in.
         </label>
-        <br />
-        <button
-          className="bg-blue-500 hover:bg-blue-600 rounded-full text-white px-5 py-3 mt-5"
-          type="submit"
-        >
-          Submit
-        </button>
+        <div className="flex items-center justify-between">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 rounded-full text-white px-5 py-3 mt-5"
+            type="submit"
+          >
+            Submit
+          </button>
+          <div className="text-xs">
+            <div>Don't have an account?</div>
+            <Link href={`/signup`}>
+              <a className="text-blue-500 ">Singup Here!</a>
+            </Link>
+          </div>
+        </div>
       </form>
     </>
   );
