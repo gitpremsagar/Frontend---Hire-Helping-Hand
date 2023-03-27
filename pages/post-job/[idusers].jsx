@@ -15,10 +15,11 @@ export default function becomeFreelancer() {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleProposalSubmit = async (event) => {
+  const handleProjectSubmit = async (event) => {
     event.preventDefault();
 
-    console.log("Proposal form data = ", formData);
+    console.log("Project form data = ", formData);
+
     // submit the proposal form
     // try {
     //   const response = await axios.post("/api/submit-form", formData);
@@ -41,7 +42,7 @@ export default function becomeFreelancer() {
           </h1>
         </div>
 
-        <form method="POST" action="" onSubmit={handleProposalSubmit}>
+        <form method="POST" action="" onSubmit={handleProjectSubmit}>
           <div className="p-20 bg-gray-900 text-white">
             {/* proposalTitle */}
             <InputField
