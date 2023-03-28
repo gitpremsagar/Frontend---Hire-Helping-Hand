@@ -111,9 +111,13 @@ export default function becomeFreelancer() {
                 <h3 className="font-semibold">Gold</h3>
               </CellOfGoldPlan>
             </div>
-            <RowOfPlans />
-            <RowOfPlans />
-            <RowOfPlans />
+            <RowOfPlans rowSideHeading="Side Heading" inputType="checkBox" />
+            <RowOfPlans rowSideHeading="Side Heading" inputType="checkBox" />
+            <RowOfPlans rowSideHeading="Side Heading" inputType="text" />
+            <RowOfPlans rowSideHeading="Side Heading" inputType="checkBox" />
+            <RowOfPlans rowSideHeading="Side Heading" inputType="text" />
+            <RowOfPlans rowSideHeading="Side Heading" inputType="checkBox" />
+            <RowOfPlans rowSideHeading="Side Heading" inputType="text" />
           </div>
           <div className="px-20 py-10 bg-gray-800 text-white flex justify-end items-center">
             <button className="border-2 border-white rounded-full px-3 py-2 mr-2">

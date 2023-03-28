@@ -3,24 +3,59 @@ import CellOfBasicPlan from "./CellOfBasicPlan";
 import CellOfGoldPlan from "./CellOfGoldPlan";
 import CellOfSideHeadingForAllPlans from "./CellOfSideHeadingForAllPlans";
 import CellOfSilverPlan from "./CellOfSilverPlan";
+import Checkbox from "@mui/material/Checkbox";
+import TextField from "@mui/material/TextField";
+import InputField from "./InputField";
 
-export default function RowOfPlans() {
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
+export default function RowOfPlans({ rowSideHeading, inputType }) {
+  const InputElement = (inputName) => {
+    return <input type="text" name={inputName} placeholder="write something" />;
+  };
   return (
-    <div className="grid lg:grid-cols-4 ">
+    <div className="grid lg:grid-cols-4 border-b-2 border-gray-800">
       <CellOfSideHeadingForAllPlans>
-        <h3 className="font-semibold">Describe Each Plan</h3>
+        <h3 className="font-semibold">{rowSideHeading}</h3>
       </CellOfSideHeadingForAllPlans>
 
       <CellOfBasicPlan>
-        <h3 className="font-semibold">Basic</h3>
+        {inputType == "checkBox" ? (
+          <Checkbox {...label} />
+        ) : (
+          <TextField
+            required
+            id="outlined-required"
+            label="Required"
+            defaultValue=""
+          />
+        )}
       </CellOfBasicPlan>
 
       <CellOfSilverPlan>
-        <h3 className="font-semibold">Silver</h3>
+        {inputType == "checkBox" ? (
+          <Checkbox {...label} />
+        ) : (
+          <TextField
+            required
+            id="outlined-required"
+            label="Required"
+            defaultValue=""
+          />
+        )}
       </CellOfSilverPlan>
 
       <CellOfGoldPlan>
-        <h3 className="font-semibold">Gold</h3>
+        {inputType == "checkBox" ? (
+          <Checkbox {...label} />
+        ) : (
+          <TextField
+            required
+            id="outlined-required"
+            label="Required"
+            defaultValue=""
+          />
+        )}
       </CellOfGoldPlan>
     </div>
   );
