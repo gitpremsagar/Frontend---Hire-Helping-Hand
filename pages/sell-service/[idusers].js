@@ -1,7 +1,5 @@
 import Head from "next/head";
-import BasicPlanFormCard from "./../../components/sellService/basicPlanFormCard";
-import SilverPlanFromCard from "./../../components/sellService/silverPlanFormCard";
-import GoldPlanFromCard from "./../../components/sellService/goldPlanFormCard";
+
 import InputField from "../../components/sellService/InputField";
 import TextareaField from "../../components/sellService/TextareaField";
 import { useState } from "react";
@@ -11,45 +9,86 @@ import CellOfBasicPlan from "./../../components/sellService/CellOfBasicPlan";
 import CellOfSilverPlan from "./../../components/sellService/CellOfSilverPlan";
 import CellOfGoldPlan from "./../../components/sellService/CellOfGoldPlan";
 import RowOfPlans from "../../components/sellService/RowOfPlans";
+import { InputAdornment, OutlinedInput } from "@mui/material";
+import axios from "axios";
+import { envVars } from "./../../Services/envVars";
 
 export default function becomeFreelancer() {
-  const [extraOptions, setextraOptions] = useState([
-    "first extra option",
-    "second",
-    "third",
-  ]);
-  function addMoreOptions() {
-    setextraOptions((preItem) => {
-      return [...preItem, "new item"];
-    });
-  }
-
-  const initialValues = {
+  const proposalInitialValues = {
     proposalTitle: "",
+
     proposalDescription: "",
-    basicPlanTitle: "",
-    basicPlanDescription: "",
-    basicPlanPlanPrice: "",
-    basicPlanDeliveryDuration: "",
-    silverPlanTitle: "",
-    silverPlanDescription: "",
-    silverPlanPlanPrice: "",
-    silverPlanDeliveryDuration: "",
-    goldPlanTitle: "",
-    goldPlanDescription: "",
-    goldPlanPlanPrice: "",
-    goldPlanDeliveryDuration: "",
+
     hashTags: "",
+
+    cost: {
+      basic: "",
+      silver: "",
+      gold: "",
+    },
+
+    title: {
+      basic: "",
+      silver: "",
+      gold: "",
+    },
+
+    description: {
+      basic: "",
+      silver: "",
+      gold: "",
+    },
+
+    delivery: {
+      basic: "",
+      silver: "",
+      gold: "",
+    },
+
+    addedByFreelancer: [
+      {
+        name: "",
+        valueForBasicPlan: "",
+        valueForSilverPlan: "",
+        valueForGoldPlan: "",
+      },
+    ],
   };
 
-  const Formik = useFormik({
-    initialValues,
-    onSubmit: (values) => {
-      console.log("Proposal form Values = ", values);
-    },
-  });
+  const [proposal, setProposal] = useState(proposalInitialValues);
 
-  const [textValue, setTextvalue] = useState("");
+  const handleProposalChange = (e) => {
+    const { name, value } = e.target;
+    setProposal({
+      ...proposal,
+      [name]: value,
+    });
+  };
+
+  const handleCostChange = (e) => {
+    const { name, value } = e.target;
+    setProposal({
+      ...proposal,
+      cost: {
+        ...proposal.cost,
+        [name]: value,
+      },
+    });
+  };
+
+  const handleProposalSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Submited Proposal = ", proposal);
+    try {
+      const response = await axios.post(
+        envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS,
+        proposal
+      );
+      console.log("Proposal posting response = ", response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -64,7 +103,7 @@ export default function becomeFreelancer() {
             Create New Proposal
           </h1>
         </div>
-        <form onSubmit={Formik.handleSubmit}>
+        <form onSubmit={handleProposalSubmit}>
           <div className="p-20 bg-gray-900 text-white">
             <InputField
               type="text"
@@ -72,24 +111,24 @@ export default function becomeFreelancer() {
               name="proposalTitle"
               placeholder="Main Title..."
               lableClass=""
-              value={Formik.values.proposalTitle}
-              onChangeHandler={Formik.handleChange}
+              value={proposal.proposalTitle}
+              onChangeHandler={handleProposalChange}
             />
             <TextareaField
               type="text"
               label="Detailed description of the service that you offer"
               name="proposalDescription"
               placeholder="Detailed service description..."
-              value={Formik.values.proposalDescription}
-              onChangeHandler={Formik.handleChange}
+              value={proposal.proposalDescription}
+              onChangeHandler={handleProposalChange}
             />
             <InputField
               type="text"
               label="Add hashtags"
               name="hashTags"
               placeholder="#hashTags..."
-              value={Formik.values.hashTags}
-              onChangeHandler={Formik.handleChange}
+              value={proposal.hashTags}
+              onChangeHandler={handleProposalChange}
             />
           </div>
           {/* three plans container */}
@@ -100,24 +139,89 @@ export default function becomeFreelancer() {
               </CellOfSideHeadingForAllPlans>
 
               <CellOfBasicPlan>
-                <h3 className="font-semibold">Basic</h3>
+                <h3 className="font-semibold text-center text-2xl">Basic</h3>
               </CellOfBasicPlan>
 
               <CellOfSilverPlan>
-                <h3 className="font-semibold">Silver</h3>
+                <h3 className="font-semibold text-center text-2xl">Silver</h3>
               </CellOfSilverPlan>
 
               <CellOfGoldPlan>
-                <h3 className="font-semibold">Gold</h3>
+                <h3 className="font-semibold text-center text-2xl">Gold</h3>
               </CellOfGoldPlan>
             </div>
-            <RowOfPlans rowSideHeading="Side Heading" inputType="checkBox" />
-            <RowOfPlans rowSideHeading="Side Heading" inputType="checkBox" />
-            <RowOfPlans rowSideHeading="Side Heading" inputType="text" />
-            <RowOfPlans rowSideHeading="Side Heading" inputType="checkBox" />
-            <RowOfPlans rowSideHeading="Side Heading" inputType="text" />
-            <RowOfPlans rowSideHeading="Side Heading" inputType="checkBox" />
-            <RowOfPlans rowSideHeading="Side Heading" inputType="text" />
+
+            {/* Plan Description Row */}
+            <RowOfPlans
+              rowSideHeading="Short Description"
+              inputType="text"
+              onChangeHandler={() =>
+                console.log("Description Change triggered!")
+              }
+            />
+
+            {/* Plan Cost Row */}
+            <RowOfPlans
+              rowSideHeading="Cost"
+              inputType="number"
+              onChangeHandler={handleCostChange}
+            />
+
+            {/* Delivery Details row */}
+            <div className="grid lg:grid-cols-4 border-b-2 border-gray-800">
+              <CellOfSideHeadingForAllPlans>
+                <h3 className="font-semibold">Delivery (in Days)</h3>
+              </CellOfSideHeadingForAllPlans>
+
+              <CellOfBasicPlan>
+                <OutlinedInput
+                  id="outlined-adornment-weight"
+                  endAdornment={
+                    <InputAdornment position="end">Day(s)</InputAdornment>
+                  }
+                  aria-describedby="outlined-weight-helper-text"
+                  inputProps={{
+                    "aria-label": "days",
+                    max: "5",
+                    min: "1",
+                  }}
+                  type="number"
+                  className="w-full"
+                />
+              </CellOfBasicPlan>
+
+              <CellOfSilverPlan>
+                <OutlinedInput
+                  id="outlined-adornment-weight"
+                  endAdornment={
+                    <InputAdornment position="end">Day(s)</InputAdornment>
+                  }
+                  aria-describedby="outlined-weight-helper-text"
+                  inputProps={{
+                    "aria-label": "days",
+                    max: "5",
+                    min: "1",
+                  }}
+                  type="number"
+                />
+              </CellOfSilverPlan>
+
+              <CellOfGoldPlan>
+                <OutlinedInput
+                  id="outlined-adornment-weight"
+                  endAdornment={
+                    <InputAdornment position="end">Day(s)</InputAdornment>
+                  }
+                  aria-describedby="outlined-weight-helper-text"
+                  inputProps={{
+                    "aria-label": "days",
+                    max: "5",
+                    min: "1",
+                  }}
+                  type="number"
+                />
+              </CellOfGoldPlan>
+            </div>
           </div>
           <div className="px-20 py-10 bg-gray-800 text-white flex justify-end items-center">
             <button className="border-2 border-white rounded-full px-3 py-2 mr-2">

@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function CellOfSideHeadingForAllPlans({ children }) {
-  return <div className="bg-red-400 p-4">{children}</div>;
+  return <div className="bg-gray-700 p-4 text-white">{children}</div>;
 }
