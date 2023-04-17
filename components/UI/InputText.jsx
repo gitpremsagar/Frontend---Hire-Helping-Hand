@@ -5,6 +5,7 @@ export default function InputText({
   placeholder,
   className,
   onChangeHandler,
+  inputRef,
 }) {
   return (
     <input
@@ -14,6 +15,7 @@ export default function InputText({
       onChange={onChangeHandler}
       className={`px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500 ${className}`}
       placeholder={placeholder}
+      ref={inputRef}
     />
   );
 }
