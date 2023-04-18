@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import axios from "axios";
 import FormElementContainer from "../../components/UI/FormElementContainer";
 import TncStar from "../../components/UI/tncStar";
 import InputText from "../../components/UI/InputText";
@@ -43,7 +42,7 @@ export default function becomeFreelancer() {
 
   function handleAddMoreAdditionalServices(e) {
     e.preventDefault();
-    const additionalService = {
+    const newAdditionalService = {
       serviceDescription: extraServiceInputRef.current.value,
       serviceCost: extraServiceChargeInputRef.current.value,
       serviceDuration: extraServiceDurationInputRef.current.value,
@@ -52,7 +51,7 @@ export default function becomeFreelancer() {
     setAdditionalServicesArray((prev) => {
       const newAdditionalServices = [
         ...additionalServicesArray,
-        additionalService,
+        newAdditionalService,
       ];
       // TODO: reset the additional service form
       return newAdditionalServices;
@@ -93,10 +92,13 @@ export default function becomeFreelancer() {
     console.log(`Edit clicked! index = ${indexOfAdditionalService}`);
   }
 
-  function handleSaveAdditionalServiceClick(indexOfAdditionalService) {
+  function handleSaveAdditionalServiceClick(
+    indexOfAdditionalService,
+    newDataOfAdditionalServices
+  ) {
     setAdditionalServicesArray((prev) => {
       const newArray = [...prev];
-      newArray[indexOfAdditionalService].editMode = false;
+      newArray[indexOfAdditionalService] = newDataOfAdditionalServices;
       return newArray;
     });
     console.log(`Edit clicked! index = ${indexOfAdditionalService}`);
@@ -116,8 +118,8 @@ export default function becomeFreelancer() {
           </h1>
         </div>
 
-        <section className="flex justify-center items-center min-h-screen bg-gray-900 p-20">
-          <form className="min-w-[1200px]">
+        <section className="flex justify-center items-center min-h-screen bg-gray-900 ">
+          <form className="">
             {/* Title */}
             <FormElementContainer>
               <label
@@ -163,6 +165,52 @@ export default function becomeFreelancer() {
               />
             </FormElementContainer>
 
+            {/* Cost and Delivery Duraion*/}
+            <FormElementContainer>
+              <div className="grid  grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="proposalCost"
+                    className="block text-white text-2xl mb-6"
+                  >
+                    Proposal cost
+                  </label>
+                  <span className="text-yellow-300">
+                    <TncStar />
+                    Set a fixed price for the freelancing service that you are
+                    offering.
+                  </span>
+                  <input
+                    name="proposalCost"
+                    id="proposalCost"
+                    type="number"
+                    className="block px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500"
+                    ref={proposalCostRef}
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="proposalCost"
+                    className="block text-white text-2xl mb-6"
+                  >
+                    Delivery Duration( in Days )
+                  </label>
+                  <span className="text-yellow-300">
+                    <TncStar />
+                    Set the number of days it's going to take for you to deliver
+                    the service that you are offering.
+                  </span>
+                  <input
+                    name="proposalCost"
+                    id="proposalCost"
+                    type="number"
+                    className="block px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500"
+                    ref={proposalCostRef}
+                  />
+                </div>
+              </div>
+            </FormElementContainer>
+
             {/* Addition Service  */}
             <FormElementContainer>
               <h6 className="text-white text-2xl mb-6">
@@ -171,7 +219,7 @@ export default function becomeFreelancer() {
 
               {/* Addtional Services List Table */}
               <div className="flex flex-col">
-                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div className="overflow-x-hidden sm:-mx-6 lg:-mx-8">
                   <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                     <div className="overflow-hidden">
                       <table className="min-w-full text-left text-sm font-light">
@@ -247,7 +295,7 @@ export default function becomeFreelancer() {
                                   If you wish, you can offer addition services
                                   on the same proposal for some extra money.
                                 </span>
-                                <div className="flex items-center text-black">
+                                <div className="text-black">
                                   <div className="text-xl mr-2 min-w-fit">
                                     I will
                                   </div>

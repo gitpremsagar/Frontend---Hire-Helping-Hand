@@ -56,7 +56,7 @@ export default function Navbar(props) {
   }
 
   return (
-    <nav className="">
+    <nav className="hidden lg:block">
       <ul className="flex p-5 bg-gray-900 text-white justify-between items-center">
         {/* left side item */}
         <span className="flex items-center gap-10">

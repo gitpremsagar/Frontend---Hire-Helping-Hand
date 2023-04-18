@@ -30,7 +30,7 @@ export default function DynamicPage(props) {
 
         <div className="col-span-10">
           <main className="">
-            <SearchForm />
+            <SearchForm {...props} />
             <hr />
             <h1 className="font-bold text-center mt-20 text-6xl mb-20 text-gray-800">
               {isUserFreelancer

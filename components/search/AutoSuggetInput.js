@@ -62,7 +62,7 @@ const AutoSuggestInput = ({ searchTerm, setSearchTerm, isUserFreelancer }) => {
     <div className="relative text-gray-600">
       <input
         autoComplete="off"
-        className="min-w-[600px] text-gray-900 border-2 border-gray-900 p-2 focus:outline-none"
+        className=" text-gray-900 border-2 border-gray-900 p-2 focus:outline-none"
         type="search"
         name="search"
         placeholder={isUserFreelancer ? `Find Clients` : `Find Freelancers`}
@@ -70,7 +70,7 @@ const AutoSuggestInput = ({ searchTerm, setSearchTerm, isUserFreelancer }) => {
         onChange={handleInputChange}
       />
       {searchTerm.length > 0 && (
-        <ul className="absolute z-10 bg-white border border-gray-300 rounded-lg w-full shadow-lg">
+        <ul className="absolute z-10 bg-white border border-gray-300 rounded-lg max-w-fit shadow-lg">
           {suggestions.map((suggestion, key) => (
             <li
               key={key}

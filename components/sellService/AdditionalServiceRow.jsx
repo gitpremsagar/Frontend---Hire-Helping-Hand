@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import ButtonPrimaryOutlined from "../UI/ButtonPrimaryOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import ButtonDanger from "../UI/ButtonDanger";
@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import HighlightedText from "../UI/HighlightedText";
 import SaveIcon from "@mui/icons-material/Save";
 import InputText from "../UI/InputText";
+import EditFormForAdditionalService from "./EditFormForAdditionalService";
 
 export default function AdditionalServiceRow({
   colourChanger,
@@ -18,44 +19,44 @@ export default function AdditionalServiceRow({
   saveClickHandler,
   editMode,
 }) {
+  // give different colour to each row
+  let classNameTableRow = colourChanger
+    ? ` bg-neutral-100 hover:bg-gray-800 hover:text-white`
+    : ` bg-white hover:bg-gray-800 hover:text-white`;
+
+  // give red background to rowa that are in edit mode
+  classNameTableRow = editMode
+    ? `bg-red-300 hover:bg-gray-800 hover:text-white`
+    : classNameTableRow;
+
+  const extraServiceInputRef = useRef();
+  const extraServiceChargeInputRef = useRef();
+  const extraServiceDurationInputRef = useRef();
+
+  function saveChangesOfAddtionService() {
+    const newDataOfAdditionalServices = {
+      serviceDescription: extraServiceInputRef.current.value,
+      serviceCost: extraServiceChargeInputRef.current.value,
+      serviceDuration: extraServiceDurationInputRef.current.value,
+      editMode: false,
+    };
+    const additionalServiceID = index - 1;
+    saveClickHandler(additionalServiceID, newDataOfAdditionalServices);
+  }
+
   return (
-    <tr
-      className={
-        colourChanger
-          ? `border-b bg-neutral-100 hover:bg-gray-800 hover:text-white`
-          : `border-b bg-white hover:bg-gray-800 hover:text-white`
-      }
-    >
+    <tr className={classNameTableRow}>
       <td className="whitespace-nowrap px-6 py-4 font-medium">{index}</td>
       {editMode ? (
         <td className=" px-6 py-4">
-          <div className="flex items-center text-black">
-            <div className="text-xl mr-2 min-w-fit">I will</div>
-
-            <InputText
-              name="additionalService_1"
-              placeholder={`do something extra`}
-              className={`w-full`}
-              // inputRef={extraServiceInputRef}
-            />
-            <div className="text-xl mx-2 min-w-fit">for</div>
-
-            <InputText
-              name="additionalService_1_price"
-              placeholder={`money`}
-              // inputRef={extraServiceChargeInputRef}
-            />
-
-            <div className="text-xl mx-2 min-w-fit">more and additional</div>
-
-            <InputText
-              name="additionalService_1_duration"
-              placeholder={`days`}
-              // inputRef={extraServiceDurationInputRef}
-            />
-
-            <div className="text-xl mx-2 min-w-fit">days</div>
-          </div>
+          <EditFormForAdditionalService
+            serviceDescription={serviceDescription}
+            serviceCost={serviceCost}
+            serviceDuration={serviceDuration}
+            extraServiceInputRef={extraServiceInputRef}
+            extraServiceChargeInputRef={extraServiceChargeInputRef}
+            extraServiceDurationInputRef={extraServiceDurationInputRef}
+          />
         </td>
       ) : (
         <td className=" px-6 py-4">
@@ -69,16 +70,16 @@ export default function AdditionalServiceRow({
 
       <td className="whitespace-nowrap px-6 py-4 min-w-fit flex">
         {editMode ? (
-          <ButtonPrimaryOutlined
+          <ButtonPrimaryOutlined //save button
             className={`flex items-center mr-2`}
-            onClickHandler={saveClickHandler}
+            onClickHandler={saveChangesOfAddtionService}
             additionalServiceIndex={index}
           >
             <SaveIcon className="mr-2" />
             Save
           </ButtonPrimaryOutlined>
         ) : (
-          <ButtonPrimaryOutlined
+          <ButtonPrimaryOutlined //edit button
             className={`flex items-center mr-2`}
             onClickHandler={editClickHandler}
             additionalServiceIndex={index}
@@ -88,7 +89,7 @@ export default function AdditionalServiceRow({
           </ButtonPrimaryOutlined>
         )}
 
-        <ButtonDanger
+        <ButtonDanger //delete button
           className={`flex items-center`}
           onClickHandler={deleteClickHandler}
           additionalServiceIndex={index}

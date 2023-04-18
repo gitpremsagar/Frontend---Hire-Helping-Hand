@@ -36,13 +36,13 @@ export default function SearchForm(props) {
 
         <button
           type="submit"
-          className="text-white p-2 font-bold border-2 border-gray-900 bg-gray-900"
+          className="text-white p-2 font-bold border-2 border-gray-900 bg-gray-900 min-w-fit"
         >
           {isUserFreelancer ? `Find Clients` : `Find Freelancers`}
         </button>
       </div>
 
-      <div className="mt-10 flex justify-evenly">
+      <div className="mt-10 flex flex-col md:flex-row justify-evenly">
         <SelectMenuForCountries
           label="Location"
           location={location}
