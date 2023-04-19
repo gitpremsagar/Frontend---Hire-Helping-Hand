@@ -6,6 +6,8 @@ import TncStar from "../../components/UI/tncStar";
 import InputText from "../../components/UI/InputText";
 import AdditionalServiceRow from "../../components/sellService/AdditionalServiceRow";
 import ButtonPrimary from "./../../components/UI/ButtonPrimary";
+import LabelElement from "../../components/UI/LabelElement";
+import InputInfoSpan from "../../components/UI/InputInfoSpan";
 
 export default function becomeFreelancer() {
   const [additionalServicesArray, setAdditionalServicesArray] = useState([]);
@@ -113,30 +115,26 @@ export default function becomeFreelancer() {
 
       <main>
         <div className="bg-gray-800 text-white">
-          <h1 className="text-center font-bold text-6xl p-20">
+          <h1 className="text-center font-bold text-2xl sm:text-6xl p-5 sm:p-20">
             Create New Proposal
           </h1>
         </div>
 
-        <section className="flex justify-center items-center min-h-screen bg-gray-900 ">
+        <section className="flex justify-center items-center min-h-screen bg-gray-900 p-10">
           <form className="">
             {/* Title */}
             <FormElementContainer>
-              <label
-                htmlFor="proposalTitle"
-                className="block text-white text-2xl mb-6"
-              >
+              <LabelElement htmlFor="proposalTitle">
                 Proposal Title
-              </label>
-              <span className="text-yellow-300">
-                <TncStar />
+              </LabelElement>
+              <InputInfoSpan>
                 Give the title for the freelanceing service you provide.
-              </span>
+              </InputInfoSpan>
               <input
                 name="proposalTitle"
                 id="proposalTitle"
                 type="text"
-                className="w-full px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500"
+                className=" px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500"
                 onChange={handleProposalTitleChange}
                 ref={proposalTitleRef}
               />
@@ -144,42 +142,34 @@ export default function becomeFreelancer() {
 
             {/* Description */}
             <FormElementContainer>
-              <label
-                htmlFor="proposalDescription"
-                className="block text-white text-2xl mb-6"
-              >
+              <LabelElement htmlFor="proposalDescription">
                 Proposal Description
-              </label>
-              <span className="text-yellow-300">
-                <TncStar />
+              </LabelElement>
+              <InputInfoSpan>
                 Give detailed description of the freelanceing service you
                 provide.
-              </span>
+              </InputInfoSpan>
               <textarea
                 name="proposalDescription"
                 rows={10}
                 id="proposalDescription"
                 type="text"
-                className="w-full px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500"
+                className=" px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500"
                 ref={proposalDescriptionRef}
               />
             </FormElementContainer>
 
             {/* Cost and Delivery Duraion*/}
             <FormElementContainer>
-              <div className="grid  grid-cols-2">
+              <div className="grid  grid-cols-1 sm:grid-cols-2">
                 <div>
-                  <label
-                    htmlFor="proposalCost"
-                    className="block text-white text-2xl mb-6"
-                  >
+                  <LabelElement htmlFor="proposalCost">
                     Proposal cost
-                  </label>
-                  <span className="text-yellow-300">
-                    <TncStar />
+                  </LabelElement>
+                  <InputInfoSpan className="text-yellow-300">
                     Set a fixed price for the freelancing service that you are
                     offering.
-                  </span>
+                  </InputInfoSpan>
                   <input
                     name="proposalCost"
                     id="proposalCost"
@@ -189,17 +179,13 @@ export default function becomeFreelancer() {
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="proposalCost"
-                    className="block text-white text-2xl mb-6"
-                  >
+                  <LabelElement htmlFor="proposalCost">
                     Delivery Duration( in Days )
-                  </label>
-                  <span className="text-yellow-300">
-                    <TncStar />
+                  </LabelElement>
+                  <InputInfoSpan>
                     Set the number of days it's going to take for you to deliver
                     the service that you are offering.
-                  </span>
+                  </InputInfoSpan>
                   <input
                     name="proposalCost"
                     id="proposalCost"
@@ -212,17 +198,17 @@ export default function becomeFreelancer() {
             </FormElementContainer>
 
             {/* Addition Service  */}
-            <FormElementContainer>
+            {/* <FormElementContainer>
               <h6 className="text-white text-2xl mb-6">
                 Add additional services(optional)
               </h6>
 
-              {/* Addtional Services List Table */}
+              {/* Addtional Services List Table 
               <div className="flex flex-col">
                 <div className="overflow-x-hidden sm:-mx-6 lg:-mx-8">
-                  <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                  <div className="inline-block py-2 sm:px-6 lg:px-8">
                     <div className="overflow-hidden">
-                      <table className="min-w-full text-left text-sm font-light">
+                      <table className="text-left text-sm font-light">
                         {additionalServicesArray.length < 1 ? (
                           <thead className="border-b bg-white font-medium">
                             <tr>
@@ -284,7 +270,7 @@ export default function becomeFreelancer() {
                             }
                           )}
 
-                          {/* Add new additional service */}
+                          {/* Add new additional service
                           <tr className="border-b bg-blue-200">
                             <td
                               colSpan="3"
@@ -303,7 +289,6 @@ export default function becomeFreelancer() {
                                   <InputText
                                     name="additionalService_1"
                                     placeholder={`do something extra`}
-                                    className={`w-full`}
                                     inputRef={extraServiceInputRef}
                                   />
                                   <div className="text-xl mx-2 min-w-fit">
@@ -345,7 +330,7 @@ export default function becomeFreelancer() {
                   </div>
                 </div>
               </div>
-            </FormElementContainer>
+            </FormElementContainer> */}
           </form>
         </section>
         <div className="flex justify-center bg-gray-800 w-full p-20">
