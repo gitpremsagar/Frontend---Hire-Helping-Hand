@@ -59,7 +59,7 @@ export default function AdditionalServiceRow({
           />
         </td>
       ) : (
-        <td className=" px-6 py-4">
+        <td className=" px-6 py-4 text-xs md:text-base">
           I will
           <HighlightedText> {`${serviceDescription} `}</HighlightedText>
           for<HighlightedText> {`${serviceCost}`} </HighlightedText>
@@ -68,10 +68,9 @@ export default function AdditionalServiceRow({
         </td>
       )}
 
-      <td className="whitespace-nowrap px-6 py-4 min-w-fit flex flex-col">
+      <td className="whitespace-nowrap px-6 py-4 min-w-fit flex flex-col md:flex-row">
         {editMode ? (
           <ButtonPrimaryOutlined //save button
-            className={`flex items-center mr-2 mb-2`}
             onClickHandler={saveChangesOfAddtionService}
             additionalServiceIndex={index}
           >
@@ -80,7 +79,6 @@ export default function AdditionalServiceRow({
           </ButtonPrimaryOutlined>
         ) : (
           <ButtonPrimaryOutlined //edit button
-            className={`flex items-center mr-2 mb-2`}
             onClickHandler={editClickHandler}
             additionalServiceIndex={index}
           >
@@ -90,7 +88,6 @@ export default function AdditionalServiceRow({
         )}
 
         <ButtonDanger //delete button
-          className={`flex items-center`}
           onClickHandler={deleteClickHandler}
           additionalServiceIndex={index}
         >

@@ -8,6 +8,7 @@ import AdditionalServiceRow from "../../components/sellService/AdditionalService
 import ButtonPrimary from "./../../components/UI/ButtonPrimary";
 import LabelElement from "../../components/UI/LabelElement";
 import InputInfoSpan from "../../components/UI/InputInfoSpan";
+import TextareaElement from "../../components/UI/TextareaElement";
 
 export default function becomeFreelancer() {
   const [additionalServicesArray, setAdditionalServicesArray] = useState([]);
@@ -130,13 +131,13 @@ export default function becomeFreelancer() {
               <InputInfoSpan>
                 Give the title for the freelanceing service you provide.
               </InputInfoSpan>
-              <input
+              <InputText
                 name="proposalTitle"
                 id="proposalTitle"
                 type="text"
-                className=" px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500"
-                onChange={handleProposalTitleChange}
-                ref={proposalTitleRef}
+                className="w-full"
+                onChangeHandler={handleProposalTitleChange}
+                inputRef={proposalTitleRef}
               />
             </FormElementContainer>
 
@@ -149,13 +150,12 @@ export default function becomeFreelancer() {
                 Give detailed description of the freelanceing service you
                 provide.
               </InputInfoSpan>
-              <textarea
+              <TextareaElement
                 name="proposalDescription"
                 rows={10}
                 id="proposalDescription"
-                type="text"
-                className=" px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500"
-                ref={proposalDescriptionRef}
+                className="w-full"
+                textareaRef={proposalDescriptionRef}
               />
             </FormElementContainer>
 
@@ -278,15 +278,16 @@ export default function becomeFreelancer() {
                                   If you wish, you can offer addition services
                                   on the same proposal for some extra money.
                                 </span>
-                                <div className="text-black">
+                                <div className="text-black flex flex-col lg:flex-row">
                                   <div className="text-xl mr-2 min-w-fit">
                                     I will
                                   </div>
 
-                                  <InputText
+                                  <TextareaElement
                                     name="additionalService_1"
                                     placeholder={`do something extra`}
-                                    inputRef={extraServiceInputRef}
+                                    textareaRef={extraServiceInputRef}
+                                    className={`lg:w-full`}
                                   />
                                   <div className="text-xl mx-2 min-w-fit">
                                     for
@@ -312,7 +313,7 @@ export default function becomeFreelancer() {
                                     days
                                   </div>
                                   <button
-                                    className={`px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg ml-2`}
+                                    className={`px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg ml-2 flex items-center`}
                                     onClick={handleAddMoreAdditionalServices}
                                   >
                                     <AddCircleIcon className="mr-2" /> Add
