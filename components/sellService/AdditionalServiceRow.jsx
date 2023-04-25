@@ -68,10 +68,10 @@ export default function AdditionalServiceRow({
         </td>
       )}
 
-      <td className="whitespace-nowrap px-6 py-4 min-w-fit flex">
+      <td className="whitespace-nowrap px-6 py-4 min-w-fit flex flex-col">
         {editMode ? (
           <ButtonPrimaryOutlined //save button
-            className={`flex items-center mr-2`}
+            className={`flex items-center mr-2 mb-2`}
             onClickHandler={saveChangesOfAddtionService}
             additionalServiceIndex={index}
           >
@@ -80,7 +80,7 @@ export default function AdditionalServiceRow({
           </ButtonPrimaryOutlined>
         ) : (
           <ButtonPrimaryOutlined //edit button
-            className={`flex items-center mr-2`}
+            className={`flex items-center mr-2 mb-2`}
             onClickHandler={editClickHandler}
             additionalServiceIndex={index}
           >

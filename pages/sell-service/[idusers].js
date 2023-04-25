@@ -198,17 +198,17 @@ export default function becomeFreelancer() {
             </FormElementContainer>
 
             {/* Addition Service  */}
-            {/* <FormElementContainer>
+            <FormElementContainer>
               <h6 className="text-white text-2xl mb-6">
                 Add additional services(optional)
               </h6>
 
-              {/* Addtional Services List Table 
-              <div className="flex flex-col">
-                <div className="overflow-x-hidden sm:-mx-6 lg:-mx-8">
-                  <div className="inline-block py-2 sm:px-6 lg:px-8">
+              {/* Addtional Services List Table */}
+              <div className="flex flex-col border-2 my-10">
+                <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                  <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                     <div className="overflow-hidden">
-                      <table className="text-left text-sm font-light">
+                      <table className="min-w-full text-left text-sm font-light">
                         {additionalServicesArray.length < 1 ? (
                           <thead className="border-b bg-white font-medium">
                             <tr>
@@ -270,12 +270,9 @@ export default function becomeFreelancer() {
                             }
                           )}
 
-                          {/* Add new additional service
+                          {/* Add new additional service*/}
                           <tr className="border-b bg-blue-200">
-                            <td
-                              colSpan="3"
-                              className="whitespace-nowrap px-6 py-4"
-                            >
+                            <td colSpan="3" className=" px-6 py-4">
                               <FormElementContainer>
                                 <span className="text-black text-base">
                                   If you wish, you can offer addition services
@@ -330,7 +327,7 @@ export default function becomeFreelancer() {
                   </div>
                 </div>
               </div>
-            </FormElementContainer> */}
+            </FormElementContainer>
           </form>
         </section>
         <div className="flex justify-center bg-gray-800 w-full p-20">
