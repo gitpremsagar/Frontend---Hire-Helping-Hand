@@ -5,6 +5,7 @@ import AsideLeft from "./../components/Theme/AsideLeft/AsideLeft";
 import { envVars } from "../Services/envVars";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Section from "../components/UI/Section";
 
 export default function Home(props) {
   const { loggedInUserInfo } = props;
@@ -58,12 +59,13 @@ export default function Home(props) {
         </div>
 
         <div className="col-span-10">
-          <main className="p-10">
+          <main>
             <HeroSection {...props} />
-            <hr />
-            {proposals.map((proposal, key) => {
-              return <ProposalCard {...proposal} key={key} />;
-            })}
+            <Section>
+              {proposals.map((proposal, key) => {
+                return <ProposalCard {...proposal} key={key} />;
+              })}
+            </Section>
           </main>
         </div>
       </div>
