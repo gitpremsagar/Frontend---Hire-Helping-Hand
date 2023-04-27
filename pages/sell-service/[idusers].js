@@ -12,6 +12,7 @@ import TextareaElement from "../../components/UI/TextareaElement";
 import Section from "./../../components/UI/Section";
 import CircularProgress from "@mui/material/CircularProgress";
 import ProposalImageSection from "../../components/sellService/ProposalImageSection";
+import RequirmentDetails from "../../components/sellService/RequirmentDetails";
 
 export default function becomeFreelancer() {
   const [additionalServicesArray, setAdditionalServicesArray] = useState([]);
@@ -31,6 +32,7 @@ export default function becomeFreelancer() {
     proposalDeliveryDuration: "",
     heroImageName: "",
     extraImagesName: [],
+    requirements: [],
     extraServices: [
       {
         serviceDescription: "",
@@ -207,6 +209,8 @@ export default function becomeFreelancer() {
               setProposal={setProposal}
               proposal={proposal}
             />
+
+            <RequirmentDetails setProposal={setProposal} proposal={proposal} />
 
             {/* Addition Service  */}
             <FormElementContainer>
