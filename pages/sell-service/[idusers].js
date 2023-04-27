@@ -9,6 +9,9 @@ import ButtonPrimary from "./../../components/UI/ButtonPrimary";
 import LabelElement from "../../components/UI/LabelElement";
 import InputInfoSpan from "../../components/UI/InputInfoSpan";
 import TextareaElement from "../../components/UI/TextareaElement";
+import Section from "./../../components/UI/Section";
+import CircularProgress from "@mui/material/CircularProgress";
+import ProposalImageSection from "../../components/sellService/ProposalImageSection";
 
 export default function becomeFreelancer() {
   const [additionalServicesArray, setAdditionalServicesArray] = useState([]);
@@ -26,6 +29,8 @@ export default function becomeFreelancer() {
     proposalDescription: "",
     proposalCost: "",
     proposalDeliveryDuration: "",
+    heroImageName: "",
+    extraImagesName: [],
     extraServices: [
       {
         serviceDescription: "",
@@ -121,7 +126,7 @@ export default function becomeFreelancer() {
           </h1>
         </div>
 
-        <section className="flex justify-center items-center min-h-screen bg-gray-900 p-10">
+        <Section className="flex justify-center items-center min-h-screen bg-gray-900">
           <form className="">
             {/* Title */}
             <FormElementContainer>
@@ -161,7 +166,7 @@ export default function becomeFreelancer() {
 
             {/* Cost and Delivery Duraion*/}
             <FormElementContainer>
-              <div className="grid  grid-cols-1 sm:grid-cols-2">
+              <div className="grid  grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <LabelElement htmlFor="proposalCost">
                     Proposal cost
@@ -170,32 +175,38 @@ export default function becomeFreelancer() {
                     Set a fixed price for the freelancing service that you are
                     offering.
                   </InputInfoSpan>
-                  <input
+                  <InputText
                     name="proposalCost"
                     id="proposalCost"
                     type="number"
-                    className="block px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500"
-                    ref={proposalCostRef}
+                    className="w-full"
+                    inputRef={proposalCostRef}
                   />
                 </div>
                 <div>
-                  <LabelElement htmlFor="proposalCost">
+                  <LabelElement htmlFor="proposalDeliveryDuration">
                     Delivery Duration( in Days )
                   </LabelElement>
                   <InputInfoSpan>
                     Set the number of days it's going to take for you to deliver
                     the service that you are offering.
                   </InputInfoSpan>
-                  <input
-                    name="proposalCost"
-                    id="proposalCost"
+
+                  <InputText
+                    name="proposalDeliveryDuration"
+                    id="proposalDeliveryDuration"
                     type="number"
-                    className="block px-3 py-2 rounded-lg focus:outline-none focus:ring focus:ring-blue-500 border-2 border-blue-500"
-                    ref={proposalCostRef}
+                    className="w-full"
+                    inputRef={proposalDeliveryDurationRef}
                   />
                 </div>
               </div>
             </FormElementContainer>
+
+            <ProposalImageSection
+              setProposal={setProposal}
+              proposal={proposal}
+            />
 
             {/* Addition Service  */}
             <FormElementContainer>
@@ -330,7 +341,7 @@ export default function becomeFreelancer() {
               </div>
             </FormElementContainer>
           </form>
-        </section>
+        </Section>
         <div className="flex justify-center bg-gray-800 w-full p-20">
           <ButtonPrimary className={`mr-5`}>Save to Draft</ButtonPrimary>
           <ButtonPrimary>Publish</ButtonPrimary>

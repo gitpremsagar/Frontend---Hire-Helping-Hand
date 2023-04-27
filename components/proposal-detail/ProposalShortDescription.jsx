@@ -1,3 +1,3 @@
 export default function ProposalShortDescription({ shortDescription }) {
-  return <p>{shortDescription}</p>;
+  return <p className="text-sm md:text-base">{shortDescription}</p>;
 }

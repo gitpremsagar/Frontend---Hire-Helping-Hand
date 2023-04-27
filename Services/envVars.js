@@ -27,3 +27,7 @@ export const envVars = {
 
   BACKEND_API_ENDPOINT_FOR_GETTING_FREELANCER_PROFILE_PIC: `${hhhBackendHostname}/public/uploads/freelancerProfileImages`,
 };
+
+export const BACKEND_API_FOR_UPLOADING_PROPOSAL_IMAGES = `${hhhBackendHostname}/api/uploads/proposalImages`;
+
+export const BASE_URL_FOR_PROPOSAL_IMAGES = `${hhhBackendHostname}/public/uploads/proposalsImages/raw`;

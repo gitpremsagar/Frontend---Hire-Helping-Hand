@@ -11,7 +11,7 @@ export default function ServiceDeliveryDate({ num_of_days }) {
   };
   const indiaTimeZone = Intl.DateTimeFormat("en-IN", options);
   return (
-    <p className="italic">
+    <p className="italic text-xs md:text-sm">
       Get it done by{" "}
       <span className="font-bold">
         {indiaTimeZone.format(threeDaysFromToday)}
