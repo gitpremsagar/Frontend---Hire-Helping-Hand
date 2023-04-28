@@ -1,4 +1,3 @@
-import react from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
 const Tag = ({ tag, index, onClickHandler }) => {

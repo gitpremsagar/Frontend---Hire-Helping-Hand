@@ -14,6 +14,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import ProposalImageSection from "../../components/sellService/ProposalImageSection";
 import RequirmentDetails from "../../components/sellService/RequirmentDetails";
 import SetTags from "../../components/sellService/SetTags";
+import SetFaqs from "../../components/sellService/setFAQs";
 
 export default function becomeFreelancer() {
   const [additionalServicesArray, setAdditionalServicesArray] = useState([]);
@@ -35,6 +36,7 @@ export default function becomeFreelancer() {
     extraImagesName: [],
     requirements: [],
     tags: [],
+    faqs: [],
     extraServices: [
       {
         serviceDescription: "",
@@ -215,6 +217,8 @@ export default function becomeFreelancer() {
             <RequirmentDetails setProposal={setProposal} proposal={proposal} />
 
             <SetTags setProposal={setProposal} proposal={proposal} />
+
+            <SetFaqs setProposal={setProposal} proposal={proposal} />
 
             {/* Addition Service  */}
             <FormElementContainer>
