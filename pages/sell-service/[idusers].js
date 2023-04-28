@@ -2,15 +2,11 @@ import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import FormElementContainer from "../../components/UI/FormElementContainer";
-import TncStar from "../../components/UI/tncStar";
 import InputText from "../../components/UI/InputText";
 import AdditionalServiceRow from "../../components/sellService/AdditionalServiceRow";
 import ButtonPrimary from "./../../components/UI/ButtonPrimary";
-import LabelElement from "../../components/UI/LabelElement";
-import InputInfoSpan from "../../components/UI/InputInfoSpan";
 import TextareaElement from "../../components/UI/TextareaElement";
 import Section from "./../../components/UI/Section";
-import CircularProgress from "@mui/material/CircularProgress";
 import ProposalImageSection from "../../components/sellService/ProposalImageSection";
 import RequirmentDetails from "../../components/sellService/RequirmentDetails";
 import SetTags from "../../components/sellService/SetTags";
@@ -19,12 +15,12 @@ import axios from "axios";
 import { envVars } from "../../Services/envVars";
 import SetTitle from "../../components/sellService/SetTitle";
 import SetDescription from "../../components/sellService/SetDescription";
+import SetCost from "../../components/sellService/SetCost";
+import SetDeliveryDuration from "../../components/sellService/SetDeliveryDuration";
 
 export default function becomeFreelancer() {
   const [additionalServicesArray, setAdditionalServicesArray] = useState([]);
 
-  const proposalCostRef = useRef();
-  const proposalDeliveryDurationRef = useRef();
   const extraServiceInputRef = useRef();
   const extraServiceChargeInputRef = useRef();
   const extraServiceDurationInputRef = useRef();
@@ -152,39 +148,11 @@ export default function becomeFreelancer() {
             {/* Cost and Delivery Duraion*/}
             <FormElementContainer>
               <div className="grid  grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <LabelElement htmlFor="proposalCost">
-                    Proposal cost
-                  </LabelElement>
-                  <InputInfoSpan className="text-yellow-300">
-                    Set a fixed price for the freelancing service that you are
-                    offering.
-                  </InputInfoSpan>
-                  <InputText
-                    name="proposalCost"
-                    id="proposalCost"
-                    type="number"
-                    className="w-full"
-                    inputRef={proposalCostRef}
-                  />
-                </div>
-                <div>
-                  <LabelElement htmlFor="proposalDeliveryDuration">
-                    Delivery Duration( in Days )
-                  </LabelElement>
-                  <InputInfoSpan>
-                    Set the number of days it's going to take for you to deliver
-                    the service that you are offering.
-                  </InputInfoSpan>
-
-                  <InputText
-                    name="proposalDeliveryDuration"
-                    id="proposalDeliveryDuration"
-                    type="number"
-                    className="w-full"
-                    inputRef={proposalDeliveryDurationRef}
-                  />
-                </div>
+                <SetCost setProposal={setProposal} proposal={proposal} />
+                <SetDeliveryDuration
+                  setProposal={setProposal}
+                  proposal={proposal}
+                />
               </div>
             </FormElementContainer>
 
