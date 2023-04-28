@@ -37,7 +37,12 @@ export default function SetTags({ proposal, setProposal }) {
       <div className="grid grid-cols-2 md:grid-cols-6 gap-2 mb-5">
         {tags.map((tag, index) => {
           return (
-            <Tag tag={tag} index={index} onClickHandler={handleDeleteTag} />
+            <Tag
+              tag={tag}
+              key={index}
+              index={index}
+              onClickHandler={handleDeleteTag}
+            />
           );
         })}
       </div>

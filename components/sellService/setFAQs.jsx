@@ -38,7 +38,9 @@ export default function SetFaqs({ proposal, setProposal }) {
     <div className="text-white">
       {faqs &&
         faqs.map((faq, index) => {
-          return <FAQ faq={faq} index={index} deleteFaq={deleteFaq} />;
+          return (
+            <FAQ faq={faq} key={index} index={index} deleteFaq={deleteFaq} />
+          );
         })}
 
       {/* form to add more faqs */}
