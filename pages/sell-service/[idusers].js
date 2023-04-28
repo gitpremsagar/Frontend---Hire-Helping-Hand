@@ -15,12 +15,14 @@ import ProposalImageSection from "../../components/sellService/ProposalImageSect
 import RequirmentDetails from "../../components/sellService/RequirmentDetails";
 import SetTags from "../../components/sellService/SetTags";
 import SetFaqs from "../../components/sellService/setFAQs";
+import axios from "axios";
+import { envVars } from "../../Services/envVars";
+import SetTitle from "../../components/sellService/SetTitle";
+import SetDescription from "../../components/sellService/SetDescription";
 
 export default function becomeFreelancer() {
   const [additionalServicesArray, setAdditionalServicesArray] = useState([]);
 
-  const proposalTitleRef = useRef();
-  const proposalDescriptionRef = useRef();
   const proposalCostRef = useRef();
   const proposalDeliveryDurationRef = useRef();
   const extraServiceInputRef = useRef();
@@ -45,14 +47,6 @@ export default function becomeFreelancer() {
       },
     ],
   });
-
-  function handleProposalTitleChange() {
-    setProposal((prevProposal) => {
-      const newProposal = { ...prevProposal };
-      newProposal.proposalTitle = proposalTitleRef.current.value;
-      return newProposal;
-    });
-  }
 
   function handleAddMoreAdditionalServices(e) {
     e.preventDefault();
@@ -118,6 +112,22 @@ export default function becomeFreelancer() {
     console.log(`Edit clicked! index = ${indexOfAdditionalService}`);
   }
 
+  async function postNewProposalToAPI() {
+    try {
+      const response = await axios(envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS, {
+        method: "POST",
+        data: proposal,
+        headers: {
+          "x-auth-token": "token",
+        },
+      });
+      console.log(response.data);
+    } catch (e) {
+      alert("Error Occerered: \n" + e.message);
+      console.log(e);
+    }
+  }
+
   return (
     <div>
       <Head>
@@ -134,41 +144,10 @@ export default function becomeFreelancer() {
 
         <Section className="flex justify-center items-center min-h-screen bg-gray-900">
           <form className="">
-            {/* Title */}
-            <FormElementContainer>
-              <LabelElement htmlFor="proposalTitle">
-                Proposal Title
-              </LabelElement>
-              <InputInfoSpan>
-                Give the title for the freelanceing service you provide.
-              </InputInfoSpan>
-              <InputText
-                name="proposalTitle"
-                id="proposalTitle"
-                type="text"
-                className="w-full"
-                onChangeHandler={handleProposalTitleChange}
-                inputRef={proposalTitleRef}
-              />
-            </FormElementContainer>
+            <SetTitle setProposal={setProposal} proposal={proposal} />
 
             {/* Description */}
-            <FormElementContainer>
-              <LabelElement htmlFor="proposalDescription">
-                Proposal Description
-              </LabelElement>
-              <InputInfoSpan>
-                Give detailed description of the freelanceing service you
-                provide.
-              </InputInfoSpan>
-              <TextareaElement
-                name="proposalDescription"
-                rows={10}
-                id="proposalDescription"
-                className="w-full"
-                textareaRef={proposalDescriptionRef}
-              />
-            </FormElementContainer>
+            <SetDescription setProposal={setProposal} proposal={proposal} />
 
             {/* Cost and Delivery Duraion*/}
             <FormElementContainer>
@@ -356,7 +335,9 @@ export default function becomeFreelancer() {
         </Section>
         <div className="flex justify-center bg-gray-800 w-full p-20">
           <ButtonPrimary className={`mr-5`}>Save to Draft</ButtonPrimary>
-          <ButtonPrimary>Publish</ButtonPrimary>
+          <ButtonPrimary onClickHandler={postNewProposalToAPI}>
+            Publish
+          </ButtonPrimary>
         </div>
       </main>
     </div>
