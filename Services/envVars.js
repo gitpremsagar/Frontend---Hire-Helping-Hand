@@ -29,5 +29,8 @@ export const envVars = {
 };
 
 export const BACKEND_API_FOR_UPLOADING_PROPOSAL_IMAGES = `${hhhBackendHostname}/api/uploads/proposalImages`;
-
 export const BASE_URL_FOR_PROPOSAL_IMAGES = `${hhhBackendHostname}/public/uploads/proposalsImages/raw`;
+
+export const BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES = `${hhhBackendHostname}/api/top-level-categories`;
+export const BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES = `${hhhBackendHostname}/api/mid-level-categories`;
+export const BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES = `${hhhBackendHostname}/api/bottom-level-categories`;

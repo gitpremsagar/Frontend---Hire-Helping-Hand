@@ -7,6 +7,8 @@ import axios from "axios";
 import Footer from "../components/Theme/Footer/footer";
 import { useRouter } from "next/router";
 import { extractParamsFromURL } from "../Services/extractParamsFromURL";
+import { Provider } from "react-redux";
+import { store } from "../redux/store";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -60,7 +62,7 @@ function MyApp({ Component, pageProps }) {
 
   //console.log("isUserFreelancer on top = ", isUserFreelancer);
   return (
-    <Fragment>
+    <Provider store={store}>
       <Header
         loggedInUserInfo={loggedInUserInfo}
         isUserFreelancer={isUserFreelancer}
@@ -75,7 +77,7 @@ function MyApp({ Component, pageProps }) {
         jwt={jwt}
       />
       <Footer />
-    </Fragment>
+    </Provider>
   );
 }
 

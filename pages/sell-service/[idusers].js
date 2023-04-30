@@ -8,17 +8,32 @@ import RequirmentDetails from "../../components/sellService/RequirmentDetails";
 import SetTags from "../../components/sellService/SetTags";
 import SetFaqs from "../../components/sellService/setFAQs";
 import axios from "axios";
-import { envVars } from "../../Services/envVars";
+import {
+  BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES,
+  BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES,
+  BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES,
+  envVars,
+} from "../../Services/envVars";
 import SetTitle from "../../components/sellService/SetTitle";
 import SetDescription from "../../components/sellService/SetDescription";
 import SetCost from "../../components/sellService/SetCost";
 import SetDeliveryDuration from "../../components/sellService/SetDeliveryDuration";
 import SetAdditionalService from "../../components/sellService/SetAdditionalServices";
+import SetCategories from "../../components/sellService/setCategories";
+import { useDispatch } from "react-redux";
+import {
+  setTopLevelCategories,
+  setMidLevelCategories,
+  setBottomLevelCategories,
+} from "../../redux/categoriesSlice";
 
 export default function becomeFreelancer() {
   const [proposal, setProposal] = useState({
     proposalTitle: "",
     proposalDescription: "",
+    topLevelCategory: "",
+    midLevelCategory: "",
+    bottomLevelCategory: "",
     proposalCost: "",
     proposalDeliveryDuration: "",
     heroImageName: "",
@@ -35,16 +50,45 @@ export default function becomeFreelancer() {
     ],
   });
 
+  const dispatch = useDispatch();
+
+  //   fetch all the categories and update redux states
+  useEffect(async () => {
+    async function fetchAndUpdateTopLevelCategories() {
+      try {
+        const [
+          topLevelCatResponse,
+          midLevelCatResponse,
+          bottomLevelCatResponse,
+        ] = await Promise.all([
+          axios.get(BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES),
+          axios.get(BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES),
+          axios.get(BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES),
+        ]);
+        dispatch(setTopLevelCategories(topLevelCatResponse.data));
+        dispatch(setMidLevelCategories(midLevelCatResponse.data));
+        dispatch(setBottomLevelCategories(bottomLevelCatResponse.data));
+      } catch (error) {
+        alert("Error: " + error.message);
+        console.log(error);
+      }
+    }
+    fetchAndUpdateTopLevelCategories();
+  }, []);
+
   // logging proposals
   useEffect(() => {
-    console.log(proposal);
+    console.log("proposal = ", proposal);
   }, [proposal]);
 
-  async function postNewProposalToAPI() {
+  async function postNewProposalToAPI(mode) {
     try {
       const response = await axios(envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS, {
         method: "POST",
-        data: proposal,
+        data: {
+          proposal,
+          proposalMode: mode,
+        },
         headers: {
           "x-auth-token": "token",
         },
@@ -88,6 +132,8 @@ export default function becomeFreelancer() {
               </div>
             </FormElementContainer>
 
+            <SetCategories setProposal={setProposal} proposal={proposal} />
+
             <ProposalImageSection
               setProposal={setProposal}
               proposal={proposal}
@@ -106,8 +152,19 @@ export default function becomeFreelancer() {
           </form>
         </Section>
         <div className="flex justify-center bg-gray-800 w-full p-20">
-          <ButtonPrimary className={`mr-5`}>Save to Draft</ButtonPrimary>
-          <ButtonPrimary onClickHandler={postNewProposalToAPI}>
+          <ButtonPrimary
+            className={`mr-5`}
+            onClickHandler={() => {
+              postNewProposalToAPI("draft");
+            }}
+          >
+            Save to Draft
+          </ButtonPrimary>
+          <ButtonPrimary
+            onClickHandler={() => {
+              postNewProposalToAPI("published");
+            }}
+          >
             Publish
           </ButtonPrimary>
         </div>
