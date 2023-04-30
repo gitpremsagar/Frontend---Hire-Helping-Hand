@@ -1,14 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import LabelElement from "../UI/LabelElement";
 import InputInfoSpan from "../UI/InputInfoSpan";
-import InputText from "../UI/InputText";
 import FormElementContainer from "../UI/FormElementContainer";
 import { useSelector } from "react-redux";
-import axios from "axios";
-import {
-  BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES,
-  envVars,
-} from "./../../Services/envVars";
+import SelectElement from "../UI/SelectElement";
+import OptionElement from "../UI/OptionElement";
 
 export default function SetCategories({ proposal, setProposal }) {
   //   const [topLevelCategory, setTopLevelCategory] = useState([]);
@@ -24,10 +20,6 @@ export default function SetCategories({ proposal, setProposal }) {
     (state) => state.bottomLevelCategories
   );
 
-  console.log("topLevelCategories", topLevelCategories);
-  console.log("midLevelCategories", midLevelCategories);
-  console.log("bottomLevelCategories", bottomLevelCategories);
-
   function handleTopLevelCategoryChange() {
     // setTopLevelCategory(topLevelCategoryRef.current.value);
   }
@@ -42,34 +34,52 @@ export default function SetCategories({ proposal, setProposal }) {
         <LabelElement htmlFor="topLevelCategory">
           Top Level Category
         </LabelElement>
+
         <InputInfoSpan className="text-yellow-300">
           Define top level category of the freelancing service that you provide.
         </InputInfoSpan>
-        <InputText
-          name="topLevelCategory"
+
+        <SelectElement
+          elementName="topLevelCategory"
           id="topLevelCategory"
-          type="text"
           className="w-full"
-          inputRef={topLevelCategoryRef}
+          selectRef={topLevelCategoryRef}
           onChangeHandler={handleTopLevelCategoryChange}
-        />
+        >
+          {topLevelCategories.map((topLevelCategory, key) => {
+            return (
+              <OptionElement value={topLevelCategory.name} key={key}>
+                {topLevelCategory.name}
+              </OptionElement>
+            );
+          })}
+        </SelectElement>
       </FormElementContainer>
 
       <FormElementContainer>
         <LabelElement htmlFor="midLevelCategory">
           Mid Level Category
         </LabelElement>
+
         <InputInfoSpan className="text-yellow-300">
           Define mid level category of the freelancing service that you provide.
         </InputInfoSpan>
-        <InputText
-          name="midLevelCategory"
+
+        <SelectElement
+          elementName="midLevelCategory"
           id="midLevelCategory"
-          type="text"
           className="w-full"
-          inputRef={midLevelCategoryRef}
+          selectRef={midLevelCategoryRef}
           onChangeHandler={handleMidLevelCategoryChange}
-        />
+        >
+          {midLevelCategories.map((midLevelCategory, key) => {
+            return (
+              <OptionElement value={midLevelCategory.name} key={key}>
+                {midLevelCategory.name}
+              </OptionElement>
+            );
+          })}
+        </SelectElement>
       </FormElementContainer>
 
       <FormElementContainer>
@@ -80,14 +90,22 @@ export default function SetCategories({ proposal, setProposal }) {
           Define bottom level category of the freelancing service that you
           provide.
         </InputInfoSpan>
-        <InputText
-          name="bottomLevelCategory"
+
+        <SelectElement
+          elementName="bottomLevelCategory"
           id="bottomLevelCategory"
-          type="text"
           className="w-full"
-          inputRef={bottomLevelCategoryRef}
+          selectRef={bottomLevelCategoryRef}
           onChangeHandler={handleBottomLevelCategoryChange}
-        />
+        >
+          {bottomLevelCategories.map((bottomLevelCategory, key) => {
+            return (
+              <OptionElement value={bottomLevelCategory.name} key={key}>
+                {bottomLevelCategory.name}
+              </OptionElement>
+            );
+          })}
+        </SelectElement>
       </FormElementContainer>
     </div>
   );
