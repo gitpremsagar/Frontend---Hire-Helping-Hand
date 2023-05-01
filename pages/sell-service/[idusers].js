@@ -31,9 +31,9 @@ export default function becomeFreelancer() {
   const [proposal, setProposal] = useState({
     proposalTitle: "",
     proposalDescription: "",
-    topLevelCategory: "",
-    midLevelCategory: "",
-    bottomLevelCategory: "",
+    topLevelCategoryID: "",
+    midLevelCategoryID: "",
+    bottomLevelCategoryID: "",
     proposalCost: "",
     proposalDeliveryDuration: "",
     heroImageName: "",

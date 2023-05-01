@@ -7,26 +7,87 @@ import SelectElement from "../UI/SelectElement";
 import OptionElement from "../UI/OptionElement";
 
 export default function SetCategories({ proposal, setProposal }) {
-  //   const [topLevelCategory, setTopLevelCategory] = useState([]);
-  //   const [midLevelCategory, setMidLevelCategory] = useState([]);
-  //   const [bottomLevelCategory, setBottomLevelCategory] = useState([]);
   const topLevelCategoryRef = useRef();
   const midLevelCategoryRef = useRef();
   const bottomLevelCategoryRef = useRef();
 
-  const topLevelCategories = useSelector((state) => state.topLevelCategories);
-  const midLevelCategories = useSelector((state) => state.midLevelCategories);
-  const bottomLevelCategories = useSelector(
+  // get all top, mid and bottom level categories
+  const allTopLevelCategories = useSelector(
+    (state) => state.topLevelCategories
+  );
+  const allMidLevelCategories = useSelector(
+    (state) => state.midLevelCategories
+  );
+  const allBottomLevelCategories = useSelector(
     (state) => state.bottomLevelCategories
   );
 
-  function handleTopLevelCategoryChange() {
-    // setTopLevelCategory(topLevelCategoryRef.current.value);
-  }
+  const [filteredMidLevelCategories, setFilteredMidLevelCategory] = useState(
+    []
+  );
 
-  function handleMidLevelCategoryChange() {}
+  const [filteredBottomLevelCategories, setFilteredBottomLevelCategories] =
+    useState([]);
 
-  function handleBottomLevelCategoryChange() {}
+  const handleTopLevelCategoryChange = (e) => {
+    // setSelectedTopLevelCategoryID(parseInt(topLevelCategoryRef.current.value));
+    const selectedtopLevelCategoryID = parseInt(e.target.value);
+
+    //set top level category on proposal state
+    setProposal((prev) => {
+      const updatedProposal = { ...prev };
+      updatedProposal.topLevelCategoryID = selectedtopLevelCategoryID;
+      return updatedProposal;
+    });
+
+    // filter mid level categories to show only related mid level categories
+    setFilteredMidLevelCategory(
+      allMidLevelCategories.filter((midLevelCategory, index) => {
+        return (
+          midLevelCategory.parent_top_level_category_id ===
+          selectedtopLevelCategoryID
+        );
+      })
+    );
+    midLevelCategoryRef.current.selectedIndex = 0; //to unselect any previous selected mid level category
+
+    setFilteredBottomLevelCategories([]);
+    bottomLevelCategoryRef.current.selectedIndex = 0; //to unselect any previous selected bottom level category
+  };
+
+  const handleMidLevelCategoryChange = (e) => {
+    //filter `setFilteredBottomLevelCategories`
+    const selectedMidLevelCategoryID = parseInt(e.target.value);
+    console.log("selectedMidLevelCategoryID = " + selectedMidLevelCategoryID);
+    setFilteredBottomLevelCategories(
+      allBottomLevelCategories.filter((bottomLevelCategory, index) => {
+        return (
+          bottomLevelCategory.parent_mid_level_category_id ===
+          selectedMidLevelCategoryID
+        );
+      })
+    );
+    bottomLevelCategoryRef.current.selectedIndex = 0; //to unselect any previous selected bottom level category
+
+    // set mid level category value on proposal
+    setProposal((prev) => {
+      const updatedProposal = { ...prev };
+      updatedProposal.midLevelCategoryID = selectedMidLevelCategoryID;
+      return updatedProposal;
+    });
+  };
+
+  const handleBottomLevelCategoryChange = (e) => {
+    const selectedBottomLevelCategoryID = parseInt(e.target.value);
+    console.log(
+      "selectedBottomLevelCategoryID = " + selectedBottomLevelCategoryID
+    );
+    setProposal((prev) => {
+      const updatedProposal = { ...prev };
+      updatedProposal.bottomLevelCategoryID = selectedBottomLevelCategoryID;
+      return updatedProposal;
+    });
+  };
 
   return (
     <div className="grid grid-cols-1 gap-2 lg:gap-5 md:grid-cols-3">
@@ -46,9 +107,10 @@ export default function SetCategories({ proposal, setProposal }) {
           selectRef={topLevelCategoryRef}
           onChangeHandler={handleTopLevelCategoryChange}
         >
-          {topLevelCategories.map((topLevelCategory, key) => {
+          <OptionElement value={`none`}>Select</OptionElement>
+          {allTopLevelCategories.map((topLevelCategory, key) => {
             return (
-              <OptionElement value={topLevelCategory.name} key={key}>
+              <OptionElement value={topLevelCategory.id} key={key}>
                 {topLevelCategory.name}
               </OptionElement>
             );
@@ -56,6 +118,7 @@ export default function SetCategories({ proposal, setProposal }) {
         </SelectElement>
       </FormElementContainer>
 
+      {/* FIXME: show filtered options only for mid and bottom level category selector */}
       <FormElementContainer>
         <LabelElement htmlFor="midLevelCategory">
           Mid Level Category
@@ -71,10 +134,12 @@ export default function SetCategories({ proposal, setProposal }) {
           className="w-full"
           selectRef={midLevelCategoryRef}
           onChangeHandler={handleMidLevelCategoryChange}
+          disabledFlag={filteredMidLevelCategories.length < 1}
         >
-          {midLevelCategories.map((midLevelCategory, key) => {
+          <OptionElement value={`none`}>Select</OptionElement>
+          {filteredMidLevelCategories.map((midLevelCategory, key) => {
             return (
-              <OptionElement value={midLevelCategory.name} key={key}>
+              <OptionElement value={midLevelCategory.id} key={key}>
                 {midLevelCategory.name}
               </OptionElement>
             );
@@ -97,10 +162,12 @@ export default function SetCategories({ proposal, setProposal }) {
           className="w-full"
           selectRef={bottomLevelCategoryRef}
           onChangeHandler={handleBottomLevelCategoryChange}
+          disabledFlag={filteredBottomLevelCategories.length < 1}
         >
-          {bottomLevelCategories.map((bottomLevelCategory, key) => {
+          <OptionElement value={`none`}>Select</OptionElement>
+          {filteredBottomLevelCategories.map((bottomLevelCategory, key) => {
             return (
-              <OptionElement value={bottomLevelCategory.name} key={key}>
+              <OptionElement value={bottomLevelCategory.id} key={key}>
                 {bottomLevelCategory.name}
               </OptionElement>
             );
