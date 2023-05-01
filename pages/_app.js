@@ -8,7 +8,14 @@ import Footer from "../components/Theme/Footer/footer";
 import { useRouter } from "next/router";
 import { extractParamsFromURL } from "../Services/extractParamsFromURL";
 import { Provider } from "react-redux";
-import { store } from "../redux/store";
+import store from "../redux/store";
+import { useDispatch } from "react-redux";
+import {
+  setJWTToken,
+  setFirstName,
+  setLastName,
+  setUserId,
+} from "../redux/authSlice";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();

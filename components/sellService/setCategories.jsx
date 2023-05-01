@@ -13,13 +13,13 @@ export default function SetCategories({ proposal, setProposal }) {
 
   // get all top, mid and bottom level categories
   const allTopLevelCategories = useSelector(
-    (state) => state.topLevelCategories
+    (state) => state.categories.topLevelCategories
   );
   const allMidLevelCategories = useSelector(
-    (state) => state.midLevelCategories
+    (state) => state.categories.midLevelCategories
   );
   const allBottomLevelCategories = useSelector(
-    (state) => state.bottomLevelCategories
+    (state) => state.categories.bottomLevelCategories
   );
 
   const [filteredMidLevelCategories, setFilteredMidLevelCategory] = useState(

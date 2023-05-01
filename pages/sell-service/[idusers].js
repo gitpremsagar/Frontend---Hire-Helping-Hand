@@ -1,3 +1,6 @@
+// TODO: Save proposal automatically as draft on every change after 10 second idle timeout
+// TODO: save JWT on redux store
+// TODO: publish proposal then redirect user to dashboard
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import FormElementContainer from "../../components/UI/FormElementContainer";
@@ -20,7 +23,7 @@ import SetCost from "../../components/sellService/SetCost";
 import SetDeliveryDuration from "../../components/sellService/SetDeliveryDuration";
 import SetAdditionalService from "../../components/sellService/SetAdditionalServices";
 import SetCategories from "../../components/sellService/setCategories";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setTopLevelCategories,
   setMidLevelCategories,
@@ -54,7 +57,7 @@ export default function becomeFreelancer() {
 
   //   fetch all the categories and update redux states
   useEffect(async () => {
-    async function fetchAndUpdateTopLevelCategories() {
+    async function fetchAndUpdateAllLevelCategories() {
       try {
         const [
           topLevelCatResponse,
@@ -73,7 +76,7 @@ export default function becomeFreelancer() {
         console.log(error);
       }
     }
-    fetchAndUpdateTopLevelCategories();
+    fetchAndUpdateAllLevelCategories();
   }, []);
 
   // logging proposals
@@ -81,6 +84,7 @@ export default function becomeFreelancer() {
     console.log("proposal = ", proposal);
   }, [proposal]);
 
+  const token = useSelector((state) => state.authSlice.jwtToken);
   async function postNewProposalToAPI(mode) {
     try {
       const response = await axios(envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS, {
@@ -90,7 +94,7 @@ export default function becomeFreelancer() {
           proposalMode: mode,
         },
         headers: {
-          "x-auth-token": "token",
+          "x-auth-token": token,
         },
       });
       console.log(response.data);
