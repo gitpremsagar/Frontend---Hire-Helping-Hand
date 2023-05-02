@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import FAQ from "./FAQ";
 import InputText from "../UI/InputText";
 import ButtonPrimary from "../UI/ButtonPrimary";
+import H5 from "../UI/H5";
 
 export default function SetFaqs({ proposal, setProposal }) {
   const [faqs, setFaqs] = useState([]);
@@ -36,6 +37,7 @@ export default function SetFaqs({ proposal, setProposal }) {
 
   return (
     <div className="text-white">
+      {/* map FAQs */}
       {faqs &&
         faqs.map((faq, index) => {
           return (
@@ -44,17 +46,33 @@ export default function SetFaqs({ proposal, setProposal }) {
         })}
 
       {/* form to add more faqs */}
-      <div className="">
-        <InputText
-          name="faqQuestion"
-          placeholder="Enter FAQ"
-          inputRef={faqQuestionInputRef}
-        />
-        <InputText
-          name="faqAnswer"
-          placeholder="Enter Answer"
-          inputRef={faqAnswerInputRef}
-        />
+      <div className="flex flex-col md:gap-2 justify-center">
+        <H5>Add Frequently Asked Questions:</H5>
+        <div className="flex items-center gap-2">
+          <label className="min-w-fit" htmlFor="faqQuestion">
+            Question :{" "}
+          </label>
+          <InputText
+            name="faqQuestion"
+            placeholder="Enter FAQ"
+            inputRef={faqQuestionInputRef}
+            id="faqQuestion"
+            className="w-full"
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <label className="min-w-fit" htmlFor="faqAnswer">
+            Answer :{" "}
+          </label>
+          <InputText
+            name="faqAnswer"
+            placeholder="Enter Answer"
+            inputRef={faqAnswerInputRef}
+            id="faqAnswer"
+            className="w-full"
+          />
+        </div>
+
         <ButtonPrimary onClickHandler={handleAddFaq}>Add FAQ</ButtonPrimary>
       </div>
     </div>

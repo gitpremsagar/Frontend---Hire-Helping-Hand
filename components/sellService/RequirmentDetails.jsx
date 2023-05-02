@@ -41,7 +41,7 @@ export default function RequirmentDetails({ proposal, setProposal }) {
           placeholder="Add a new requirement"
         />
         <ButtonPrimary onClickHandler={handleAddNewRequirement}>
-          Add
+          Add Requirement
         </ButtonPrimary>
       </div>
     </FormElementContainer>

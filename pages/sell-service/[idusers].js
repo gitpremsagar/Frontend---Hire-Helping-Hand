@@ -29,6 +29,8 @@ import {
   setMidLevelCategories,
   setBottomLevelCategories,
 } from "../../redux/categoriesSlice";
+import H1 from "../../components/UI/H1";
+import H6 from "../../components/UI/H6";
 
 export default function becomeFreelancer() {
   const [proposal, setProposal] = useState({
@@ -112,10 +114,14 @@ export default function becomeFreelancer() {
       </Head>
 
       <main>
-        <div className="bg-gray-800 text-white">
-          <h1 className="text-center font-bold text-2xl sm:text-6xl p-5 sm:p-20">
-            Create New Proposal
-          </h1>
+        <div className="bg-gray-800 text-white p-5 sm:p-10 md:p-15 lg:p-20">
+          <H1 className="text-center">Create New Proposal</H1>
+          <H6
+            className={`text-center mt-2 sm:mt-3 md:mt-4 lg:mt-5 text-yellow-300`}
+          >
+            Proposal is detailed information of the kind of freelancing service
+            you provide and the amount you charge for it.
+          </H6>
         </div>
 
         <Section className="flex justify-center items-center min-h-screen bg-gray-900">

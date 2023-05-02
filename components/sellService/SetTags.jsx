@@ -34,6 +34,7 @@ export default function SetTags({ proposal, setProposal }) {
   return (
     <div className="text-white my-5">
       <H5>Add tags</H5>
+      {/* mapping tags */}
       <div className="grid grid-cols-2 md:grid-cols-6 gap-2 mb-5">
         {tags.map((tag, index) => {
           return (
@@ -46,13 +47,17 @@ export default function SetTags({ proposal, setProposal }) {
           );
         })}
       </div>
-      <div className="flex items-center justify-start gap-2">
-        <div>
-          <InputText type="text" name={`tag`} inputRef={tagInputRef} />
-        </div>
+      {/* form for adding new tags */}
+      <div className="flex items-center justify-start">
+        <InputText
+          type="text"
+          name={`tag`}
+          inputRef={tagInputRef}
+          placeholder={`Write tag`}
+        />
         <button
           onClick={handleAddNewTag}
-          className="bg-blue-500 rounded-lg px-3 py-2"
+          className="bg-blue-500 rounded-lg px-3 py-2 min-w-fit"
         >
           Add Tag
         </button>
