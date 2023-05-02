@@ -4,7 +4,7 @@ export default function ProposalThumbnail() {
   return (
     <Image
       width={400}
-      height={350}
+      height={400}
       src={`/dummy-proposal-thumbnail/dummy-proposal-thumbnail.png`}
       alt="mycustomImage"
       layout="responsive"

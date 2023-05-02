@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -30,10 +31,13 @@ const ClientProfilePic = ({ src, alt, onUpload, loggedInUserInfo }) => {
       onMouseLeave={handleMouseLeave}
       className="relative inline-block"
     >
-      <img
+      <Image
         src={src}
         alt={alt}
-        className=" rounded-full object-cover  h-[200px] w-[200px]"
+        className="rounded-full object-cover"
+        width={300}
+        height={300}
+        priority
       />
       {isHovered && isUserLookingAtOwnProfile && (
         <div className="absolute inset-0 bg-gray-700 opacity-75 flex items-center justify-center rounded-full">
