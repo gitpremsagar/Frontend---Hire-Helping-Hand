@@ -5,6 +5,7 @@ import AsideLeft from "../../../components/Theme/AsideLeft/AsideLeft";
 import ProposalsList from "../../../components/services/proposals/ProposalsList";
 import ProjectsList from "../../../components/services/projects/ProjectsList";
 import { extractParamsFromURL } from "./../../../Services/extractParamsFromURL";
+import AsideLeftNew from "../../../components/Theme/AsideLeft/AsideLeftNew";
 
 export default function DynamicPage(props) {
   const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
@@ -25,7 +26,8 @@ export default function DynamicPage(props) {
 
       <div className="lg:grid lg:grid-cols-12">
         <div className="col-span-2">
-          <AsideLeft {...props} />
+          {/* <AsideLeft {...props} /> */}
+          <AsideLeftNew />
         </div>
 
         <div className="col-span-10">

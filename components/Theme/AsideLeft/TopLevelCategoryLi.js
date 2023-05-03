@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { RightArrowIcon } from "../../svg/heroicons";
 import { useDispatch, useSelector } from "react-redux";
 import MidLevelCategoryLi from "./MidLevelCategoryLi";
-import { Hidden } from "@mui/material";
 import { setClickedTopLevelCategory } from "../../../redux/asideLeftSlice";
 
 export default function TopLevelCategoryLi({ topLevelCategory }) {
@@ -22,18 +21,18 @@ export default function TopLevelCategoryLi({ topLevelCategory }) {
   );
 
   //   get the clicked top level category name from the redux store
-  const clickTopLevelCategory = useSelector(
+  const clickedTopLevelCategory = useSelector(
     (state) => state.asideLeftSlice.clickedTopLevelCategory
   );
 
   // if clickedTopLevelCategory is equal to the present topLevelCategory then show mid level categories belonging to this topLevelCategory
   useEffect(() => {
-    if (clickTopLevelCategory === "") return;
+    if (clickedTopLevelCategory === "") return;
 
-    clickTopLevelCategory === topLevelCategory
+    clickedTopLevelCategory === topLevelCategory
       ? setshowMidLevelCategories(true)
       : setshowMidLevelCategories(false);
-  }, [clickTopLevelCategory]);
+  }, [clickedTopLevelCategory]);
 
   //   store clicked top level categories name in the redux store
   const dispatch = useDispatch();
@@ -42,18 +41,30 @@ export default function TopLevelCategoryLi({ topLevelCategory }) {
     setshowMidLevelCategories(!showMidLevelCategories);
   };
 
+  const transitionDuration = `duration-1000`;
+
   return (
-    <li>
+    <li
+      className={`transition-colors ${transitionDuration} ${
+        showMidLevelCategories ? `bg-gray-900` : ``
+      }`}
+    >
       <div
         onClick={handleTopLevelCategoryClick}
         className="flex items-center justify-between hover:bg-gray-900 hover:cursor-pointer px-3 py-5"
       >
         <span>{topLevelCategory.name}</span>
         <RightArrowIcon
-          className={showMidLevelCategories ? `-rotate-90` : `rotate-90`}
+          className={` transition-all ${transitionDuration} ${
+            showMidLevelCategories ? `-rotate-90 ` : `rotate-90 `
+          }`}
         />
       </div>
-      <ul className={showMidLevelCategories ? `block` : `hidden`}>
+      <ul
+        className={`overflow-hidden transition-all ${transitionDuration} ${
+          showMidLevelCategories ? `max-h-[3000px]` : `max-h-[0px]`
+        }`}
+      >
         {filteredMidLevelCategories.map((midLevelCategory, key) => (
           <MidLevelCategoryLi
             midLevelCategory={midLevelCategory}

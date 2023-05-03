@@ -1,6 +1,7 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 export default function BottomLevelCategoryLi({
   bottomLevelCategory,
@@ -10,8 +11,21 @@ export default function BottomLevelCategoryLi({
     (state) => state.authSlice.isUserFreelancer
   );
 
+  const router = useRouter();
+  const [isActive, setIsActive] = useState(false);
+  useEffect(() => {
+    if (router.query.serviceName) {
+      router.query.serviceName == bottomLevelCategory.name
+        ? setIsActive(true)
+        : setIsActive(false);
+    }
+  }, [router]);
+  const activeClass = isActive ? `bg-blue-500` : ``;
+
+  //   console.log(router.query.serviceName);
+
   return (
-    <li>
+    <li className="my-1">
       <Link
         href={
           isUserFreelancer
@@ -19,7 +33,7 @@ export default function BottomLevelCategoryLi({
             : `/services/${topLevelCategory.name}/${bottomLevelCategory.name}`
         }
       >
-        <a className="block p-2 hover:bg-blue-500 rounded">
+        <a className={`block px-3 py-3 hover:bg-blue-600  ${activeClass}`}>
           {bottomLevelCategory.name}
         </a>
       </Link>
