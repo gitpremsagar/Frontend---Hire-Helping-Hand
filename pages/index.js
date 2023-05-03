@@ -6,6 +6,7 @@ import { envVars } from "../Services/envVars";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Section from "../components/UI/Section";
+import AsideLeftNew from "../components/Theme/AsideLeft/AsideLeftNew";
 
 export default function Home(props) {
   const { loggedInUserInfo } = props;
@@ -56,6 +57,7 @@ export default function Home(props) {
       <div className="lg:grid lg:grid-cols-12 ">
         <div className="col-span-2">
           <AsideLeft {...props} />
+          <AsideLeftNew {...props} />
         </div>
 
         <div className="col-span-10">

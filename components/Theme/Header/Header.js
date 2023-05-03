@@ -6,12 +6,14 @@ import {
   setLastName,
   setUserId,
   setIsUserLoggedIn,
+  setIsUserFreelancer,
 } from "../../../redux/authSlice";
 
 export default function Header(props) {
-  const { jwt, loggedInUserInfo } = props;
+  const { jwt, loggedInUserInfo, isUserFreelancer } = props;
   const dispatch = useDispatch();
   dispatch(setJWTToken(jwt)); // store jwt in redux store
+  dispatch(setIsUserFreelancer(isUserFreelancer));
   // TODO: set other user informations on authSlice( Redux State)
 
   return (
