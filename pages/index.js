@@ -56,8 +56,8 @@ export default function Home(props) {
       {/* Header */}
       <div className="lg:grid lg:grid-cols-12 ">
         <div className="col-span-2">
-          <AsideLeft {...props} />
-          <AsideLeftNew {...props} />
+          {/* <AsideLeft {...props} /> */}
+          <AsideLeftNew />
         </div>
 
         <div className="col-span-10">

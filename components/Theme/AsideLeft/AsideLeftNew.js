@@ -18,29 +18,8 @@ import {
 import TopLevelCategoryLi from "./TopLevelCategoryLi";
 
 // FIXME: Make this AsideNav work with database categories
-export default function AsideLeftNew(props) {
+export default function AsideLeftNew() {
   const router = useRouter();
-  const { loggedInUserInfo, isUserFreelancer, setisUserFreelancer } = props;
-
-  function showListOfSubCategories(e) {
-    // change background colour of clicked list item to make it look active
-    const category_li = e.currentTarget.parentElement;
-    category_li.classList.toggle("activeCategory");
-
-    // show sub-category list items of clicked category
-    const subCat_ul = e.currentTarget.nextElementSibling;
-    subCat_ul.classList.toggle("showSubCategory");
-
-    // collaps any other explanded sub cateogry list and make it look not active
-    const allSubCategoryLists =
-      document.getElementsByClassName("showSubCategory");
-    Array.prototype.forEach.call(allSubCategoryLists, function (subCategoryUl) {
-      if (subCategoryUl !== subCat_ul) {
-        subCategoryUl.parentElement.classList.remove("activeCategory");
-        subCategoryUl.classList.remove("showSubCategory");
-      }
-    });
-  }
 
   // fetch all categories and store it in redux store
   const dispatch = useDispatch();
