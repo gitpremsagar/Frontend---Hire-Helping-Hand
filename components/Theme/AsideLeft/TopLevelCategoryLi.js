@@ -3,8 +3,10 @@ import { RightArrowIcon } from "../../svg/heroicons";
 import { useDispatch, useSelector } from "react-redux";
 import MidLevelCategoryLi from "./MidLevelCategoryLi";
 import { setClickedTopLevelCategory } from "../../../redux/asideLeftSlice";
+import { useRouter } from "next/router";
 
 export default function TopLevelCategoryLi({ topLevelCategory }) {
+  const router = useRouter();
   const [showMidLevelCategories, setshowMidLevelCategories] = useState(false);
 
   const allMidLevelCategories = useSelector(
@@ -20,7 +22,7 @@ export default function TopLevelCategoryLi({ topLevelCategory }) {
     }
   );
 
-  //   get the clicked top level category name from the redux store
+  //get the clicked top level category name from the redux store
   const clickedTopLevelCategory = useSelector(
     (state) => state.asideLeftSlice.clickedTopLevelCategory
   );
@@ -34,7 +36,15 @@ export default function TopLevelCategoryLi({ topLevelCategory }) {
       : setshowMidLevelCategories(false);
   }, [clickedTopLevelCategory]);
 
-  //   store clicked top level categories name in the redux store
+  //show mid level categories of top level category name present in the url
+  useEffect(() => {
+    if (router.query.serviceCategory) {
+      router.query.serviceCategory == topLevelCategory.name &&
+        setshowMidLevelCategories(true);
+    }
+  }, [router]);
+
+  // store clicked top level categories name in the redux store
   const dispatch = useDispatch();
   const handleTopLevelCategoryClick = () => {
     dispatch(setClickedTopLevelCategory(topLevelCategory));

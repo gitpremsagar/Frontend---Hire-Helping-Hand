@@ -9,8 +9,6 @@ import Section from "../components/UI/Section";
 import AsideLeftNew from "../components/Theme/AsideLeft/AsideLeftNew";
 
 export default function Home(props) {
-  const { loggedInUserInfo } = props;
-
   const [proposals, setProposals] = useState([]);
 
   // TODO: fetch proposals from all categories and show it on home page
