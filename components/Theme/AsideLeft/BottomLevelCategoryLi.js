@@ -20,7 +20,7 @@ export default function BottomLevelCategoryLi({
         : setIsActive(false);
     }
   }, [router]);
-  const activeClass = isActive ? `bg-blue-500` : ``;
+  const activeClass = isActive ? `bg-gray-700` : ``;
 
   //   console.log(router.query.serviceName);
 
@@ -33,7 +33,9 @@ export default function BottomLevelCategoryLi({
             : `/services/${topLevelCategory.name}/${bottomLevelCategory.name}`
         }
       >
-        <a className={`block px-3 py-3 hover:bg-blue-600  ${activeClass}`}>
+        <a
+          className={`block px-3 py-3 hover:bg-gray-600 text-sm mx-1 rounded ${activeClass}`}
+        >
           {bottomLevelCategory.name}
         </a>
       </Link>

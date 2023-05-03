@@ -56,12 +56,12 @@ export default function TopLevelCategoryLi({ topLevelCategory }) {
   return (
     <li
       className={`transition-colors ${transitionDuration} ${
-        showMidLevelCategories ? `bg-gray-900` : ``
+        showMidLevelCategories ? `bg-gray-800` : ``
       }`}
     >
       <div
         onClick={handleTopLevelCategoryClick}
-        className="flex items-center justify-between hover:bg-gray-900 hover:cursor-pointer px-3 py-5"
+        className="flex items-center justify-between hover:bg-gray-800 hover:cursor-pointer px-3 py-3"
       >
         <span>{topLevelCategory.name}</span>
         <RightArrowIcon

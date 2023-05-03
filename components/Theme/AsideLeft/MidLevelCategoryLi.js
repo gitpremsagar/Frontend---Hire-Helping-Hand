@@ -17,10 +17,8 @@ export default function MidLevelCategoryLi({
   );
   return (
     <li>
-      <div className="px-3 py-5">
-        <span className="text-yellow-300 underline">
-          {midLevelCategory.name}
-        </span>
+      <div className="px-3 py-2">
+        <span className="text-gray-500 text-xs">{midLevelCategory.name}</span>
       </div>
       <ul>
         {filteredBottomLevelCategories.map((bottomLevelCategory, key) => {

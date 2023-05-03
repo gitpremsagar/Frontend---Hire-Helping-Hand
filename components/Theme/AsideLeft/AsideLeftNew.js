@@ -45,7 +45,7 @@ export default function AsideLeftNew() {
   );
 
   return (
-    <aside className="h-screen overflow-y-scroll bg-gray-800 text-white w-full sticky top-16">
+    <aside className="h-screen overflow-y-scroll bg-gray-900 text-white w-full sticky top-16">
       <nav>
         <ul>
           <h5 className="p-4 ml-4">
