@@ -1,9 +1,37 @@
 import Head from "next/head";
 import AsideLeftOfUserMessages from "../../components/userMessages/AsideLeftOfUserMessages";
 import LeftNav from "./../../components/userMessages/LeftNav";
+import { io } from "socket.io-client";
+import { useEffect } from "react";
 
 export default function UserMessagesPage(props) {
   const { loggedInUserInfo } = props;
+
+  useEffect(() => {
+    const socket = io("http://localhost:3015");
+    function greetHandler(data) {
+      console.log("chatServer data = ", data);
+    }
+
+    socket.on("greet", greetHandler);
+
+    socket.on("connect", () => {
+      console.log("Your socket.id = ", socket.id);
+    });
+
+    socket.on("new user connected", (data) => {
+      console.log(data);
+    });
+
+    socket.on("a user disconnected", (data) => {
+      console.log(data);
+    });
+
+    return () => {
+      socket.off("greet", greetHandler);
+      socket.disconnect();
+    };
+  }, []);
 
   return (
     <div className="">
