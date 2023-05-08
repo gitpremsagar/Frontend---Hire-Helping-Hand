@@ -8,12 +8,20 @@ import {
   setIsUserLoggedIn,
   setIsUserFreelancer,
 } from "../../../redux/authSlice";
+import { useEffect } from "react";
 
 export default function Header(props) {
   const { jwt, loggedInUserInfo, isUserFreelancer } = props;
+  // console.log("logged info", loggedInUserInfo.idusers);
   const dispatch = useDispatch();
-  dispatch(setJWTToken(jwt)); // store jwt in redux store
-  dispatch(setIsUserFreelancer(isUserFreelancer));
+  useEffect(() => {
+    if (loggedInUserInfo) {
+      dispatch(setJWTToken(jwt)); // store jwt in redux store
+      dispatch(setIsUserFreelancer(isUserFreelancer));
+      loggedInUserInfo && dispatch(setUserId(loggedInUserInfo.idusers)); //if loggedInUserInfo is not null then set userid in redux store
+    }
+  }, [loggedInUserInfo]);
+
   // TODO: set other user informations on authSlice( Redux State)
 
   return (

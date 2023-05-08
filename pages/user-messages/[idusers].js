@@ -1,37 +1,68 @@
 import Head from "next/head";
 import AsideLeftOfUserMessages from "../../components/userMessages/AsideLeftOfUserMessages";
-import LeftNav from "./../../components/userMessages/LeftNav";
+// import LeftNav from "./../../components/userMessages/LeftNav";
 import { io } from "socket.io-client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+
+const socket = io("http://localhost:3015", {
+  autoConnect: false,
+});
+// const socket = io("http://localhost:3015");
 
 export default function UserMessagesPage(props) {
-  const { loggedInUserInfo } = props;
+  const router = useRouter();
+  const userID = useSelector((state) => state.authSlice.userid);
+
+  const [loggedInUserId, setLoggedInUserId] = useState(false);
+  useEffect(() => {
+    setLoggedInUserId(userID);
+  }, [userID]);
 
   useEffect(() => {
-    const socket = io("http://localhost:3015");
-    function greetHandler(data) {
-      console.log("chatServer data = ", data);
+    if (userID) {
+      socket.connect();
+      function greetHandler(data) {
+        console.log("chatServer data = ", data);
+      }
+
+      socket.on("greet", greetHandler);
+
+      socket.on("connect", () => {
+        console.log("Your socket.id = ", socket.id);
+        console.log("userid on connect = ", userID);
+        socket.emit("Submit User ID", userID);
+      });
+
+      socket.on("new user connected", (data) => {
+        console.log(data);
+      });
+
+      socket.on("a user disconnected", (data) => {
+        console.log(data);
+      });
+    } else {
+      socket.off("greet", greetHandler);
+      socket.disconnect();
     }
-
-    socket.on("greet", greetHandler);
-
-    socket.on("connect", () => {
-      console.log("Your socket.id = ", socket.id);
-    });
-
-    socket.on("new user connected", (data) => {
-      console.log(data);
-    });
-
-    socket.on("a user disconnected", (data) => {
-      console.log(data);
-    });
-
     return () => {
       socket.off("greet", greetHandler);
       socket.disconnect();
     };
-  }, []);
+  }, [userID]);
+
+  // connect to socket.io server only when userId of loggedin user is available in the redux store
+  // useEffect(() => {
+  //   console.log(loggedInUserId);
+  //   loggedInUserId && socket.connect();
+  //   return () => {};
+  // }, [loggedInUserId]);
+
+  function handleSendMessage(e) {
+    e.preventDefault();
+    console.log(userID);
+  }
 
   return (
     <div className="">
@@ -72,7 +103,12 @@ export default function UserMessagesPage(props) {
                     type="text"
                     className="flex-1 p-2 border border-gray-400"
                   />
-                  <button className="bg-blue-500 p-2 text-white">Send</button>
+                  <button
+                    className="bg-blue-500 p-2 text-white"
+                    onClick={handleSendMessage}
+                  >
+                    Send
+                  </button>
                 </form>
               </div>
             </div>
