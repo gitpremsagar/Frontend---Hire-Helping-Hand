@@ -16,6 +16,7 @@ import {
   setBottomLevelCategories,
 } from "../../../redux/categoriesSlice";
 import TopLevelCategoryLi from "./TopLevelCategoryLi";
+import useSWR from "swr";
 
 // FIXME: Make this AsideNav work with database categories
 export default function AsideLeftNew() {
@@ -23,23 +24,35 @@ export default function AsideLeftNew() {
 
   // fetch all categories and store it in redux store
   const dispatch = useDispatch();
-  useEffect(async () => {
-    try {
-      const [resTopCat, resMidCat, resBotCat] = await Promise.all([
-        axios.get(BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES),
-        axios.get(BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES),
-        axios.get(BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES),
-      ]);
-      dispatch(setTopLevelCategories(resTopCat.data));
-      dispatch(setMidLevelCategories(resMidCat.data));
-      dispatch(setBottomLevelCategories(resBotCat.data));
-    } catch (error) {
-      console.log(error);
-      alert("Error: \n" + error);
-    }
-  }, []);
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
+  const { data, error } = useSWR(
+    [
+      BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES,
+      BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES,
+      BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES,
+    ],
+    () =>
+      Promise.all([
+        fetcher(BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES),
+        fetcher(BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES),
+        fetcher(BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES),
+      ])
+  );
 
-  // get all top, mid and bottom level categories
+  if (error) console.log("error in fetching data");
+  if (!data) console.log("Loading...");
+
+  // console.log(data);
+  // const [resTopCat, resMidCat, resBotCat] = data;
+  useEffect(() => {
+    if (!data) return;
+
+    dispatch(setTopLevelCategories(data[0]));
+    dispatch(setMidLevelCategories(data[1]));
+    dispatch(setBottomLevelCategories(data[2]));
+  }, [data]);
+
+  // get all top level categories
   const allTopLevelCategories = useSelector(
     (state) => state.categories.topLevelCategories
   );

@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import SearchForm from "../../../components/HeroSection/searchForm";
-import AsideLeft from "../../../components/Theme/AsideLeft/AsideLeft";
+// import AsideLeft from "../../../components/Theme/AsideLeft/AsideLeft";
 import ProposalsList from "../../../components/services/proposals/ProposalsList";
 import ProjectsList from "../../../components/services/projects/ProjectsList";
-import { extractParamsFromURL } from "./../../../Services/extractParamsFromURL";
+// import { extractParamsFromURL } from "./../../../Services/extractParamsFromURL";
 import AsideLeftNew from "../../../components/Theme/AsideLeft/AsideLeftNew";
 
 export default function DynamicPage(props) {
