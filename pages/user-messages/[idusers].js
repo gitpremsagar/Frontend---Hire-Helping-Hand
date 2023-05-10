@@ -5,6 +5,7 @@ import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import Conversation from "../../components/userMessages/Conversation";
 
 const socket = io("http://localhost:3015", {
   autoConnect: false,
@@ -22,47 +23,34 @@ export default function UserMessagesPage(props) {
 
   useEffect(() => {
     if (userID) {
-      socket.connect();
-      function greetHandler(data) {
-        console.log("chatServer data = ", data);
-      }
-
-      socket.on("greet", greetHandler);
+      socket.connect(); //connect to the chatServer when userID of Logged in user is available in redux store
 
       socket.on("connect", () => {
-        console.log("Your socket.id = ", socket.id);
-        console.log("userid on connect = ", userID);
+        // submit this user's userID when this user gets connected to chatServer
         socket.emit("Submit User ID", userID);
       });
 
+      // whenever anyone connects to the chatServer do following
       socket.on("new user connected", (data) => {
         console.log(data);
       });
 
+      // whenever anyone gets disconnected from the chatServer do following
       socket.on("a user disconnected", (data) => {
         console.log(data);
       });
     } else {
-      socket.off("greet", greetHandler);
+      // user is not logged in so disconnect her from the chatServer
       socket.disconnect();
     }
     return () => {
-      socket.off("greet", greetHandler);
+      // disconnect from chatServer whenever this component get unmounted
       socket.disconnect();
     };
   }, [userID]);
 
-  // connect to socket.io server only when userId of loggedin user is available in the redux store
-  // useEffect(() => {
-  //   console.log(loggedInUserId);
-  //   loggedInUserId && socket.connect();
-  //   return () => {};
-  // }, [loggedInUserId]);
-
-  function handleSendMessage(e) {
-    e.preventDefault();
-    console.log(userID);
-  }
+  const [activeContactID, setActiveContactID] = useState(false);
+  const [contacts, setContacts] = useState(["Person 1", "person 2"]);
 
   return (
     <div className="">
@@ -75,43 +63,16 @@ export default function UserMessagesPage(props) {
       {/* Header */}
       <div className="lg:grid lg:grid-cols-12">
         <div className="col-span-2">
-          <AsideLeftOfUserMessages />
-          {/* <LeftNav /> */}
+          <AsideLeftOfUserMessages
+            contacts={contacts}
+            activeContactID={activeContactID}
+            setActiveContactID={setActiveContactID}
+          />
         </div>
 
         <div className="col-span-10">
           <main className="">
-            <div className="flex flex-col h-screen">
-              <div className="p-6 bg-white border-b border-gray-400">
-                Chat with User
-              </div>
-              <div className="flex-1 overflow-y-scroll p-6">
-                <div className="mb-4">
-                  <p className="text-sm text-gray-600">
-                    User: Hi, how are you?
-                  </p>
-                </div>
-                <div className="mb-4">
-                  <p className="text-sm text-gray-600">
-                    You: I'm good, thanks! How about you?
-                  </p>
-                </div>
-              </div>
-              <div className="p-6 bg-gray-100">
-                <form className="flex">
-                  <input
-                    type="text"
-                    className="flex-1 p-2 border border-gray-400"
-                  />
-                  <button
-                    className="bg-blue-500 p-2 text-white"
-                    onClick={handleSendMessage}
-                  >
-                    Send
-                  </button>
-                </form>
-              </div>
-            </div>
+            <Conversation activeContactID={activeContactID} />
           </main>
         </div>
       </div>

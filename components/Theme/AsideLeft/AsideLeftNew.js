@@ -39,11 +39,12 @@ export default function AsideLeftNew() {
       ])
   );
 
-  if (error) console.log("error in fetching data");
+  if (error) {
+    alert("Error occurred!\n", error);
+    console.log("error in fetching data");
+  }
   if (!data) console.log("Loading...");
 
-  // console.log(data);
-  // const [resTopCat, resMidCat, resBotCat] = data;
   useEffect(() => {
     if (!data) return;
 
