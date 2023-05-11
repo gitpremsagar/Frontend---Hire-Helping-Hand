@@ -1,7 +1,7 @@
 import React from "react";
 import Message from "./Message";
 
-export default function Conversation({ activeContactID }) {
+export default function Conversation({ activeContactID, userID }) {
   function handleSendMessage(e) {
     e.preventDefault();
     console.log(userID);

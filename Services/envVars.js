@@ -34,3 +34,5 @@ export const BASE_URL_FOR_PROPOSAL_IMAGES = `${hhhBackendHostname}/public/upload
 export const BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES = `${hhhBackendHostname}/api/top-level-categories`;
 export const BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES = `${hhhBackendHostname}/api/mid-level-categories`;
 export const BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES = `${hhhBackendHostname}/api/bottom-level-categories`;
+
+export const BACKEND_API_ENDPOINT_FOR_USERS_CHAT_CONTACTS = `${hhhBackendHostname}/api/chat-contacts`;

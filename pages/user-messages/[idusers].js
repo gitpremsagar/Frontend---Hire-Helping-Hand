@@ -1,6 +1,5 @@
 import Head from "next/head";
 import AsideLeftOfUserMessages from "../../components/userMessages/AsideLeftOfUserMessages";
-// import LeftNav from "./../../components/userMessages/LeftNav";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -10,16 +9,10 @@ import Conversation from "../../components/userMessages/Conversation";
 const socket = io("http://localhost:3015", {
   autoConnect: false,
 });
-// const socket = io("http://localhost:3015");
 
 export default function UserMessagesPage(props) {
   const router = useRouter();
   const userID = useSelector((state) => state.authSlice.userid);
-
-  const [loggedInUserId, setLoggedInUserId] = useState(false);
-  useEffect(() => {
-    setLoggedInUserId(userID);
-  }, [userID]);
 
   useEffect(() => {
     if (userID) {
@@ -50,7 +43,7 @@ export default function UserMessagesPage(props) {
   }, [userID]);
 
   const [activeContactID, setActiveContactID] = useState(false);
-  const [contacts, setContacts] = useState(["Person 1", "person 2"]);
+  const [contacts, setContacts] = useState([]);
 
   return (
     <div className="">
@@ -67,12 +60,14 @@ export default function UserMessagesPage(props) {
             contacts={contacts}
             activeContactID={activeContactID}
             setActiveContactID={setActiveContactID}
+            setContacts={setContacts}
+            userID={userID}
           />
         </div>
 
         <div className="col-span-10">
           <main className="">
-            <Conversation activeContactID={activeContactID} />
+            <Conversation activeContactID={activeContactID} userID={userID} />
           </main>
         </div>
       </div>
