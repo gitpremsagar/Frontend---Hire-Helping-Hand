@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Message from "./Message";
+import useSWR from "swr";
+import { BACKEND_API_ENDPOINT_FOR_USERS_CHAT_MESSAGES } from "../../Services/envVars";
+import axios from "axios";
 
-export default function Conversation({ activeContactID, userID }) {
-  function handleSendMessage(e) {
-    e.preventDefault();
-    console.log(userID);
-  }
-
-  //if no contact is selected
+export default function Conversation({
+  activeContactID,
+  userID,
+  jwtToken,
+  messages,
+  setMessages,
+}) {
+  // if no contact is selected
   if (!activeContactID) {
     return (
       <div className="flex items-center justify-center h-screen text-4xl text-gray-500">
@@ -15,6 +19,38 @@ export default function Conversation({ activeContactID, userID }) {
       </div>
     );
   }
+
+  const fetcher = async (url) => {
+    const response = await axios.get(url, {
+      data: {
+        contactID: activeContactID,
+      },
+      headers: {
+        "x-auth-token": jwtToken, //FIXME:
+      },
+    });
+    return response;
+  };
+
+  const { data, error } = useSWR(
+    activeContactID ? BACKEND_API_ENDPOINT_FOR_USERS_CHAT_MESSAGES : null,
+    fetcher
+  );
+
+  // TODO: handle loading and error case properly
+  if (!data) console.log("loading messages!");
+  if (error) console.log("error occured while fetching messages", error);
+
+  function handleSendMessage(e) {
+    e.preventDefault();
+    console.log(userID);
+  }
+
+  useEffect(() => {
+    if (!data) return console.log("loading");
+
+    setMessages(data.data);
+  }, [data]);
 
   const from = "someone";
 
@@ -24,27 +60,16 @@ export default function Conversation({ activeContactID, userID }) {
         Name of selected Contact
       </div>
       <div className="flex-1 overflow-y-scroll p-6">
-        <Message
-          messageType="recieved"
-          message={
-            "This is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the message"
-          }
-          from={from}
-        />
-        <Message
-          messageType="recieved"
-          message={"This is the message"}
-          from={from}
-        />
-        <Message messageType="sent" message={"This is the reply"} from={from} />
-        <Message
-          messageType="sent"
-          message={
-            " This is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the messageThis is the message"
-          }
-          from={from}
-        />
-        <Message messageType="sent" message={"This is the reply"} from={from} />
+        {messages.map((message, key) => {
+          return (
+            <Message
+              key={key}
+              messageType="recieved"
+              message={message.message}
+              from={from}
+            />
+          );
+        })}
       </div>
       <div className="p-6 bg-gray-100">
         <form className="flex">

@@ -13,6 +13,7 @@ const socket = io("http://localhost:3015", {
 export default function UserMessagesPage(props) {
   const router = useRouter();
   const userID = useSelector((state) => state.authSlice.userid);
+  const jwtToken = useSelector((state) => state.authSlice.jwtToken);
 
   useEffect(() => {
     if (userID) {
@@ -44,6 +45,7 @@ export default function UserMessagesPage(props) {
 
   const [activeContactID, setActiveContactID] = useState(false);
   const [contacts, setContacts] = useState([]);
+  const [messages, setMessages] = useState([]);
 
   return (
     <div className="">
@@ -62,12 +64,19 @@ export default function UserMessagesPage(props) {
             setActiveContactID={setActiveContactID}
             setContacts={setContacts}
             userID={userID}
+            jwtToken={jwtToken}
           />
         </div>
 
         <div className="col-span-10">
           <main className="">
-            <Conversation activeContactID={activeContactID} userID={userID} />
+            <Conversation
+              activeContactID={activeContactID}
+              userID={userID}
+              jwtToken={jwtToken}
+              messages={messages}
+              setMessages={setMessages}
+            />
           </main>
         </div>
       </div>

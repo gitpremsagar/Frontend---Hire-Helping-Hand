@@ -10,14 +10,12 @@ export default function AsideLeftOfUserMessages({
   setActiveContactID,
   setContacts,
   userID,
+  jwtToken,
 }) {
   const contactIdRef = useRef();
-  const handleContactClick = () => {
-    setActiveContactID(contactIdRef.current.value);
+  const handleContactClick = (e) => {
+    setActiveContactID(e.target.value);
   };
-
-  // get jwt token from redux store
-  const jwtToken = useSelector((state) => state.authSlice.jwtToken);
 
   // get list of all contacts from api if jwtToken and userID available
   const fetcher = async (url) => {
@@ -36,27 +34,32 @@ export default function AsideLeftOfUserMessages({
   //TODO: indicate loading state to users
   if (!data) console.log("Loading contacts list...");
   if (error) {
-    console.log(error);
-    // alert(`Error Occured!\n ${error}`);
+    console.log(error); //TODO: Handle error properly
+    alert(`Error Occured!\n ${error}`);
   }
 
-  // setContacts list when got response from server
+  // extract contacts from response to setContacts list
   useEffect(() => {
     if (!data) return setContacts([]);
     const contactList = data.data.map((message) => {
       if (message.sender_id == userID) {
-        return message.recipient_first_name;
-      } else return message.sender_first_name;
+        const contact = {
+          firstName: message.recipient_first_name,
+          lastName: message.recipient_last_name,
+          id: message.recipient_id,
+        };
+        return contact;
+      } else {
+        const contact = {
+          firstName: message.sender_first_name,
+          lastName: message.sender_last_name,
+          id: message.sender_id,
+        };
+        return contact;
+      }
     });
     setContacts(contactList);
-    console.log(data);
   }, [data]);
-
-  useEffect(() => {
-    if (!data && jwtToken) {
-      // Fetch data from server
-    }
-  }, [data, jwtToken]);
 
   return (
     <aside className="AsideLeftOfDashboard">
@@ -67,11 +70,11 @@ export default function AsideLeftOfUserMessages({
             return (
               <li
                 key={key}
-                value={3}
+                value={contact.id}
                 ref={contactIdRef}
                 onClick={handleContactClick}
               >
-                {contact}
+                {contact.firstName}
               </li>
             );
           })}
