@@ -12,6 +12,8 @@ export default function AsideLeftOfUserMessages({
   userID,
   jwtToken,
 }) {
+  const [uniqueSendeRecipientList, setUniqueSendeRecipientList] = useState([]);
+
   const contactIdRef = useRef();
   const handleContactClick = (e) => {
     setActiveContactID(e.target.value);
@@ -38,7 +40,7 @@ export default function AsideLeftOfUserMessages({
     alert(`Error Occured!\n ${error}`);
   }
 
-  // extract contacts from response to setContacts list
+  // extract contacts from response
   useEffect(() => {
     if (!data) return setContacts([]);
     const contactList = data.data.map((message) => {
@@ -58,9 +60,20 @@ export default function AsideLeftOfUserMessages({
         return contact;
       }
     });
-    setContacts(contactList);
+    setUniqueSendeRecipientList(contactList);
   }, [data]);
 
+  //filter out duplicate contacts by id and `setContacts` having only unique contacts
+  useEffect(() => {
+    if (uniqueSendeRecipientList.length > 0) {
+      const uniqueContacts = uniqueSendeRecipientList.filter(
+        (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
+      );
+      setContacts(uniqueContacts);
+    }
+  }, [uniqueSendeRecipientList]);
+
+  console.log("constacts = ", contacts);
   return (
     <aside className="AsideLeftOfDashboard">
       <nav>

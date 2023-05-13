@@ -11,6 +11,7 @@ export default function Conversation({
   messages,
   setMessages,
 }) {
+  console.log("activeContactID = ", activeContactID);
   // if no contact is selected
   if (!activeContactID) {
     return (
@@ -22,18 +23,18 @@ export default function Conversation({
 
   const fetcher = async (url) => {
     const response = await axios.get(url, {
-      data: {
-        contactID: activeContactID,
-      },
       headers: {
-        "x-auth-token": jwtToken, //FIXME:
+        "x-auth-token": jwtToken,
       },
     });
     return response;
   };
 
+  // make request to backend only when `activeContactID` id is defined
   const { data, error } = useSWR(
-    activeContactID ? BACKEND_API_ENDPOINT_FOR_USERS_CHAT_MESSAGES : null,
+    activeContactID
+      ? BACKEND_API_ENDPOINT_FOR_USERS_CHAT_MESSAGES + "/" + activeContactID
+      : null,
     fetcher
   );
 
@@ -64,9 +65,9 @@ export default function Conversation({
           return (
             <Message
               key={key}
-              messageType="recieved"
+              messageType={message.sender_id == userID ? `sent` : `recieved`}
               message={message.message}
-              from={from}
+              from={message.sender_first_name}
             />
           );
         })}
