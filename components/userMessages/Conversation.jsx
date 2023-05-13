@@ -11,7 +11,7 @@ export default function Conversation({
   messages,
   setMessages,
 }) {
-  console.log("activeContactID = ", activeContactID);
+  // console.log("activeContactID = ", activeContactID);
   // if no contact is selected
   if (!activeContactID) {
     return (
@@ -39,7 +39,7 @@ export default function Conversation({
   );
 
   // TODO: handle loading and error case properly
-  if (!data) console.log("loading messages!");
+  // if (!data) console.log("loading messages!");
   if (error) console.log("error occured while fetching messages", error);
 
   function handleSendMessage(e) {
@@ -48,12 +48,12 @@ export default function Conversation({
   }
 
   useEffect(() => {
-    if (!data) return console.log("loading");
+    if (!data) return; //console.log("loading");
 
     setMessages(data.data);
   }, [data]);
 
-  const from = "someone";
+  // const from = "someone";
 
   return (
     <div className="flex flex-col h-screen">

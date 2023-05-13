@@ -34,7 +34,7 @@ export default function AsideLeftOfUserMessages({
   );
 
   //TODO: indicate loading state to users
-  if (!data) console.log("Loading contacts list...");
+  // if (!data) console.log("Loading contacts list...");
   if (error) {
     console.log(error); //TODO: Handle error properly
     alert(`Error Occured!\n ${error}`);
@@ -73,7 +73,7 @@ export default function AsideLeftOfUserMessages({
     }
   }, [uniqueSendeRecipientList]);
 
-  console.log("constacts = ", contacts);
+  // console.log("constacts = ", contacts);
   return (
     <aside className="AsideLeftOfDashboard">
       <nav>
