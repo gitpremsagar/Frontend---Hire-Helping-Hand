@@ -56,7 +56,7 @@ export default function Conversation({
   // const from = "someone";
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-[calc(100vh-70px)]">
       <div className="p-6 bg-white border-b border-gray-400">
         Name of selected Contact
       </div>
@@ -72,9 +72,12 @@ export default function Conversation({
           );
         })}
       </div>
-      <div className="p-6 bg-gray-100">
-        <form className="flex">
-          <input type="text" className="flex-1 p-2 border border-gray-400" />
+      <div className="p-6 bg-gray-100 ">
+        <form className="flex rounded-lg overflow-hidden">
+          <input
+            type="text"
+            className="flex-1 p-2 border border-gray-400 rounded-l-lg"
+          />
           <button
             className="bg-blue-500 p-2 text-white"
             onClick={handleSendMessage}

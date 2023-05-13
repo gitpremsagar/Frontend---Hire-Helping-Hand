@@ -75,7 +75,7 @@ export default function AsideLeftOfUserMessages({
 
   // console.log("constacts = ", contacts);
   return (
-    <aside className="AsideLeftOfDashboard">
+    <aside className="h-full overflow-y-scroll bg-gray-800 text-white w-full sticky top-12">
       <nav>
         <h4 className="text-lg font-medium m-2">Inbox</h4>
         <ul>
@@ -86,6 +86,7 @@ export default function AsideLeftOfUserMessages({
                 value={contact.id}
                 ref={contactIdRef}
                 onClick={handleContactClick}
+                className="py-4 px-2 hover:bg-gray-900"
               >
                 {contact.firstName}
               </li>

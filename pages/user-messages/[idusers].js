@@ -56,7 +56,7 @@ export default function UserMessagesPage(props) {
       </Head>
 
       {/* Header */}
-      <div className="lg:grid lg:grid-cols-12">
+      <div className="lg:grid lg:grid-cols-12 lg:h-[calc(100vh-70px)]">
         <div className="col-span-2">
           <AsideLeftOfUserMessages
             contacts={contacts}
