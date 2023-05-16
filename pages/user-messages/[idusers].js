@@ -11,7 +11,6 @@ const socket = io("http://localhost:3015", {
 });
 
 export default function UserMessagesPage(props) {
-  const router = useRouter();
   const userID = useSelector((state) => state.authSlice.userid);
   const jwtToken = useSelector((state) => state.authSlice.jwtToken);
 
@@ -20,8 +19,8 @@ export default function UserMessagesPage(props) {
       socket.connect(); //connect to the chatServer when userID of Logged in user is available in redux store
 
       socket.on("connect", () => {
-        // submit this user's userID when this user gets connected to chatServer
-        socket.emit("Submit User ID", userID);
+        // submit this user's userID to `online_users` table when this user gets connected to chatServer
+        socket.emit("update-online-users-table", userID);
       });
 
       // whenever anyone connects to the chatServer do following
@@ -43,9 +42,8 @@ export default function UserMessagesPage(props) {
     };
   }, [userID]);
 
-  const [activeContactID, setActiveContactID] = useState(false);
+  const [activeContact, setActiveContact] = useState(false);
   const [contacts, setContacts] = useState([]);
-  const [messages, setMessages] = useState([]);
 
   return (
     <div className="">
@@ -60,8 +58,8 @@ export default function UserMessagesPage(props) {
         <div className="col-span-2">
           <AsideLeftOfUserMessages
             contacts={contacts}
-            activeContactID={activeContactID}
-            setActiveContactID={setActiveContactID}
+            activeContact={activeContact}
+            setActiveContact={setActiveContact}
             setContacts={setContacts}
             userID={userID}
             jwtToken={jwtToken}
@@ -71,11 +69,10 @@ export default function UserMessagesPage(props) {
         <div className="col-span-10">
           <main className="">
             <Conversation
-              activeContactID={activeContactID}
+              activeContact={activeContact}
               userID={userID}
               jwtToken={jwtToken}
-              messages={messages}
-              setMessages={setMessages}
+              socket={socket}
             />
           </main>
         </div>

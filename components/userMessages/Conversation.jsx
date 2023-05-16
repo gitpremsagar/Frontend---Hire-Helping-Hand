@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Message from "./Message";
 import useSWR from "swr";
 import { BACKEND_API_ENDPOINT_FOR_USERS_CHAT_MESSAGES } from "../../Services/envVars";
 import axios from "axios";
 
 export default function Conversation({
-  activeContactID,
+  activeContact,
   userID,
   jwtToken,
-  messages,
-  setMessages,
+  socket,
 }) {
-  // console.log("activeContactID = ", activeContactID);
   // if no contact is selected
-  if (!activeContactID) {
+  if (!activeContact) {
     return (
       <div className="flex items-center justify-center h-screen text-4xl text-gray-500">
         Please select a contact to have conversation with.
       </div>
     );
   }
+
+  console.log("active contact = ", activeContact);
+
+  const [recieverSocketID, setRecieverSocketID] = useState(false);
+  const [recievedMessage, setRecievedMessage] = useState(false);
+  const [messages, setMessages] = useState([]);
 
   const fetcher = async (url) => {
     const response = await axios.get(url, {
@@ -30,10 +34,10 @@ export default function Conversation({
     return response;
   };
 
-  // make request to backend only when `activeContactID` id is defined
+  // make request to backend only when `activeContact` id is defined
   const { data, error } = useSWR(
-    activeContactID
-      ? BACKEND_API_ENDPOINT_FOR_USERS_CHAT_MESSAGES + "/" + activeContactID
+    activeContact
+      ? BACKEND_API_ENDPOINT_FOR_USERS_CHAT_MESSAGES + "/" + activeContact[0].id
       : null,
     fetcher
   );
@@ -42,18 +46,43 @@ export default function Conversation({
   // if (!data) console.log("loading messages!");
   if (error) console.log("error occured while fetching messages", error);
 
-  function handleSendMessage(e) {
+  const msgInputRef = useRef();
+
+  function sendMessage(e) {
     e.preventDefault();
     console.log(userID);
+    socket.emit("send-message", {
+      message: msgInputRef.current.value,
+      toUserID: activeContact,
+      toSocketID: recieverSocketID, //FIXME:
+      senderSocketID: socket.id,
+      senderUserID: userID,
+    });
+    msgInputRef.current.value = "";
   }
 
+  // handle recipient socket.id submit
+  socket.on("set-recipient-socket-id", (msgRecieverInfo) => {
+    setRecieverSocketID(msgRecieverInfo.recipientSocketId);
+  });
+  useEffect(() => {
+    console.log("recieverSocketID", recieverSocketID);
+  }, [recieverSocketID]);
+
+  //handle new message
+  socket.on("new-message", (incommingMessage) => {
+    console.log("new-message triggered");
+    setRecievedMessage(incommingMessage);
+  });
+  useEffect(() => {
+    console.log("recievedMessage = ", recievedMessage);
+  }, [recievedMessage]);
+
+  // setMessages when messages fetched from server is recieved
   useEffect(() => {
     if (!data) return; //console.log("loading");
-
     setMessages(data.data);
   }, [data]);
-
-  // const from = "someone";
 
   return (
     <div className="flex flex-col h-[calc(100vh-70px)]">
@@ -73,17 +102,16 @@ export default function Conversation({
         })}
       </div>
       <div className="p-6 bg-gray-100 ">
-        <form className="flex rounded-lg overflow-hidden">
+        <form
+          className="flex rounded-lg overflow-hidden"
+          onSubmit={sendMessage}
+        >
           <input
             type="text"
             className="flex-1 p-2 border border-gray-400 rounded-l-lg"
+            ref={msgInputRef}
           />
-          <button
-            className="bg-blue-500 p-2 text-white"
-            onClick={handleSendMessage}
-          >
-            Send
-          </button>
+          <button className="bg-blue-500 p-2 text-white">Send</button>
         </form>
       </div>
     </div>

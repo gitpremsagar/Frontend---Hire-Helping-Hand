@@ -3,21 +3,22 @@ import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import { BACKEND_API_ENDPOINT_FOR_USERS_CHAT_CONTACTS } from "./../../Services/envVars";
 import { useSelector } from "react-redux";
+import ContactLi from "./ContactLi";
 
 export default function AsideLeftOfUserMessages({
   contacts,
-  activeContactID,
-  setActiveContactID,
+  activeContact,
+  setActiveContact,
   setContacts,
   userID,
   jwtToken,
 }) {
   const [uniqueSendeRecipientList, setUniqueSendeRecipientList] = useState([]);
 
-  const contactIdRef = useRef();
-  const handleContactClick = (e) => {
-    setActiveContactID(e.target.value);
-  };
+  // const contactIdRef = useRef();
+  // const handleContactClick = (e) => {
+  //   setActiveContact(e.target.value);
+  // };
 
   // get list of all contacts from api if jwtToken and userID available
   const fetcher = async (url) => {
@@ -45,17 +46,21 @@ export default function AsideLeftOfUserMessages({
     if (!data) return setContacts([]);
     const contactList = data.data.map((message) => {
       if (message.sender_id == userID) {
+        //add recipient to contact list
         const contact = {
           firstName: message.recipient_first_name,
           lastName: message.recipient_last_name,
           id: message.recipient_id,
+          socketID: false,
         };
         return contact;
       } else {
+        //add sender to contact list
         const contact = {
           firstName: message.sender_first_name,
           lastName: message.sender_last_name,
           id: message.sender_id,
+          socketID: false,
         };
         return contact;
       }
@@ -81,15 +86,13 @@ export default function AsideLeftOfUserMessages({
         <ul>
           {contacts.map((contact, key) => {
             return (
-              <li
+              <ContactLi
                 key={key}
-                value={contact.id}
-                ref={contactIdRef}
-                onClick={handleContactClick}
-                className="py-4 px-2 hover:bg-gray-900"
-              >
-                {contact.firstName}
-              </li>
+                contact={contact}
+                setActiveContact={setActiveContact}
+                activeContact={activeContact}
+                contacts={contacts}
+              />
             );
           })}
         </ul>
