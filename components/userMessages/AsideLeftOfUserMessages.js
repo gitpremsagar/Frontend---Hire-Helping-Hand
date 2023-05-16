@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import { BACKEND_API_ENDPOINT_FOR_USERS_CHAT_CONTACTS } from "./../../Services/envVars";
-import { useSelector } from "react-redux";
 import ContactLi from "./ContactLi";
 
 export default function AsideLeftOfUserMessages({
@@ -14,11 +13,6 @@ export default function AsideLeftOfUserMessages({
   jwtToken,
 }) {
   const [uniqueSendeRecipientList, setUniqueSendeRecipientList] = useState([]);
-
-  // const contactIdRef = useRef();
-  // const handleContactClick = (e) => {
-  //   setActiveContact(e.target.value);
-  // };
 
   // get list of all contacts from api if jwtToken and userID available
   const fetcher = async (url) => {
@@ -78,7 +72,6 @@ export default function AsideLeftOfUserMessages({
     }
   }, [uniqueSendeRecipientList]);
 
-  // console.log("constacts = ", contacts);
   return (
     <aside className="h-full overflow-y-scroll bg-gray-800 text-white w-full sticky top-12">
       <nav>

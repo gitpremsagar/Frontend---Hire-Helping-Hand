@@ -3,7 +3,6 @@ import AsideLeftOfUserMessages from "../../components/userMessages/AsideLeftOfUs
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
 import Conversation from "../../components/userMessages/Conversation";
 
 const socket = io("http://localhost:3015", {
@@ -13,6 +12,8 @@ const socket = io("http://localhost:3015", {
 export default function UserMessagesPage(props) {
   const userID = useSelector((state) => state.authSlice.userid);
   const jwtToken = useSelector((state) => state.authSlice.jwtToken);
+  const userFirstName = useSelector((state) => state.authSlice.firstName);
+  // console.log("userFirstName =", userFirstName);
 
   useEffect(() => {
     if (userID) {
@@ -44,6 +45,7 @@ export default function UserMessagesPage(props) {
 
   const [activeContact, setActiveContact] = useState(false);
   const [contacts, setContacts] = useState([]);
+  const [realTimeChatMessages, setRealTimeChatMessages] = useState([]);
 
   return (
     <div className="">
@@ -73,6 +75,9 @@ export default function UserMessagesPage(props) {
               userID={userID}
               jwtToken={jwtToken}
               socket={socket}
+              realTimeChatMessages={realTimeChatMessages}
+              setRealTimeChatMessages={setRealTimeChatMessages}
+              userFirstName={userFirstName}
             />
           </main>
         </div>

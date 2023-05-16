@@ -19,7 +19,7 @@ export default function ContactLi({
       ref={contactIdRef}
       onClick={handleContactClick}
       className={`py-4 px-2 hover:bg-gray-700 ${
-        contact.id == activeContact[0].id ? `bg-gray-600` : ``
+        activeContact && contact.id == activeContact[0].id ? `bg-gray-600` : ``
       }`}
     >
       {contact.firstName}

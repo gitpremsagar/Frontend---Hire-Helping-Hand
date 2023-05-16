@@ -19,6 +19,7 @@ export default function Header(props) {
       dispatch(setJWTToken(jwt)); // store jwt in redux store
       dispatch(setIsUserFreelancer(isUserFreelancer));
       loggedInUserInfo && dispatch(setUserId(loggedInUserInfo.idusers)); //if loggedInUserInfo is not null then set userid in redux store
+      loggedInUserInfo && dispatch(setFirstName(loggedInUserInfo.first_name)); //if loggedInUserInfo is not null then set userid in redux store
     }
   }, [loggedInUserInfo]);
 

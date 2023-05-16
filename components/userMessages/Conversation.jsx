@@ -7,7 +7,10 @@ import axios from "axios";
 export default function Conversation({
   activeContact,
   userID,
+  userFirstName,
   jwtToken,
+  realTimeChatMessages,
+  setRealTimeChatMessages,
   socket,
 }) {
   // if no contact is selected
@@ -18,12 +21,24 @@ export default function Conversation({
       </div>
     );
   }
-
-  console.log("active contact = ", activeContact);
+  // console.log("active contact = ", activeContact);
 
   const [recieverSocketID, setRecieverSocketID] = useState(false);
-  const [recievedMessage, setRecievedMessage] = useState(false);
   const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    //handle new message
+    socket.on("new-message", (incommingMessage) => {
+      setMessages((prev) => {
+        const updatedMessages = [...prev, incommingMessage];
+        return updatedMessages;
+      });
+      setRealTimeChatMessages((prev) => {
+        const updatedChatMessages = [...prev, incommingMessage];
+        return updatedChatMessages;
+      });
+    });
+  }, [socket]);
 
   const fetcher = async (url) => {
     const response = await axios.get(url, {
@@ -50,33 +65,39 @@ export default function Conversation({
 
   function sendMessage(e) {
     e.preventDefault();
-    console.log(userID);
-    socket.emit("send-message", {
-      message: msgInputRef.current.value,
-      toUserID: activeContact,
-      toSocketID: recieverSocketID, //FIXME:
+    const outgoingMessage = {
+      sender_id: userID,
+      sender_first_name: userFirstName,
+      recipient_id: activeContact[0].id,
+      toSocketID: activeContact[0].socketID,
       senderSocketID: socket.id,
-      senderUserID: userID,
+      recipient_first_name: activeContact[0].firstName,
+      message: msgInputRef.current.value,
+      created_at: currentDateTime,
+      has_seen: false,
+    };
+    socket.emit("send-message", outgoingMessage); //send message to chatServer
+    //insert sent message to messages list
+    const currentDateTime = "2023-05-15T04:57:47.000Z"; //FIXME: provide current date time
+    setMessages((prev) => {
+      const updatedMessages = [...prev, outgoingMessage];
+      return updatedMessages;
     });
-    msgInputRef.current.value = "";
+    // msgInputRef.current.value = "";
   }
 
   // handle recipient socket.id submit
   socket.on("set-recipient-socket-id", (msgRecieverInfo) => {
     setRecieverSocketID(msgRecieverInfo.recipientSocketId);
+    //FIXME: UPDATE socketID on contacts state hook
   });
-  useEffect(() => {
-    console.log("recieverSocketID", recieverSocketID);
-  }, [recieverSocketID]);
+  // useEffect(() => {
+  //   console.log("recieverSocketID", recieverSocketID);
+  // }, [recieverSocketID]);
 
-  //handle new message
-  socket.on("new-message", (incommingMessage) => {
-    console.log("new-message triggered");
-    setRecievedMessage(incommingMessage);
-  });
-  useEffect(() => {
-    console.log("recievedMessage = ", recievedMessage);
-  }, [recievedMessage]);
+  // useEffect(() => {
+  //   console.log("realTimeChatMessages = ", realTimeChatMessages);
+  // }, [realTimeChatMessages]);
 
   // setMessages when messages fetched from server is recieved
   useEffect(() => {
