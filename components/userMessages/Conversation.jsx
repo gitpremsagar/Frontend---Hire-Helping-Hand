@@ -11,6 +11,8 @@ export default function Conversation({
   jwtToken,
   realTimeChatMessages,
   setRealTimeChatMessages,
+  contacts,
+  setContacts,
   socket,
 }) {
   // if no contact is selected
@@ -23,7 +25,6 @@ export default function Conversation({
   }
   // console.log("active contact = ", activeContact);
 
-  const [recieverSocketID, setRecieverSocketID] = useState(false);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -62,6 +63,7 @@ export default function Conversation({
   if (error) console.log("error occured while fetching messages", error);
 
   const msgInputRef = useRef();
+  const messagesDivRef = useRef();
 
   function sendMessage(e) {
     e.preventDefault();
@@ -86,11 +88,35 @@ export default function Conversation({
     // msgInputRef.current.value = "";
   }
 
-  // handle recipient socket.id submit
-  socket.on("set-recipient-socket-id", (msgRecieverInfo) => {
-    setRecieverSocketID(msgRecieverInfo.recipientSocketId);
-    //FIXME: UPDATE socketID on contacts state hook
-  });
+  // Function to update socketID of contact with a specific id
+  function updateSocketID(contactsList, id, newSocketID) {
+    for (let i = 0; i < contactsList.length; i++) {
+      if (contactsList[i].id === id) {
+        contactsList[i].socketID = newSocketID;
+        break; // Exit the loop once the element is found and updated
+      }
+    }
+    return contactsList;
+  }
+
+  useEffect(() => {
+    // handle recipient socket.id submit
+    socket.on("set-recipient-socket-id", (msgRecieverInfo) => {
+      //update socket id of the contact who is recipient
+      setContacts((prev) => {
+        const contactsCopy = [...prev];
+        const updatedContacts = updateSocketID(
+          contactsCopy,
+          msgRecieverInfo.recipientUserID,
+          msgRecieverInfo.recipientSocketId
+        );
+        console.log("updatedContacts = ", updatedContacts);
+        return updatedContacts;
+      });
+      //FIXME: UPDATE socketID on contacts state hook
+    });
+  }, []);
+
   // useEffect(() => {
   //   console.log("recieverSocketID", recieverSocketID);
   // }, [recieverSocketID]);
@@ -105,12 +131,17 @@ export default function Conversation({
     setMessages(data.data);
   }, [data]);
 
+  // scroll to bottom on new message
+  useEffect(() => {
+    messagesDivRef.current.scrollTop = messagesDivRef.current.scrollHeight;
+  }, [messages]);
+
   return (
     <div className="flex flex-col h-[calc(100vh-70px)]">
       <div className="p-6 bg-white border-b border-gray-400">
         Name of selected Contact
       </div>
-      <div className="flex-1 overflow-y-scroll p-6">
+      <div ref={messagesDivRef} className="flex-1 overflow-y-scroll p-6">
         {messages.map((message, key) => {
           return (
             <Message

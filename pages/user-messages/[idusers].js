@@ -47,6 +47,8 @@ export default function UserMessagesPage(props) {
   const [contacts, setContacts] = useState([]);
   const [realTimeChatMessages, setRealTimeChatMessages] = useState([]);
 
+  console.log("contacts = ", contacts);
+
   return (
     <div className="">
       <Head>
@@ -78,6 +80,8 @@ export default function UserMessagesPage(props) {
               realTimeChatMessages={realTimeChatMessages}
               setRealTimeChatMessages={setRealTimeChatMessages}
               userFirstName={userFirstName}
+              setContacts={setContacts}
+              contacts={contacts}
             />
           </main>
         </div>
