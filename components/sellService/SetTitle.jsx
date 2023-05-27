@@ -17,7 +17,9 @@ export default function SetTitle({ proposal, setProposal }) {
 
   return (
     <FormElementContainer>
-      <LabelElement htmlFor="proposalTitle">Proposal Title</LabelElement>
+      <LabelElement className={`text-white`} htmlFor="proposalTitle">
+        Proposal Title
+      </LabelElement>
       <InputInfoSpan>
         Give the title for the freelanceing service you provide.
       </InputInfoSpan>

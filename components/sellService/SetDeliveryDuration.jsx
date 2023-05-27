@@ -16,7 +16,7 @@ export default function SetDeliveryDuration({ proposal, setProposal }) {
   }
   return (
     <div>
-      <LabelElement htmlFor="proposalDeliveryDuration">
+      <LabelElement className={`text-white`} htmlFor="proposalDeliveryDuration">
         Delivery Duration( in Days )
       </LabelElement>
       <InputInfoSpan>

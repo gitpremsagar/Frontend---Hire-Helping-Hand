@@ -18,7 +18,7 @@ export default function SetDescription({ proposal, setProposal }) {
 
   return (
     <FormElementContainer>
-      <LabelElement htmlFor="proposalDescription">
+      <LabelElement className={`text-white`} htmlFor="proposalDescription">
         Proposal Description
       </LabelElement>
       <InputInfoSpan>

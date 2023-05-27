@@ -1,5 +1,4 @@
 // TODO: Save proposal automatically as draft on every change after 10 second idle timeout
-// TODO: save JWT on redux store
 // TODO: publish proposal then redirect user to dashboard
 import Head from "next/head";
 import { useEffect, useState } from "react";

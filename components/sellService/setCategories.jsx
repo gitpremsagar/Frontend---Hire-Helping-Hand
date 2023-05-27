@@ -92,7 +92,7 @@ export default function SetCategories({ proposal, setProposal }) {
   return (
     <div className="grid grid-cols-1 gap-2 lg:gap-5 md:grid-cols-3">
       <FormElementContainer>
-        <LabelElement htmlFor="topLevelCategory">
+        <LabelElement className={`text-white`} htmlFor="topLevelCategory">
           Top Level Category
         </LabelElement>
 
@@ -120,7 +120,7 @@ export default function SetCategories({ proposal, setProposal }) {
 
       {/* FIXME: show filtered options only for mid and bottom level category selector */}
       <FormElementContainer>
-        <LabelElement htmlFor="midLevelCategory">
+        <LabelElement className={`text-white`} htmlFor="midLevelCategory">
           Mid Level Category
         </LabelElement>
 
@@ -148,7 +148,7 @@ export default function SetCategories({ proposal, setProposal }) {
       </FormElementContainer>
 
       <FormElementContainer>
-        <LabelElement htmlFor="bottomLevelCategory">
+        <LabelElement className={`text-white`} htmlFor="bottomLevelCategory">
           Bottom Level Category
         </LabelElement>
         <InputInfoSpan className="text-yellow-300">

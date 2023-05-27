@@ -26,7 +26,7 @@ export default function SearchForm(props) {
   };
   return (
     <form onSubmit={handleSearchFormSubmission} className="mt-20">
-      <div className="flex justify-center items-baseline">
+      <div className="flex justify-center items-baseline w-full">
         {/* Search Bar with auto suggest functionality */}
         <AutoSuggestInput
           searchTerm={searchTerm}

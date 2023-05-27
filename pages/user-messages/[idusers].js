@@ -47,7 +47,7 @@ export default function UserMessagesPage(props) {
   const [contacts, setContacts] = useState([]);
   const [realTimeChatMessages, setRealTimeChatMessages] = useState([]);
 
-  console.log("contacts = ", contacts);
+  console.log("activeContact = ", activeContact);
 
   return (
     <div className="">
@@ -74,6 +74,7 @@ export default function UserMessagesPage(props) {
           <main className="">
             <Conversation
               activeContact={activeContact}
+              setActiveContact={setActiveContact}
               userID={userID}
               jwtToken={jwtToken}
               socket={socket}

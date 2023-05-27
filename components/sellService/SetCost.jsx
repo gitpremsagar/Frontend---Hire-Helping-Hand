@@ -15,7 +15,9 @@ export default function ({ proposal, setProposal }) {
   }
   return (
     <div>
-      <LabelElement htmlFor="proposalCost">Proposal cost</LabelElement>
+      <LabelElement className={`text-white`} htmlFor="proposalCost">
+        Proposal cost
+      </LabelElement>
       <InputInfoSpan className="text-yellow-300">
         Set a fixed price for the freelancing service that you are offering.
       </InputInfoSpan>

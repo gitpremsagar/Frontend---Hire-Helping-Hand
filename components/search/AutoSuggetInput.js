@@ -59,10 +59,10 @@ const AutoSuggestInput = ({ searchTerm, setSearchTerm, isUserFreelancer }) => {
   };
 
   return (
-    <div className="relative text-gray-600">
+    <div className="relative text-gray-600 w-2/3">
       <input
         autoComplete="off"
-        className=" text-gray-900 border-2 border-gray-900 p-2 focus:outline-none"
+        className=" text-gray-900 border-2 border-gray-900 p-2 focus:outline-none w-full "
         type="search"
         name="search"
         placeholder={isUserFreelancer ? `Find Clients` : `Find Freelancers`}
