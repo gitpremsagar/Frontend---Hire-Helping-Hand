@@ -113,52 +113,56 @@ export default function becomeFreelancer() {
       </Head>
 
       <main>
-        <div className="bg-gray-800 text-white p-5 sm:p-10 md:p-15 lg:p-20">
-          <H1 className="text-center">Create New Proposal</H1>
-          <H6
-            className={`text-center mt-2 sm:mt-3 md:mt-4 lg:mt-5 text-yellow-300`}
-          >
-            Proposal is detailed information of the kind of freelancing service
-            you provide and the amount you charge for it.
-          </H6>
-        </div>
-
         <Section className="flex justify-center items-center min-h-screen bg-gray-900">
-          <form className="">
-            <SetTitle setProposal={setProposal} proposal={proposal} />
+          <div>
+            <div className="bg-gray-800 text-white p-5 sm:p-10 md:p-15 lg:p-20 mb-5 sm:mb-10 md:mb-15 lg:mb-20 rounded-lg overflow-hidden">
+              <H1 className="text-center">Create New Proposal</H1>
+              <H6
+                className={`text-center mt-2 sm:mt-3 md:mt-4 lg:mt-5 text-yellow-300`}
+              >
+                Proposal is detailed information of the kind of freelancing
+                service you provide and the amount you charge for it.
+              </H6>
+            </div>
+            <form className="">
+              <SetTitle setProposal={setProposal} proposal={proposal} />
 
-            {/* Description */}
-            <SetDescription setProposal={setProposal} proposal={proposal} />
+              {/* Description */}
+              <SetDescription setProposal={setProposal} proposal={proposal} />
 
-            {/* Cost and Delivery Duraion*/}
-            <FormElementContainer>
-              <div className="grid  grid-cols-1 sm:grid-cols-2 gap-5">
-                <SetCost setProposal={setProposal} proposal={proposal} />
-                <SetDeliveryDuration
-                  setProposal={setProposal}
-                  proposal={proposal}
-                />
-              </div>
-            </FormElementContainer>
+              {/* Cost and Delivery Duraion*/}
+              <FormElementContainer>
+                <div className="grid  grid-cols-1 sm:grid-cols-2 gap-5">
+                  <SetCost setProposal={setProposal} proposal={proposal} />
+                  <SetDeliveryDuration
+                    setProposal={setProposal}
+                    proposal={proposal}
+                  />
+                </div>
+              </FormElementContainer>
 
-            <SetCategories setProposal={setProposal} proposal={proposal} />
+              <SetCategories setProposal={setProposal} proposal={proposal} />
 
-            <ProposalImageSection
-              setProposal={setProposal}
-              proposal={proposal}
-            />
+              <ProposalImageSection
+                setProposal={setProposal}
+                proposal={proposal}
+              />
 
-            <RequirmentDetails setProposal={setProposal} proposal={proposal} />
+              <RequirmentDetails
+                setProposal={setProposal}
+                proposal={proposal}
+              />
 
-            <SetTags setProposal={setProposal} proposal={proposal} />
+              <SetTags setProposal={setProposal} proposal={proposal} />
 
-            <SetFaqs setProposal={setProposal} proposal={proposal} />
+              <SetFaqs setProposal={setProposal} proposal={proposal} />
 
-            <SetAdditionalService
-              setProposal={setProposal}
-              proposal={proposal}
-            />
-          </form>
+              <SetAdditionalService
+                setProposal={setProposal}
+                proposal={proposal}
+              />
+            </form>
+          </div>
         </Section>
         <div className="flex justify-center bg-gray-800 w-full p-20">
           <ButtonPrimary

@@ -5,6 +5,8 @@ import InputInfoSpan from "../UI/InputInfoSpan";
 import InputText from "../UI/InputText";
 
 export default function SetTitle({ proposal, setProposal }) {
+  const proposalTitleRef = useRef();
+
   function handleProposalTitleChange() {
     setProposal((prevProposal) => {
       const newProposal = { ...prevProposal };
@@ -12,8 +14,6 @@ export default function SetTitle({ proposal, setProposal }) {
       return newProposal;
     });
   }
-
-  const proposalTitleRef = useRef();
 
   return (
     <FormElementContainer>
