@@ -10,6 +10,18 @@ import SetProjectBudget from "../../components/post-job/SetProjectBudget";
 import SetCategorySection from "../../components/post-job/SetCategorySection";
 import FormElementContainer from "../../components/UI/FormElementContainer";
 import SetProjectDeadline from "../../components/post-job/SetProjectDeadline";
+import { useDispatch } from "react-redux";
+import {
+  BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES,
+  BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES,
+  BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES,
+} from "../../Services/envVars";
+
+import {
+  setTopLevelCategories,
+  setMidLevelCategories,
+  setBottomLevelCategories,
+} from "../../redux/categoriesSlice";
 
 export default function becomeFreelancer() {
   // Schedule a function to run after 5 seconds
@@ -42,6 +54,32 @@ export default function becomeFreelancer() {
       },
     ],
   });
+
+  const dispatch = useDispatch();
+
+  //   fetch all the categories and update redux states
+  useEffect(async () => {
+    async function fetchAndUpdateAllLevelCategories() {
+      try {
+        const [
+          topLevelCatResponse,
+          midLevelCatResponse,
+          bottomLevelCatResponse,
+        ] = await Promise.all([
+          axios.get(BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES),
+          axios.get(BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES),
+          axios.get(BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES),
+        ]);
+        dispatch(setTopLevelCategories(topLevelCatResponse.data));
+        dispatch(setMidLevelCategories(midLevelCatResponse.data));
+        dispatch(setBottomLevelCategories(bottomLevelCatResponse.data));
+      } catch (error) {
+        alert("Error: " + error.message);
+        console.log(error);
+      }
+    }
+    fetchAndUpdateAllLevelCategories();
+  }, []);
 
   useEffect(() => {
     console.log("project = ", project);
