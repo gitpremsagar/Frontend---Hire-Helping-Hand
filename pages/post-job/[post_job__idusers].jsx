@@ -22,6 +22,7 @@ import {
   setMidLevelCategories,
   setBottomLevelCategories,
 } from "../../redux/categoriesSlice";
+import SetRequiredSkills from "../../components/post-job/SetRequiredSkills";
 
 export default function becomeFreelancer() {
   // Schedule a function to run after 5 seconds
@@ -45,6 +46,7 @@ export default function becomeFreelancer() {
     extraImagesName: [],
     requirements: [],
     tags: [],
+    requiredSkills: [],
     faqs: [],
     extraServices: [
       {
@@ -126,6 +128,7 @@ export default function becomeFreelancer() {
               </FormElementContainer>
 
               <SetCategorySection project={project} setProject={setProject} />
+              <SetRequiredSkills project={project} setProject={setProject} />
             </form>
           </div>
         </Section>
