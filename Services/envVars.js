@@ -37,3 +37,5 @@ export const BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES = `${hhhBackendHos
 
 export const BACKEND_API_ENDPOINT_FOR_USERS_CHAT_CONTACTS = `${hhhBackendHostname}/api/chat-contacts`;
 export const BACKEND_API_ENDPOINT_FOR_USERS_CHAT_MESSAGES = `${hhhBackendHostname}/api/chat-messages`;
+
+export const BACKEND_API_ENDPOINT_FOR_UPLOADING_PROJECT_ATTACHMENT_FILES = `${hhhBackendHostname}/api/upload/project-attachments`;

@@ -23,6 +23,8 @@ import {
   setBottomLevelCategories,
 } from "../../redux/categoriesSlice";
 import SetRequiredSkills from "../../components/post-job/SetRequiredSkills";
+import { AttachFile } from "@mui/icons-material";
+import AttachFiles from "../../components/post-job/AttachFiles";
 
 export default function becomeFreelancer() {
   // Schedule a function to run after 5 seconds
@@ -129,6 +131,7 @@ export default function becomeFreelancer() {
 
               <SetCategorySection project={project} setProject={setProject} />
               <SetRequiredSkills project={project} setProject={setProject} />
+              <AttachFiles />
             </form>
           </div>
         </Section>
