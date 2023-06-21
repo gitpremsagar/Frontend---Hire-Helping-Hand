@@ -26,6 +26,7 @@ import SetRequiredSkills from "../../components/post-job/SetRequiredSkills";
 import { AttachFile } from "@mui/icons-material";
 import AttachFiles from "../../components/post-job/AttachFiles";
 import SetProjectTags from "./../../components/post-job/SetProjectTags";
+import ButtonPrimary from "../../components/UI/ButtonPrimary";
 
 export default function becomeFreelancer() {
   // Schedule a function to run after 5 seconds
@@ -90,9 +91,24 @@ export default function becomeFreelancer() {
     console.log("project = ", project);
   }, [project]);
 
-  const handleProjectSubmit = async (event) => {
-    event.preventDefault();
-  };
+  async function postNewProjectToAPI(mode) {
+    try {
+      const response = await axios(envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS, {
+        method: "POST",
+        data: {
+          proposal,
+          proposalMode: mode,
+        },
+        headers: {
+          "x-auth-token": token,
+        },
+      });
+      console.log(response.data);
+    } catch (e) {
+      alert("Error Occerered: \n" + e.message);
+      console.log(e);
+    }
+  }
   return (
     <div>
       <Head>
@@ -134,6 +150,24 @@ export default function becomeFreelancer() {
               <SetRequiredSkills project={project} setProject={setProject} />
               <AttachFiles />
               <SetProjectTags project={project} setProject={setProject} />
+
+              <div className="flex justify-center bg-gray-800 w-full p-20">
+                <ButtonPrimary
+                  className={`mr-5`}
+                  onClickHandler={() => {
+                    postNewProjectToAPI("draft");
+                  }}
+                >
+                  Save to Draft
+                </ButtonPrimary>
+                <ButtonPrimary
+                  onClickHandler={() => {
+                    postNewProjectToAPI("published");
+                  }}
+                >
+                  Publish
+                </ButtonPrimary>
+              </div>
             </form>
           </div>
         </Section>

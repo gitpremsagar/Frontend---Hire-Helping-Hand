@@ -3,6 +3,7 @@ import InputText from "../UI/InputText";
 
 import H5 from "../UI/H5";
 import ProjectTag from "./ProjectTag";
+import InputInfoSpan from "../UI/InputInfoSpan";
 
 export default function SetProjectTags({ project, setProject }) {
   const [tags, setTags] = useState([]);
@@ -33,7 +34,12 @@ export default function SetProjectTags({ project, setProject }) {
 
   return (
     <div className="text-white my-5">
-      <H5>Add tags</H5>
+      <H5 className={`my-10`}>Add tags</H5>
+      <InputInfoSpan>
+        Enter tags that represent the key aspects of your project. These tags
+        will help freelancers understand the specific skills, technologies, or
+        areas of expertise required for your project.
+      </InputInfoSpan>
       {/* mapping tags */}
       <div className="grid grid-cols-2 md:grid-cols-6 gap-2 mb-5">
         {tags.map((tag, index) => {
