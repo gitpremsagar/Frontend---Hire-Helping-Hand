@@ -2,17 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import InputText from "../UI/InputText";
 
 import H5 from "../UI/H5";
-import Tag from "./Tag";
+import ProjectTag from "./ProjectTag";
 
-export default function SetProjectTags({ proposal, setProposal }) {
+export default function SetProjectTags({ project, setProject }) {
   const [tags, setTags] = useState([]);
 
-  //   update proposal with tags info
+  //   update project with tags info
   useEffect(() => {
-    setProposal((prev) => {
-      const updatedProposal = { ...prev };
-      updatedProposal.tags = tags;
-      return updatedProposal;
+    setProject((prev) => {
+      const updatedProject = { ...prev };
+      updatedProject.tags = tags;
+      return updatedProject;
     });
   }, [tags]);
 
@@ -38,7 +38,7 @@ export default function SetProjectTags({ proposal, setProposal }) {
       <div className="grid grid-cols-2 md:grid-cols-6 gap-2 mb-5">
         {tags.map((tag, index) => {
           return (
-            <Tag
+            <ProjectTag
               tag={tag}
               key={index}
               index={index}

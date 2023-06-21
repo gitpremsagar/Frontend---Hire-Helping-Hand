@@ -25,6 +25,7 @@ import {
 import SetRequiredSkills from "../../components/post-job/SetRequiredSkills";
 import { AttachFile } from "@mui/icons-material";
 import AttachFiles from "../../components/post-job/AttachFiles";
+import SetProjectTags from "./../../components/post-job/SetProjectTags";
 
 export default function becomeFreelancer() {
   // Schedule a function to run after 5 seconds
@@ -132,6 +133,7 @@ export default function becomeFreelancer() {
               <SetCategorySection project={project} setProject={setProject} />
               <SetRequiredSkills project={project} setProject={setProject} />
               <AttachFiles />
+              <SetProjectTags project={project} setProject={setProject} />
             </form>
           </div>
         </Section>
