@@ -1,11 +1,14 @@
+import Link from "next/link";
 import ActionButton from "./ActionButton";
 
-const CallToActionButtons = () => {
+const CallToActionButtons = ({ freelancer_ID }) => {
   return (
     <div className="flex mt-6">
-      <ActionButton content={`Favourite`} />
-      <ActionButton content={`Contact`} />
-      <ActionButton content={`View Detail`} />
+      <ActionButton>Favourite</ActionButton>
+      <ActionButton>
+        <Link href={`/user-messages/${freelancer_ID}`}>Contact</Link>
+      </ActionButton>
+      <ActionButton>View Detail</ActionButton>
     </div>
   );
 };
