@@ -149,7 +149,7 @@ export default function Navbar(props) {
                 </Link>
               </li>
               <li>
-                <Link href={`/user-messages/${26}`}>
+                <Link href={`/user-messages`}>
                   <a className="flex items-center">
                     <ChatAltIcon className="h-5 w-5 mr-1" />
                     Message
