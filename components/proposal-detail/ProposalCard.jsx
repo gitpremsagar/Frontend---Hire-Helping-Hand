@@ -59,7 +59,10 @@ export default function ProposalCard(props) {
           <FreelancerProfileLink freelancer_ID={freelancer_ID} />
           <ProposalShortDescription shortDescription={shortDescription} />
           <ServiceDeliveryDate num_of_days={num_of_days} />
-          <CallToActionButtons freelancer_ID={freelancer_ID} />
+          <CallToActionButtons
+            freelancer_ID={freelancer_ID}
+            proposal_ID={proposal_ID}
+          />
         </div>
       </div>
     </div>
