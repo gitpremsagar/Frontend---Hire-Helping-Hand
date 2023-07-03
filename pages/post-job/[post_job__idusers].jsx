@@ -27,6 +27,7 @@ import { AttachFile } from "@mui/icons-material";
 import AttachFiles from "../../components/post-job/AttachFiles";
 import SetProjectTags from "./../../components/post-job/SetProjectTags";
 import ButtonPrimary from "../../components/UI/ButtonPrimary";
+import SetProjectThumbnail from "../../components/post-job/SetProjectThumbnail";
 
 export default function becomeFreelancer() {
   // Schedule a function to run after 5 seconds
@@ -87,8 +88,10 @@ export default function becomeFreelancer() {
     fetchAndUpdateAllLevelCategories();
   }, []);
 
+  //run following code on any change in project
   useEffect(() => {
     console.log("project = ", project);
+    if (project.projectTitle == "") alert("Please enter proposal title first!");
   }, [project]);
 
   async function postNewProjectToAPI(mode) {
@@ -147,8 +150,13 @@ export default function becomeFreelancer() {
               </FormElementContainer>
 
               <SetCategorySection project={project} setProject={setProject} />
+
+              <SetProjectThumbnail project={project} setProject={setProject} />
+
               <SetRequiredSkills project={project} setProject={setProject} />
+
               <AttachFiles />
+
               <SetProjectTags project={project} setProject={setProject} />
 
               <div className="flex justify-center bg-gray-800 w-full p-20">
