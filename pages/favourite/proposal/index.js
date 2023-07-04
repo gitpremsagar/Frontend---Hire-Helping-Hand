@@ -6,14 +6,12 @@ import { useEffect, useState } from "react";
 import { envVars } from "../../../Services/envVars";
 import ProposalCard from "../../../components/proposal-detail/ProposalCard";
 import Section from "../../../components/UI/Section";
-import AsideLeftNew from "../../../components/Theme/AsideLeft/AsideLeftNew";
 import AsideLeft__Favourite from "../../../components/favourite/AsideLeft__Favourite";
-import { useRouter } from "next/router";
 
 export default function Home(props) {
   const [proposals, setProposals] = useState([]);
 
-  // TODO: fetch user's favourite projects
+  // TODO: fetch user's favourite proposals
   async function fetchProposals() {
     try {
       const serviceCategory = "web";
