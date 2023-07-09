@@ -42,6 +42,18 @@ export default function UserDropdown(props) {
             </a>
           </Link>
 
+          <Link href={`/favourite/proposals/${loggedInUserInfo.idusers}`}>
+            <a>
+              <li>My Favourite Proposals</li>
+            </a>
+          </Link>
+
+          <Link href={`/favourite/projects/${loggedInUserInfo.idusers}`}>
+            <a>
+              <li>My Favourite Projects</li>
+            </a>
+          </Link>
+
           <li>Settings</li>
           <li>
             <Link href={`/help-and-support`}>

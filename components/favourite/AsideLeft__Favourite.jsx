@@ -1,7 +1,7 @@
 import React from "react";
-import TopLevelCategoryLi from "../Theme/AsideLeft/TopLevelCategoryLi";
 import Li from "./Li";
-import { useRouter } from "next/router";
+
+import Link from "next/link";
 
 export default function AsideLeft__Favourite() {
   //get current page name from url
@@ -14,8 +14,17 @@ export default function AsideLeft__Favourite() {
             <strong>Favourite</strong>
           </h5>
 
-          <Li>Proposal</Li>
-          <Li>Project</Li>
+          <Link href={`/favourite/proposal`}>
+            <a>
+              <Li>Proposal</Li>
+            </a>
+          </Link>
+
+          <Link href={`/favourite/project`}>
+            <a>
+              <Li>Project</Li>
+            </a>
+          </Link>
         </ul>
       </nav>
     </aside>
