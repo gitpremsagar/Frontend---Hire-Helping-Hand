@@ -4,22 +4,12 @@ import LabelElement from "../UI/LabelElement";
 import InputInfoSpan from "../UI/InputInfoSpan";
 import TextareaElement from "../UI/TextareaElement";
 
-export default function SetDescription({
-  project,
-  setProject,
-  setDidUserType,
-}) {
+export default function SetDescription({ project, setProject }) {
   const projectDescriptionRef = useRef();
 
   function handleDescriptionChange() {
     setProject((prev) => {
       const updatedproject = { ...prev };
-      updatedproject.projectDescription = projectDescriptionRef.current.value;
-      if (projectDescriptionRef.current.value == "") {
-        setDidUserType(false);
-      } else {
-        setDidUserType(true);
-      }
 
       return updatedproject;
     });

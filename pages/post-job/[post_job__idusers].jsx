@@ -29,16 +29,8 @@ import ButtonPrimary from "../../components/UI/ButtonPrimary";
 import SetProjectThumbnail from "../../components/post-job/SetProjectThumbnail";
 
 export default function becomeFreelancer() {
-  // Schedule a function to run after 5 seconds
-  const timeoutId = setTimeout(() => {
-    console.log("Timeout function executed");
-  }, 5000);
-
-  // Later, if you want to cancel the timeout before it runs
-  clearTimeout(timeoutId);
-
   const [projectID, setProjectID] = useState(false);
-  const [didUserType, setDidUserType] = useState(false);
+
   const [project, setProject] = useState({
     projectTitle: "",
     projectDescription: "",
@@ -91,9 +83,7 @@ export default function becomeFreelancer() {
   //run following code on any change in project
   useEffect(() => {
     console.log("project = ", project);
-    if (project.projectTitle == "" && didUserType === true)
-      alert("Please enter proposal title first!");
-    console.log("didUserType = ", didUserType);
+    if (project.projectTitle == "") alert("Please enter proposal title first!");
   }, [project]);
 
   async function postNewProjectToAPI(mode) {
@@ -129,8 +119,9 @@ export default function becomeFreelancer() {
               <H6
                 className={`text-center mt-2 sm:mt-3 md:mt-4 lg:mt-5 text-yellow-300`}
               >
-                project is detailed information of the kind of freelancing
-                service you provide and the amount you charge for it.
+                Project is a detailed information of the kind of freelancing
+                service you need and the amount you are willing to pay for the
+                service.
               </H6>
             </div>
             <form>
@@ -138,7 +129,6 @@ export default function becomeFreelancer() {
               <SetProjectDescription
                 project={project}
                 setProject={setProject}
-                setDidUserType={setDidUserType}
               />
 
               {/* Cost and Delivery Duraion*/}
