@@ -14,15 +14,15 @@ export default function AsideLeft__Favourite() {
             <strong>Favourite</strong>
           </h5>
 
-          <Link href={`/favourite/proposal`}>
+          <Link href={`/favourite/proposals`}>
             <a>
-              <Li>Proposal</Li>
+              <Li>Proposals</Li>
             </a>
           </Link>
 
-          <Link href={`/favourite/project`}>
+          <Link href={`/favourite/projects`}>
             <a>
-              <Li>Project</Li>
+              <Li>Projects</Li>
             </a>
           </Link>
         </ul>

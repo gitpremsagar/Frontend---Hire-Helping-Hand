@@ -23,7 +23,6 @@ import {
   setBottomLevelCategories,
 } from "../../redux/categoriesSlice";
 import SetRequiredSkills from "../../components/post-job/SetRequiredSkills";
-import { AttachFile } from "@mui/icons-material";
 import AttachFiles from "../../components/post-job/AttachFiles";
 import SetProjectTags from "./../../components/post-job/SetProjectTags";
 import ButtonPrimary from "../../components/UI/ButtonPrimary";
@@ -39,6 +38,7 @@ export default function becomeFreelancer() {
   clearTimeout(timeoutId);
 
   const [projectID, setProjectID] = useState(false);
+  const [didUserType, setDidUserType] = useState(false);
   const [project, setProject] = useState({
     projectTitle: "",
     projectDescription: "",
@@ -91,7 +91,9 @@ export default function becomeFreelancer() {
   //run following code on any change in project
   useEffect(() => {
     console.log("project = ", project);
-    if (project.projectTitle == "") alert("Please enter proposal title first!");
+    if (project.projectTitle == "" && didUserType === true)
+      alert("Please enter proposal title first!");
+    console.log("didUserType = ", didUserType);
   }, [project]);
 
   async function postNewProjectToAPI(mode) {
@@ -136,6 +138,7 @@ export default function becomeFreelancer() {
               <SetProjectDescription
                 project={project}
                 setProject={setProject}
+                setDidUserType={setDidUserType}
               />
 
               {/* Cost and Delivery Duraion*/}
