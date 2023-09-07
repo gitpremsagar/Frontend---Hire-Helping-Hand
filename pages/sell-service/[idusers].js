@@ -53,6 +53,8 @@ export default function becomeFreelancer() {
       },
     ],
   });
+  const [proposalUpdateCounter, setProposalUpdateCounter] = useState(0);
+  const [timer, setTimer] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -80,9 +82,25 @@ export default function becomeFreelancer() {
     fetchAndUpdateAllLevelCategories();
   }, []);
 
-  // logging proposals
+  // auto post proposal to auto save the changes after 10 seconds of any change in proposal
   useEffect(() => {
-    console.log("proposal = ", proposal);
+    //clear previouse timer if any
+    clearTimeout(timer);
+
+    //create new timer
+    const newTimer = setTimeout(() => {
+      if (proposal.proposalTitle != "" && proposalUpdateCounter > 2) {
+        console.log("saving changes!");
+      }
+    }, 1000);
+
+    //save timer in state
+    setTimer(newTimer);
+
+    //Cleanup: clear timer if this effect unmounts
+    return () => {
+      clearTimeout(newTimer);
+    };
   }, [proposal]);
 
   const token = useSelector((state) => state.authSlice.jwtToken);
@@ -105,6 +123,14 @@ export default function becomeFreelancer() {
     }
   }
 
+  //show message to enter proposal title first and update `proposalUpdateCounter`
+  useEffect(() => {
+    console.log("proposal = ", proposal);
+    setProposalUpdateCounter((prev) => prev + 1); //increament counter
+    if (proposal.proposalTitle == "" && proposalUpdateCounter > 2) {
+      alert("Please enter title before entering anything else!");
+    }
+  }, [proposal]);
   return (
     <div>
       <Head>

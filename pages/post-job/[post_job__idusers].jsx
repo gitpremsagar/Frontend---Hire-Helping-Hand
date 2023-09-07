@@ -30,6 +30,8 @@ import SetProjectThumbnail from "../../components/post-job/SetProjectThumbnail";
 
 export default function becomeFreelancer() {
   const [projectID, setProjectID] = useState(false);
+  const [projectUpdateCounter, setProjectUpdateCounter] = useState(0);
+  const [timer, setTimer] = useState(null);
 
   const [project, setProject] = useState({
     projectTitle: "",
@@ -80,10 +82,32 @@ export default function becomeFreelancer() {
     fetchAndUpdateAllLevelCategories();
   }, []);
 
-  //run following code on any change in project
+  //show message to enter title first
   useEffect(() => {
     console.log("project = ", project);
-    if (project.projectTitle == "") alert("Please enter proposal title first!");
+    if (project.projectTitle == "" && projectUpdateCounter > 2)
+      alert("Please enter proposal title first!");
+    setProjectUpdateCounter((prev) => prev + 1);
+  }, [project]);
+
+  // auto post project to auto save the changes
+  useEffect(() => {
+    // clear the previous timer (if any) whenever project changes
+    if (timer) clearTimeout(timer);
+
+    // start a new timer
+    const newTimer = setTimeout(() => {
+      // if (projectUpdateCounter > 2) postNewProjectToAPI("draft");
+      console.log("saving changes!"); //TODO:
+    }, 6000);
+
+    //set the new timer in the state
+    setTimer(newTimer);
+
+    // Cleanup: Clear the timer if this effect unmounts
+    return () => {
+      clearTimeout(newTimer);
+    };
   }, [project]);
 
   async function postNewProjectToAPI(mode) {
@@ -98,7 +122,7 @@ export default function becomeFreelancer() {
           "x-auth-token": token,
         },
       });
-      console.log(response.data);
+      console.log("proposal post response  = ", response.data);
     } catch (e) {
       alert("Error Occerered: \n" + e.message);
       console.log(e);
