@@ -7,6 +7,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Section from "../components/UI/Section";
 import AsideLeftNew from "../components/Theme/AsideLeft/AsideLeftNew";
+import H2 from "../components/UI/H2";
+import KeyFeaturesCard from "../components/homepage/KeyFeaturesCard";
 
 export default function Home(props) {
   const [proposals, setProposals] = useState([]);
@@ -61,6 +63,27 @@ export default function Home(props) {
         <div className="col-span-10">
           <main>
             <HeroSection {...props} />
+
+            {/* Key Features Section */}
+            <Section>
+              <H2>Key Features</H2>
+              <div className="flex mt-10">
+                <KeyFeaturesCard className={`bg-red-400`}>
+                  Flat 3% commision
+                </KeyFeaturesCard>
+                <KeyFeaturesCard className={`bg-green-400`}>
+                  Simplified Hiring
+                </KeyFeaturesCard>
+                <KeyFeaturesCard className={`bg-blue-400`}>
+                  Secure Payments
+                </KeyFeaturesCard>
+                <KeyFeaturesCard className={`bg-yellow-400`}>
+                  Robust Review System
+                </KeyFeaturesCard>
+              </div>
+            </Section>
+
+            {/* proposals section */}
             <Section>
               {proposals.map((proposal, key) => {
                 return <ProposalCard {...proposal} key={key} />;
