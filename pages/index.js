@@ -11,6 +11,7 @@ import H2 from "../components/UI/H2";
 import KeyFeaturesCard from "../components/homepage/KeyFeaturesCard";
 import H3 from "../components/UI/H3";
 import TestimonialSection from "./../components/homepage/testimonialSection/TestimonialSection";
+import HowItWorksSection from "../components/homepage/howItWorksSection/HowItWorksSection";
 
 export default function Home(props) {
   const [proposals, setProposals] = useState([]);
@@ -89,6 +90,8 @@ export default function Home(props) {
 
             {/* TODO: show - Client and Freelancer Testimonials*/}
             <TestimonialSection />
+
+            <HowItWorksSection />
 
             {/* Featured proposals section */}
             <Section>
