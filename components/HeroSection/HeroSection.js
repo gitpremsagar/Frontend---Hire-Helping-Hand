@@ -5,7 +5,7 @@ import H3 from "./../UI/H3";
 
 export default function HeroSection(props) {
   return (
-    <Section className="p-20">
+    <Section>
       <div className="mb-20 my-auto text-center">
         <h1 className="text-2xl md:text-4xl lg:text-6xl text-gray-800 font-bold mb-6">
           Hire Helping Hand

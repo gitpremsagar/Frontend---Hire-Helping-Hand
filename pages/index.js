@@ -9,6 +9,7 @@ import Section from "../components/UI/Section";
 import AsideLeftNew from "../components/Theme/AsideLeft/AsideLeftNew";
 import H2 from "../components/UI/H2";
 import KeyFeaturesCard from "../components/homepage/KeyFeaturesCard";
+import H3 from "../components/UI/H3";
 
 export default function Home(props) {
   const [proposals, setProposals] = useState([]);
@@ -66,8 +67,10 @@ export default function Home(props) {
 
             {/* Key Features Section */}
             <Section>
-              <H2>Key Features</H2>
-              <div className="flex mt-10">
+              <H2>
+                Why <span className="underline">Hire Helping Hand</span>?
+              </H2>
+              <div className="grid xs:grid-cols-1 sm:grid-cols-2 gap-5 lg:grid-cols-4 mt-10">
                 <KeyFeaturesCard className={`bg-red-400`}>
                   Flat 3% commision
                 </KeyFeaturesCard>
@@ -83,11 +86,24 @@ export default function Home(props) {
               </div>
             </Section>
 
-            {/* proposals section */}
+            {/* Featured proposals section */}
             <Section>
-              {proposals.map((proposal, key) => {
-                return <ProposalCard {...proposal} key={key} />;
-              })}
+              <H3>Featured Proposals</H3>
+              <div className="mt-10">
+                {proposals.map((proposal, key) => {
+                  return <ProposalCard {...proposal} key={key} />;
+                })}
+              </div>
+            </Section>
+
+            {/* TODO: show - Featured Jobs section */}
+            <Section>
+              <H3>Featured Jobs</H3>
+              <div className="mt-10">
+                {proposals.map((proposal, key) => {
+                  return <ProposalCard {...proposal} key={key} />;
+                })}
+              </div>
             </Section>
           </main>
         </div>
