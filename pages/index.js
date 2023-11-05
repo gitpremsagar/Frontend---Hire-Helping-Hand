@@ -12,6 +12,7 @@ import KeyFeaturesCard from "../components/homepage/KeyFeaturesCard";
 import H3 from "../components/UI/H3";
 import TestimonialSection from "./../components/homepage/testimonialSection/TestimonialSection";
 import HowItWorksSection from "../components/homepage/howItWorksSection/HowItWorksSection";
+import BrowseCategoriesSection from "../components/homepage/browseCategoriesSction/BrowseCategoriesSection";
 
 export default function Home(props) {
   const [proposals, setProposals] = useState([]);
@@ -87,6 +88,8 @@ export default function Home(props) {
                 </KeyFeaturesCard>
               </div>
             </Section>
+
+            <BrowseCategoriesSection />
 
             {/* TODO: show - Client and Freelancer Testimonials*/}
             <TestimonialSection />
