@@ -3,6 +3,7 @@ import InputText from "../UI/InputText";
 
 import H5 from "../UI/H5";
 import Tag from "../sellService/Tag";
+import InputInfoSpan from "../UI/InputInfoSpan";
 
 export default function SetRequiredSkills({ project, setProject }) {
   const [requiredSkills, setRequiredSkill] = useState([]);
@@ -47,6 +48,11 @@ export default function SetRequiredSkills({ project, setProject }) {
           );
         })}
       </div>
+      <InputInfoSpan>
+        Specify the skills, qualifications, or expertise that are essential for
+        this job. This helps us match your project with the most suitable
+        freelancers.
+      </InputInfoSpan>
       {/* form for adding new requiredSkills */}
       <div className="flex items-center justify-start">
         <InputText

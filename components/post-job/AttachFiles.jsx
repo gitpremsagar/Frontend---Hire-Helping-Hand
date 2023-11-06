@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import H5 from "../UI/H5";
 import { BACKEND_API_ENDPOINT_FOR_UPLOADING_PROJECT_ATTACHMENT_FILES } from "../../Services/envVars";
+import InputInfoSpan from "../UI/InputInfoSpan";
 
 export default function FileUpload() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -29,6 +30,10 @@ export default function FileUpload() {
   return (
     <div className="text-white">
       <H5 className={`my-10`}>{`Attach files (optional)`}</H5>
+      <InputInfoSpan>
+        If you have any documents, reference materials, or files related to your
+        project, please upload them here.{" "}
+      </InputInfoSpan>
       <input type="file" onChange={handleFileChange} />
       <button
         className="rounded bg-blue-500 hover:bg-blue-600 px-3 py-2"
