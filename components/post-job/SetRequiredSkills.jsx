@@ -51,7 +51,8 @@ export default function SetRequiredSkills({ project, setProject }) {
       <InputInfoSpan>
         Specify the skills, qualifications, or expertise that are essential for
         this job. This helps us match your project with the most suitable
-        freelancers.
+        freelancers. To add skills, write the name of the skill and press "Add
+        Skill" button. You can add multipule skills.
       </InputInfoSpan>
       {/* form for adding new requiredSkills */}
       <div className="flex items-center justify-start">

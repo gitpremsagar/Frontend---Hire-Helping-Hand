@@ -145,7 +145,7 @@ export default function becomeFreelancer() {
               >
                 Project is a detailed information of the kind of freelancing
                 service you need and the amount you are willing to pay for the
-                service.
+                service you need.
               </H6>
             </div>
             <form>

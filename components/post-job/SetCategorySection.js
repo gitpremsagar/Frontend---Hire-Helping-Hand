@@ -97,7 +97,7 @@ export default function SetCategories({ project, setProject }) {
         </LabelElement>
 
         <InputInfoSpan className="text-yellow-300">
-          Define top level category of the freelancing service that you provide.
+          Define top level category of the freelancing service that you need.
         </InputInfoSpan>
 
         <SelectElement
@@ -125,7 +125,7 @@ export default function SetCategories({ project, setProject }) {
         </LabelElement>
 
         <InputInfoSpan className="text-yellow-300">
-          Define mid level category of the freelancing service that you provide.
+          Define mid level category of the freelancing service that you need.
         </InputInfoSpan>
 
         <SelectElement
@@ -152,8 +152,7 @@ export default function SetCategories({ project, setProject }) {
           Bottom Level Category
         </LabelElement>
         <InputInfoSpan className="text-yellow-300">
-          Define bottom level category of the freelancing service that you
-          provide.
+          Define bottom level category of the freelancing service that you need.
         </InputInfoSpan>
 
         <SelectElement

@@ -9,7 +9,7 @@ export default function HowItWorksSection() {
   return (
     <Section>
       {/* TODO:  Provide a step-by-step guide or infographic explaining the process of using your platform, from posting a job to hiring a freelancer.*/}
-      <H3>How it work?</H3>
+      <H3>How does it work?</H3>
       <H4>You can hire someone in 2 ways:</H4>
       <div className="grid grid-cols-2 gap-2">
         <div className="bg-blue-200 p-6 rounded">
