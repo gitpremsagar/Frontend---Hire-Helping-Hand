@@ -70,9 +70,10 @@ export default function TopLevelCategoryLi({ topLevelCategory }) {
           }`}
         />
       </div>
+      {/* FIXME:  the height of the following ul should be max-h-fit instead of max-h-[3000px] but it removes height transition animation*/}
       <ul
         className={`overflow-hidden transition-all ${transitionDuration} ${
-          showMidLevelCategories ? `max-h-fit` : `max-h-[0px]`
+          showMidLevelCategories ? `max-h-[3000px]` : `max-h-[0px]`
         }`}
       >
         {filteredMidLevelCategories.map((midLevelCategory, key) => (

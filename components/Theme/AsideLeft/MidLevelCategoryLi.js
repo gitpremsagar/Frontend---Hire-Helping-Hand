@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import BottomLevelCategoryLi from "./BottomLevelCategoryLi";
 
@@ -15,14 +15,27 @@ export default function MidLevelCategoryLi({
     (bottomLevelcategory) =>
       bottomLevelcategory.parent_mid_level_category_id === midLevelCategory.id
   );
+
+  //state to toggle list of bottom_level_categories
+  const [showBottomLevelCategoriesList, setshowBottomLevelCategoriesList] =
+    useState(false);
+
+  function toggleBottomLevelCategoriesList() {
+    setshowBottomLevelCategoriesList(!showBottomLevelCategoriesList);
+  }
   return (
     <li>
-      <div className="px-3 py-2">
+      <div onClick={toggleBottomLevelCategoriesList} className="px-3 py-2">
         <span className="text-blue-500 text-xs font-bold">
           {midLevelCategory.name}
         </span>
       </div>
-      <ul>
+      {/* FIXME: following max-h-[1000px] should be max-h-fit but it will remove height transition animation*/}
+      <ul
+        className={`overflow-hidden transition-all duration-1000 ${
+          showBottomLevelCategoriesList ? `max-h-[1000px]` : `max-h-[0px]`
+        }`}
+      >
         {filteredBottomLevelCategories.map((bottomLevelCategory, key) => {
           return (
             <BottomLevelCategoryLi
