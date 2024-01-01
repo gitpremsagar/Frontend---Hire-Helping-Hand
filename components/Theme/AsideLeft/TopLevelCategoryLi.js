@@ -72,7 +72,7 @@ export default function TopLevelCategoryLi({ topLevelCategory }) {
       </div>
       <ul
         className={`overflow-hidden transition-all ${transitionDuration} ${
-          showMidLevelCategories ? `max-h-[3000px]` : `max-h-[0px]`
+          showMidLevelCategories ? `max-h-fit` : `max-h-[0px]`
         }`}
       >
         {filteredMidLevelCategories.map((midLevelCategory, key) => (

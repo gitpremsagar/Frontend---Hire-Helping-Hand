@@ -18,7 +18,7 @@ export default function MidLevelCategoryLi({
   return (
     <li>
       <div className="px-3 py-2">
-        <span className="text-yellow-300 text-xs font-bold">
+        <span className="text-blue-500 text-xs font-bold">
           {midLevelCategory.name}
         </span>
       </div>
