@@ -61,7 +61,7 @@ export default function TopLevelCategoryLi({ topLevelCategory }) {
     >
       <div
         onClick={handleTopLevelCategoryClick}
-        className="flex items-center justify-between text-sm font-semibold hover:bg-gray-800 hover:cursor-pointer px-3 py-3"
+        className="flex items-center justify-between text-sm font-semibold hover:bg-gray-800 hover:cursor-pointer px-3 py-3 text-blue-500 hover:text-blue-300"
       >
         <span>{topLevelCategory.name}</span>
         <RightArrowIcon

@@ -1,6 +1,10 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import BottomLevelCategoryLi from "./BottomLevelCategoryLi";
+import {
+  asideLeftSlice,
+  setClickedMidLevelCategory,
+} from "./../../../redux/asideLeftSlice";
 
 export default function MidLevelCategoryLi({
   midLevelCategory,
@@ -16,6 +20,27 @@ export default function MidLevelCategoryLi({
       bottomLevelcategory.parent_mid_level_category_id === midLevelCategory.id
   );
 
+  //get the name of the clicked mid_level_category from redux store
+  const clickedMidLevelCategory = useSelector(
+    (state) => state.asideLeftSlice.clickedMidLevelCategory
+  );
+
+  useEffect(() => {
+    if (clickedMidLevelCategory === "") return;
+
+    clickedMidLevelCategory === midLevelCategory.name
+      ? setshowBottomLevelCategoriesList(true)
+      : setshowBottomLevelCategoriesList(false);
+
+    // console.log("Clicked Mid Cat = ", clickedMidLevelCategory);
+  }, [clickedMidLevelCategory]);
+
+  // store clicked mid level category name in the store
+  const dispatch = useDispatch();
+  function handleMidLevelCategoryClick() {
+    dispatch(setClickedMidLevelCategory(midLevelCategory.name));
+    toggleBottomLevelCategoriesList();
+  }
   //state to toggle list of bottom_level_categories
   const [showBottomLevelCategoriesList, setshowBottomLevelCategoriesList] =
     useState(false);
@@ -25,8 +50,8 @@ export default function MidLevelCategoryLi({
   }
   return (
     <li>
-      <div onClick={toggleBottomLevelCategoriesList} className="px-3 py-2">
-        <span className="text-blue-500 text-xs font-bold">
+      <div onClick={handleMidLevelCategoryClick} className=" cursor-pointer">
+        <span className="text-green-500 hover:text-green-300 px-3 py-2 block text-xs font-bold">
           {midLevelCategory.name}
         </span>
       </div>
