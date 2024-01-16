@@ -46,10 +46,14 @@ body {
 .AsideLeftOfCommunity {
   @apply h-screen overflow-y-scroll bg-gray-800 text-white w-full sticky top-12;
 }
+/* 
+.AsideLeftOfDashboard  nav>ul>li>ul{
+  @apply hidden;
+} */
 
-.AsideLeftOfDashboard li,
+
 .AsideLeftOfCommunity li {
-  @apply py-4 px-2 hover:bg-gray-900;
+  @apply py-4 px-2 ;
 }
 
 .serviceOfferCol {
