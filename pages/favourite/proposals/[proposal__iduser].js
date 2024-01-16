@@ -7,6 +7,7 @@ import { envVars } from "../../../Services/envVars";
 import ProposalCard from "../../../components/proposal-detail/ProposalCard";
 import Section from "../../../components/UI/Section";
 import AsideLeft__Favourite from "../../../components/favourite/AsideLeft__Favourite";
+import H2 from "../../../components/UI/H2";
 
 export default function Home(props) {
   const [proposals, setProposals] = useState([]);
@@ -59,6 +60,7 @@ export default function Home(props) {
         <div className="col-span-10">
           <main>
             <Section>
+              <H2 className={`mb-5`}>Your favourite proposals:</H2>
               {proposals.map((proposal, key) => {
                 return <ProposalCard {...proposal} key={key} />;
               })}

@@ -9,6 +9,7 @@ import Section from "../../../components/UI/Section";
 import AsideLeftNew from "../../../components/Theme/AsideLeft/AsideLeftNew";
 import AsideLeft__Favourite from "../../../components/favourite/AsideLeft__Favourite";
 import { useRouter } from "next/router";
+import H2 from "./../../../components/UI/H2";
 
 export default function Home(props) {
   const [proposals, setProposals] = useState([]);
@@ -61,6 +62,7 @@ export default function Home(props) {
         <div className="col-span-10">
           <main>
             <Section>
+              <H2 className={`mb-5`}>Your favourite projects:</H2>
               {proposals.map((proposal, key) => {
                 return <ProposalCard {...proposal} key={key} />;
               })}
