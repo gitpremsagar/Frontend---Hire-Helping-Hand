@@ -34,6 +34,7 @@ import H6 from "../../components/UI/H6";
 export default function becomeFreelancer() {
   const [proposal, setProposal] = useState({
     proposalTitle: "",
+    proposalID: "",
     proposalDescription: "",
     topLevelCategoryID: "",
     midLevelCategoryID: "",
@@ -53,8 +54,9 @@ export default function becomeFreelancer() {
       },
     ],
   });
-  const [proposalUpdateCounter, setProposalUpdateCounter] = useState(0);
-  const [timer, setTimer] = useState(null);
+
+  const [proposalUpdateCounter, setProposalUpdateCounter] = useState(0); //proposalUpdateCounter to avoid msg prompt on page load
+  const [timer, setTimer] = useState(null); //timer to autopost the proposal
 
   const dispatch = useDispatch();
 
@@ -82,7 +84,7 @@ export default function becomeFreelancer() {
     fetchAndUpdateAllLevelCategories();
   }, []);
 
-  // auto post proposal to auto save the changes after 10 seconds of any change in proposal
+  // auto post proposal to auto save the changes after 1 second(s) of any change in proposal
   useEffect(() => {
     //clear previouse timer if any
     clearTimeout(timer);
@@ -91,6 +93,12 @@ export default function becomeFreelancer() {
     const newTimer = setTimeout(() => {
       if (proposal.proposalTitle != "" && proposalUpdateCounter > 2) {
         console.log("saving changes!");
+        // if this is a new proposal then post it otherwise update it
+        if (proposal.proposalID === "") {
+          postNewProposalToAPI("draft");
+        } else {
+          updateProposalToAPI("draft");
+        }
       }
     }, 1000);
 
@@ -103,6 +111,7 @@ export default function becomeFreelancer() {
     };
   }, [proposal]);
 
+  //post this proposal to API
   const token = useSelector((state) => state.authSlice.jwtToken);
   async function postNewProposalToAPI(mode) {
     try {
@@ -116,7 +125,38 @@ export default function becomeFreelancer() {
           "x-auth-token": token,
         },
       });
+
+      // update `proposal` state with proposalID of inserted proposal
       console.log(response.data);
+      setProposal((prevProposal) => {
+        const newProposal = { ...prevProposal };
+        newProposal.proposalID = response.data.lastInsertID;
+        return newProposal;
+      });
+    } catch (e) {
+      alert("Error Occerered: \n" + e.message);
+      console.log(e);
+    }
+  }
+
+  async function updateProposalToAPI(mode) {
+    try {
+      const response = await axios(
+        `${envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS}/${proposal.proposalID}`,
+        {
+          method: "PUT",
+          data: {
+            proposal,
+            proposalMode: mode,
+          },
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      );
+
+      // proposal updated
+      console.log("proposal update response = ", response.data);
     } catch (e) {
       alert("Error Occerered: \n" + e.message);
       console.log(e);

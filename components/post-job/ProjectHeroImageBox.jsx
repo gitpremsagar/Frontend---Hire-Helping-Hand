@@ -15,6 +15,7 @@ export default function ProjectHeroImageBox({ project, setProject }) {
   const isImageAvailable = imageURL === "" ? false : true; //if no hero image is available then set it to false
 
   function uploadHeroImage() {
+    if (project.title === "") return alert("Set title first.");
     const fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.accept = "image/*";

@@ -15,6 +15,10 @@ export default function HeroImageBox({ proposal, setProposal }) {
   const isImageAvailable = imageURL === "" ? false : true; //if no hero image is available then set it to false
 
   function uploadHeroImage() {
+    // if title of the proposal is not set then dont allow user to upload thumbnail
+    if (proposal.proposalTitle === "")
+      return alert("Set proposal title first.");
+
     const fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.accept = "image/*";

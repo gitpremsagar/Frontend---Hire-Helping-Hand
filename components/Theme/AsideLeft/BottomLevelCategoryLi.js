@@ -34,7 +34,7 @@ export default function BottomLevelCategoryLi({
         }
       >
         <a
-          className={`block px-3 py-3 hover:bg-gray-600 text-xs mx-1 rounded ${activeClass}`}
+          className={`block px-3 py-3 hover:bg-gray-600 text-xs mx-1 rounded  ${activeClass}`}
         >
           {bottomLevelCategory.name}
         </a>
