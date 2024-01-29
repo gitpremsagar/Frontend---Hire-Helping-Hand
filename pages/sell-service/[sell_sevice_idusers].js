@@ -36,11 +36,11 @@ export default function becomeFreelancer() {
     proposalTitle: "",
     proposalID: "",
     proposalDescription: "",
-    topLevelCategoryID: "",
-    midLevelCategoryID: "",
-    bottomLevelCategoryID: "",
-    proposalCost: "",
-    proposalDeliveryDuration: "",
+    topLevelCategoryID: 1,
+    midLevelCategoryID: 1,
+    bottomLevelCategoryID: 1,
+    proposalCost: 0,
+    proposalDeliveryDuration: 0,
     heroImageName: "",
     extraImagesName: [],
     requirements: [],
@@ -91,6 +91,7 @@ export default function becomeFreelancer() {
 
     //create new timer
     const newTimer = setTimeout(() => {
+      //is there anything to upload?
       if (proposal.proposalTitle != "" && proposalUpdateCounter > 2) {
         console.log("saving changes!");
         // if this is a new proposal then post it otherwise update it
@@ -99,6 +100,8 @@ export default function becomeFreelancer() {
         } else {
           updateProposalToAPI("draft");
         }
+      } else {
+        console.log("there is no title to save");
       }
     }, 1000);
 
@@ -114,6 +117,7 @@ export default function becomeFreelancer() {
   //post this proposal to API
   const token = useSelector((state) => state.authSlice.jwtToken);
   async function postNewProposalToAPI(mode) {
+    console.log("Post called!");
     try {
       const response = await axios(envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS, {
         method: "POST",
@@ -140,6 +144,7 @@ export default function becomeFreelancer() {
   }
 
   async function updateProposalToAPI(mode) {
+    console.log("update called!");
     try {
       const response = await axios(
         `${envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS}/${proposal.proposalID}`,
@@ -171,6 +176,7 @@ export default function becomeFreelancer() {
       alert("Please enter title before entering anything else!");
     }
   }, [proposal]);
+
   return (
     <div>
       <Head>

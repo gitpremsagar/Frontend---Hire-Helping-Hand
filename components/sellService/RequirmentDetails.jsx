@@ -10,7 +10,7 @@ export default function RequirmentDetails({ proposal, setProposal }) {
   useEffect(() => {
     setProposal((prev) => {
       const updatedProposal = { ...prev };
-      updatedProposal.requirments = requirmentsList;
+      updatedProposal.requirements = requirmentsList;
       return updatedProposal;
     });
   }, [requirmentsList]);
