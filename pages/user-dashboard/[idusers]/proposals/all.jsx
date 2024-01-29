@@ -4,9 +4,9 @@ import AsideLeftOfDashboard from "../../../../components/userDashboard/AsideLeft
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BACKEND_API_ENDPOINT_FOR_GETTING_PROPOSALS_BY_FREELANCER_ID } from "../../../../Services/envVars";
-import H3 from "./../../../../components/UI/H3";
+import H3 from "../../../../components/UI/H3";
 import { useSelector } from "react-redux";
-import ProposalCard from "./../../../../components/proposal-detail/ProposalCard";
+import ProposalCard from "../../../../components/proposal-detail/ProposalCard";
 import Section from "../../../../components/UI/Section";
 export default function OngoingProjectsPage(props) {
   const router = useRouter();

@@ -36,6 +36,11 @@ export default function AsideLeftOfDashboard() {
           <li>
             <LiHeading> My Proposals</LiHeading>
             <ul>
+              <Link href={`/user-dashboard/${userID}/proposals/all`}>
+                <a>
+                  <NestedLi>All</NestedLi>
+                </a>
+              </Link>
               <Link href={`/user-dashboard/${userID}/proposals/active`}>
                 <a>
                   <NestedLi>Active</NestedLi>

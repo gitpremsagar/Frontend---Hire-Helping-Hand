@@ -141,7 +141,7 @@ export default function Navbar(props) {
           {loggedInUserInfo ? (
             <>
               <li>
-                <Link href={`/user-dashboard/${26}`}>
+                <Link href={`/user-dashboard/${loggedInUserInfo.idusers}`}>
                   <a className="flex items-center">
                     <PresentationChartBarIcon className="h-5 w-5 mr-1" />
                     Dashboard

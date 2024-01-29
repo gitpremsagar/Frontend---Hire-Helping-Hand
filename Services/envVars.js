@@ -28,9 +28,7 @@ export const envVars = {
   BACKEND_API_ENDPOINT_FOR_GETTING_FREELANCER_PROFILE_PIC: `${hhhBackendHostname}/public/uploads/freelancerProfileImages`,
 };
 
-export const BACKEND_API_FOR_UPLOADING_PROPOSAL_IMAGES = `${hhhBackendHostname}/api/uploads/proposalImages`;
-export const BASE_URL_FOR_PROPOSAL_IMAGES = `${hhhBackendHostname}/public/uploads/proposalsImages/raw`;
-
+// freelancing service's categories related
 export const BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES = `${hhhBackendHostname}/api/top-level-categories`;
 export const BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES = `${hhhBackendHostname}/api/mid-level-categories`;
 export const BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES = `${hhhBackendHostname}/api/bottom-level-categories`;
@@ -38,4 +36,10 @@ export const BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES = `${hhhBackendHos
 export const BACKEND_API_ENDPOINT_FOR_USERS_CHAT_CONTACTS = `${hhhBackendHostname}/api/chat-contacts`;
 export const BACKEND_API_ENDPOINT_FOR_USERS_CHAT_MESSAGES = `${hhhBackendHostname}/api/chat-messages`;
 
+//projects related
 export const BACKEND_API_ENDPOINT_FOR_UPLOADING_PROJECT_ATTACHMENT_FILES = `${hhhBackendHostname}/api/upload/project-attachments`;
+
+// proposals related
+export const BACKEND_API_FOR_UPLOADING_PROPOSAL_IMAGES = `${hhhBackendHostname}/api/uploads/proposalImages`;
+export const BASE_URL_FOR_PROPOSAL_IMAGES = `${hhhBackendHostname}/public/uploads/proposalsImages/raw`;
+export const BACKEND_API_ENDPOINT_FOR_GETTING_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/freelancer`;
