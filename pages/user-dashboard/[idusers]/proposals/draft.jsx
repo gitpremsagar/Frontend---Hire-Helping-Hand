@@ -3,7 +3,10 @@ import { useRouter } from "next/router";
 import AsideLeftOfDashboard from "../../../../components/userDashboard/AsideLeftOfDashboard";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BACKEND_API_ENDPOINT_FOR_GETTING_PROPOSALS_BY_FREELANCER_ID } from "../../../../Services/envVars";
+import {
+  BACKEND_API_ENDPOINT_FOR_GETTING_DRAFT_PROPOSALS_BY_FREELANCER_ID,
+  BACKEND_API_ENDPOINT_FOR_GETTING_PROPOSALS_BY_FREELANCER_ID,
+} from "../../../../Services/envVars";
 import H3 from "./../../../../components/UI/H3";
 import { useSelector } from "react-redux";
 import ProposalCard from "./../../../../components/proposal-detail/ProposalCard";
@@ -23,12 +26,12 @@ export default function OngoingProjectsPage(props) {
 
     try {
       const response = await axios.get(
-        `${BACKEND_API_ENDPOINT_FOR_GETTING_PROPOSALS_BY_FREELANCER_ID}/${freelancerID}`
+        `${BACKEND_API_ENDPOINT_FOR_GETTING_DRAFT_PROPOSALS_BY_FREELANCER_ID}/${freelancerID}`
       );
       setProposals(response.data);
     } catch (error) {
       console.log(
-        "error in fetching proposals by freelancer id = ",
+        "error in fetching draft proposals by freelancer id = ",
         error.message
       );
     }

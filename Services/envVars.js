@@ -42,4 +42,7 @@ export const BACKEND_API_ENDPOINT_FOR_UPLOADING_PROJECT_ATTACHMENT_FILES = `${hh
 // proposals related
 export const BACKEND_API_FOR_UPLOADING_PROPOSAL_IMAGES = `${hhhBackendHostname}/api/uploads/proposalImages`;
 export const BASE_URL_FOR_PROPOSAL_IMAGES = `${hhhBackendHostname}/public/uploads/proposalsImages/raw`;
-export const BACKEND_API_ENDPOINT_FOR_GETTING_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/freelancer`;
+export const BACKEND_API_ENDPOINT_FOR_GETTING_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/all`;
+export const BACKEND_API_ENDPOINT_FOR_GETTING_DRAFT_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/drafts`;
+export const BACKEND_API_ENDPOINT_FOR_GETTING_ACTIVE_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/active`;
+export const BACKEND_API_ENDPOINT_FOR_GETTING_PAUSED_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/paused`;
