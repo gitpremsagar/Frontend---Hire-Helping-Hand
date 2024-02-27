@@ -8,6 +8,7 @@ import ServiceCost from "./ServiceCost";
 import ServiceDeliveryDate from "./ServiceDeliveryDate";
 
 export default function ProposalCard(props) {
+  //the following names corespond to coloumn name in `proposal` table in database
   const {
     proposal_id,
     title,
@@ -16,6 +17,7 @@ export default function ProposalCard(props) {
     average_rating,
     delivery_duration,
     description,
+    mode,
   } = props;
 
   // proposal title
@@ -63,6 +65,7 @@ export default function ProposalCard(props) {
             freelancer_ID={freelancer_ID}
             proposal_ID={proposal_ID}
           />
+          <span>{mode}</span>
         </div>
       </div>
     </div>
