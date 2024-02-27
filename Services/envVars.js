@@ -45,4 +45,4 @@ export const BASE_URL_FOR_PROPOSAL_IMAGES = `${hhhBackendHostname}/public/upload
 export const BACKEND_API_ENDPOINT_FOR_GETTING_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/all`;
 export const BACKEND_API_ENDPOINT_FOR_GETTING_DRAFT_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/freelancer/draft/all`;
 export const BACKEND_API_ENDPOINT_FOR_GETTING_ACTIVE_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/freelancer/active/all`;
-export const BACKEND_API_ENDPOINT_FOR_GETTING_PAUSED_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/paused`;
+export const BACKEND_API_ENDPOINT_FOR_GETTING_PAUSED_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/freelancer/paused/all`;
