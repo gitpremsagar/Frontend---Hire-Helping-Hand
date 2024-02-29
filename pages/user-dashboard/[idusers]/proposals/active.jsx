@@ -9,6 +9,7 @@ import Section from "../../../../components/UI/Section";
 import H3 from "../../../../components/UI/H3";
 import ProposalCard from "../../../../components/proposal-detail/ProposalCard";
 import { Skeleton } from "@mui/material";
+import Card__ProposalPreview from "../../../../components/userDashboard/proposalPreviewCard/Card__ProposalPreview.jsx";
 export default function OngoingProjectsPage(props) {
   const router = useRouter();
 
@@ -58,25 +59,29 @@ export default function OngoingProjectsPage(props) {
                     animation="pulse"
                     variant="rectangular"
                     width={800}
-                    height={400}
+                    height={200}
                   />
                   <Skeleton
                     animation="pulse"
                     variant="rectangular"
                     width={800}
-                    height={400}
+                    height={200}
                   />
                   <Skeleton
                     animation="pulse"
                     variant="rectangular"
                     width={800}
-                    height={400}
+                    height={200}
                   />
                 </div>
               ) : (
                 <div>
                   {activeProposals.map((proposal, index) => {
-                    return <ProposalCard {...proposal} key={index} />;
+                    return (
+                      <div>
+                        <Card__ProposalPreview {...proposal} key={index} />
+                      </div>
+                    );
                   })}
                 </div>
               )}

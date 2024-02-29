@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import ProposalCard from "./../../../../components/proposal-detail/ProposalCard";
 import Section from "../../../../components/UI/Section";
 import { Skeleton } from "@mui/material";
+import Card__ProposalPreview from "../../../../components/userDashboard/proposalPreviewCard/Card__ProposalPreview.jsx";
 export default function OngoingProjectsPage(props) {
   const router = useRouter();
 
@@ -67,25 +68,25 @@ export default function OngoingProjectsPage(props) {
                     animation="pulse"
                     variant="rectangular"
                     width={800}
-                    height={400}
+                    height={200}
                   />
                   <Skeleton
                     animation="pulse"
                     variant="rectangular"
                     width={800}
-                    height={400}
+                    height={200}
                   />
                   <Skeleton
                     animation="pulse"
                     variant="rectangular"
                     width={800}
-                    height={400}
+                    height={200}
                   />
                 </div>
               ) : (
                 <div>
                   {proposals.map((proposal, index) => {
-                    return <ProposalCard {...proposal} key={index} />;
+                    return <Card__ProposalPreview {...proposal} key={index} />;
                   })}
                 </div>
               )}
