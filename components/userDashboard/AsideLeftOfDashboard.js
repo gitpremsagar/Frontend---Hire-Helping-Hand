@@ -13,13 +13,13 @@ export default function AsideLeftOfDashboard() {
       <nav>
         <ul>
           <li>
-            <LiHeading> Projects</LiHeading>
+            <LiHeading>Orders</LiHeading>
             <ul>
               <Link
                 href={`/user-dashboard/${userID}/projects/ongoing-projects`}
               >
                 <a>
-                  <NestedLi>Ongoing</NestedLi>
+                  <NestedLi>Pending</NestedLi>
                 </a>
               </Link>
 
@@ -27,7 +27,7 @@ export default function AsideLeftOfDashboard() {
                 href={`/user-dashboard/${userID}/projects/completed-projects`}
               >
                 <a>
-                  <NestedLi>Completed</NestedLi>
+                  <NestedLi>Delivered</NestedLi>
                 </a>
               </Link>
             </ul>
@@ -36,11 +36,6 @@ export default function AsideLeftOfDashboard() {
           <li>
             <LiHeading> My Proposals</LiHeading>
             <ul>
-              <Link href={`/user-dashboard/${userID}/proposals/all`}>
-                <a>
-                  <NestedLi>All</NestedLi>
-                </a>
-              </Link>
               <Link href={`/user-dashboard/${userID}/proposals/active`}>
                 <a>
                   <NestedLi>Active</NestedLi>
