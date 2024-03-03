@@ -27,7 +27,6 @@ export default function Card__ProposalPreview(props) {
 
         {/* Service offer details */}
         <div className="col-span-4 flex flex-col justify-evenly p-5">
-          This is preview card
           <Title__ProposalPreview {...props} />
           <Cost__ProposalPreview cost={price_basic} />
           <ProfileLink__ProposalPreview freelancer_id={freelancer_id} />
