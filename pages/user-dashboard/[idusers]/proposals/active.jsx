@@ -7,7 +7,6 @@ import axios from "axios";
 import { BACKEND_API_ENDPOINT_FOR_GETTING_ACTIVE_PROPOSALS_BY_FREELANCER_ID } from "../../../../Services/envVars";
 import Section from "../../../../components/UI/Section";
 import H3 from "../../../../components/UI/H3";
-import ProposalCard from "../../../../components/proposal-detail/ProposalCard";
 import { Skeleton } from "@mui/material";
 import Card__ProposalPreview from "../../../../components/userDashboard/proposalPreviewCard/Card__ProposalPreview.jsx";
 export default function OngoingProjectsPage(props) {
@@ -29,6 +28,7 @@ export default function OngoingProjectsPage(props) {
         `${BACKEND_API_ENDPOINT_FOR_GETTING_ACTIVE_PROPOSALS_BY_FREELANCER_ID}/${freelancerID}`
       );
       setActiveProposals(response.data);
+      console.log("active proposals = ", response.data);
       setIsLoaading(false);
     } catch (error) {
       console.log("Error in fetching active proposals = ", error.message);

@@ -36,9 +36,9 @@ export default function becomeFreelancer() {
     proposalTitle: "",
     proposalID: "",
     proposalDescription: "",
-    topLevelCategoryID: 1,
-    midLevelCategoryID: 1,
-    bottomLevelCategoryID: 1,
+    topLevelCategoryID: 1, //FIXME: remove this default value
+    midLevelCategoryID: 1, //FIXME: remove this default value
+    bottomLevelCategoryID: 1, //FIXME: remove this default value
     proposalCost: 0,
     proposalDeliveryDuration: 0,
     heroImageName: "",
@@ -177,6 +177,51 @@ export default function becomeFreelancer() {
     }
   }, [proposal]);
 
+  // handle save to draft button click
+  const saveToDraft = () => {
+    //is there anything to upload?
+    if (proposal.proposalTitle != "" && proposalUpdateCounter > 2) {
+      console.log("saving changes!");
+      // if this is a new proposal then post it otherwise update it
+      if (proposal.proposalID === "") {
+        console.log("firstTimeSaveAsDraft");
+        postNewProposalToAPI("draft");
+      } else {
+        console.log("updateSaveAsDraft");
+        updateProposalToAPI("draft");
+      }
+    } else {
+      console.log("there is no title to save");
+    }
+  };
+
+  // handle publish button click
+  const publishProposal = () => {
+    //check if proposal state's title, description, cost, delivery duration, top level category, mid level category, bottom level category are not empty
+    if (
+      proposal.proposalTitle != "" &&
+      proposal.proposalDescription != "" &&
+      proposal.proposalCost != 0 &&
+      proposal.proposalDeliveryDuration != 0 &&
+      proposal.topLevelCategoryID != "" && //FIXME: remove this default value
+      proposal.midLevelCategoryID != "" && //FIXME: remove this default value
+      proposal.bottomLevelCategoryID != "" //FIXME: remove this default value
+    ) {
+      // if this is a new proposal then post it otherwise update it
+      if (proposal.proposalID === "") {
+        console.log("firstTimeSaveAsPublished");
+        postNewProposalToAPI("published");
+      } else {
+        console.log("updateSaveAsPublished");
+        updateProposalToAPI("published");
+      }
+    } else {
+      alert(
+        "Please fill all the required fields before publishing the proposal"
+      );
+    }
+  };
+
   return (
     <div>
       <Head>
@@ -237,19 +282,10 @@ export default function becomeFreelancer() {
           </div>
         </Section>
         <div className="flex justify-center bg-gray-800 w-full p-20">
-          <ButtonPrimary
-            className={`mr-5`}
-            onClickHandler={() => {
-              postNewProposalToAPI("draft");
-            }}
-          >
+          <ButtonPrimary className={`mr-5`} onClickHandler={saveToDraft}>
             Save to Draft
           </ButtonPrimary>
-          <ButtonPrimary
-            onClickHandler={() => {
-              postNewProposalToAPI("published");
-            }}
-          >
+          <ButtonPrimary onClickHandler={publishProposal}>
             Publish
           </ButtonPrimary>
         </div>
