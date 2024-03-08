@@ -3,6 +3,7 @@ import Thumbnail__ProposalPreview from "./Thumbnail__ProposalPreview";
 import Title__ProposalPreview from "./Title__ProposalPreview";
 import ProfileLink__ProposalPreview from "./ProfileLink__ProposalPreview";
 import Description__ProposalPreview from "./Description__ProposalPreview";
+import Link from "next/link";
 
 export default function Card__ProposalPreview(props) {
   //the following names corespond to coloumn name in `proposal` table in database
@@ -31,7 +32,25 @@ export default function Card__ProposalPreview(props) {
           <Cost__ProposalPreview cost={price_basic} />
           <ProfileLink__ProposalPreview freelancer_id={freelancer_id} />
           <Description__ProposalPreview description={description} />
-          <span>{mode}</span>
+          {/* show edit button if mode is `draft` */}
+          {mode === "draft" && (
+            <div className="flex justify-end gap-5">
+              {/* preview button link to preview page*/}
+              <Link
+                href={`/proposal-detail/proposal-preview-of-draft/${proposal_id}`}
+              >
+                <button className="px-3 py-1 text-white bg-blue-500 rounded">
+                  Preview
+                </button>
+              </Link>
+
+              {/* edit button */}
+              <button className="px-3 py-1 text-white bg-blue-500 rounded">
+                Edit
+              </button>
+            </div>
+          )}
+          {/* <span>{mode}</span> */}
         </div>
       </div>
     </div>

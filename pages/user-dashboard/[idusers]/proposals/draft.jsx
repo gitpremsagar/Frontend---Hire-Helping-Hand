@@ -35,6 +35,7 @@ export default function OngoingProjectsPage(props) {
         `${BACKEND_API_ENDPOINT_FOR_GETTING_DRAFT_PROPOSALS_BY_FREELANCER_ID}/${freelancerID}`
       );
       setProposals(response.data);
+      console.log("draft proposals = ", response.data);
       setIsLoading(false);
     } catch (error) {
       console.log(
@@ -85,9 +86,19 @@ export default function OngoingProjectsPage(props) {
                 </div>
               ) : (
                 <div>
-                  {proposals.map((proposal, index) => {
-                    return <Card__ProposalPreview {...proposal} key={index} />;
-                  })}
+                  {/* render proposals only if available */}
+                  {proposals.length > 0 ? (
+                    <div className="">
+                      {proposals.map((proposal) => (
+                        <Card__ProposalPreview
+                          key={proposal.id}
+                          {...proposal}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <p>No draft proposals are available</p>
+                  )}
                 </div>
               )}
             </Section>
