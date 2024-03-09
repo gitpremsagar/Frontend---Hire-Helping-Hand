@@ -45,9 +45,11 @@ export default function Card__ProposalPreview(props) {
               </Link>
 
               {/* edit button */}
-              <button className="px-3 py-1 text-white bg-blue-500 rounded">
-                Edit
-              </button>
+              <Link href={`/sell-service/edit-proposal/${proposal_id}`}>
+                <button className="px-3 py-1 text-white bg-green-500 rounded">
+                  Edit
+                </button>
+              </Link>
             </div>
           )}
           {/* <span>{mode}</span> */}

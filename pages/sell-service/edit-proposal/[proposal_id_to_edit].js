@@ -1,37 +1,45 @@
-// TODO: Save proposal automatically as draft on every change after 10 second idle timeout
 // TODO: publish proposal then redirect user to dashboard
+// TODO: save proposal to draft then redirect user to dashboard
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import FormElementContainer from "../../components/UI/FormElementContainer";
-import ButtonPrimary from "./../../components/UI/ButtonPrimary";
-import Section from "./../../components/UI/Section";
-import ProposalImageSection from "../../components/sellService/ProposalImageSection";
-import RequirmentDetails from "../../components/sellService/RequirmentDetails";
-import SetTags from "../../components/sellService/SetTags";
-import SetFaqs from "../../components/sellService/setFAQs";
+import FormElementContainer from "../../../components/UI/FormElementContainer";
+import ButtonPrimary from "../../../components/UI/ButtonPrimary";
+import Section from "../../../components/UI/Section";
+import ProposalImageSection from "../../../components/sellService/ProposalImageSection";
+import RequirmentDetails from "../../../components/sellService/RequirmentDetails";
+import SetTags from "../../../components/sellService/SetTags";
+import SetFaqs from "../../../components/sellService/setFAQs";
 import axios from "axios";
 import {
   BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES,
   BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES,
   BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES,
   envVars,
-} from "../../Services/envVars";
-import SetTitle from "../../components/sellService/SetTitle";
-import SetDescription from "../../components/sellService/SetDescription";
-import SetCost from "../../components/sellService/SetCost";
-import SetDeliveryDuration from "../../components/sellService/SetDeliveryDuration";
-import SetAdditionalService from "../../components/sellService/SetAdditionalServices";
-import SetCategories from "../../components/sellService/setCategories";
+} from "../../../Services/envVars";
+import SetTitle from "../../../components/sellService/SetTitle";
+import SetDescription from "../../../components/sellService/SetDescription";
+import SetCost from "../../../components/sellService/SetCost";
+import SetDeliveryDuration from "../../../components/sellService/SetDeliveryDuration";
+import SetAdditionalService from "../../../components/sellService/SetAdditionalServices";
+import SetCategories from "../../../components/sellService/setCategories";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setTopLevelCategories,
   setMidLevelCategories,
   setBottomLevelCategories,
-} from "../../redux/categoriesSlice";
-import H1 from "../../components/UI/H1";
-import H6 from "../../components/UI/H6";
+} from "../../../redux/categoriesSlice";
+import H1 from "../../../components/UI/H1";
+import H6 from "../../../components/UI/H6";
+import { useRouter } from "next/router";
 
 export default function becomeFreelancer() {
+  // get proposal_id_to_edit from url
+  const router = useRouter();
+  const { proposal_id_to_edit } = router.query;
+
+  // get token from redux state
+  const token = useSelector((state) => state.authSlice.jwtToken);
+
   const [proposal, setProposal] = useState({
     proposalTitle: "",
     proposalID: "",
@@ -54,6 +62,32 @@ export default function becomeFreelancer() {
       },
     ],
   });
+
+  // fetch proposal details from API, send token with the request
+  useEffect(() => {
+    if (proposal_id_to_edit === undefined || token === null) {
+      return;
+    }
+
+    async function fetchProposalDetails() {
+      try {
+        const response = await axios(
+          `${envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS}/${proposal_id_to_edit}`,
+          {
+            headers: {
+              "x-auth-token": token,
+            },
+          }
+        );
+        console.log("response = ", response.data);
+        setProposal(response.data);
+      } catch (error) {
+        // alert("Error: " + error.message);
+        console.log(error);
+      }
+    }
+    fetchProposalDetails();
+  }, [proposal_id_to_edit, token]);
 
   const [proposalUpdateCounter, setProposalUpdateCounter] = useState(0); //proposalUpdateCounter to avoid msg prompt on page load
   const [timer, setTimer] = useState(null); //timer to autopost the proposal
@@ -115,7 +149,6 @@ export default function becomeFreelancer() {
   }, [proposal]);
 
   //post this proposal to API
-  const token = useSelector((state) => state.authSlice.jwtToken);
   async function postNewProposalToAPI(mode) {
     console.log("Post called!");
     try {
@@ -225,7 +258,7 @@ export default function becomeFreelancer() {
   return (
     <div>
       <Head>
-        <title>Sell Freelancing Service</title>
+        <title>Editing Proposal</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -233,7 +266,7 @@ export default function becomeFreelancer() {
         <Section className="flex justify-center items-center min-h-screen bg-gray-900">
           <div>
             <div className="bg-gray-800 text-white p-5 sm:p-10 md:p-15 lg:p-20 mb-5 sm:mb-10 md:mb-15 lg:mb-20 rounded-lg overflow-hidden">
-              <H1 className="text-center">Create New Proposal</H1>
+              <H1 className="text-center">Edit Proposal </H1>
               <H6
                 className={`text-center mt-2 sm:mt-3 md:mt-4 lg:mt-5 text-yellow-300`}
               >
