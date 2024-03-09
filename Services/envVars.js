@@ -46,3 +46,9 @@ export const BACKEND_API_ENDPOINT_FOR_GETTING_PROPOSALS_BY_FREELANCER_ID = `${hh
 export const BACKEND_API_ENDPOINT_FOR_GETTING_DRAFT_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/freelancer/draft/all`;
 export const BACKEND_API_ENDPOINT_FOR_GETTING_ACTIVE_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/freelancer/active/all`;
 export const BACKEND_API_ENDPOINT_FOR_GETTING_PAUSED_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/freelancer/paused/all`;
+// export const BACKEND_API_ENDPOINT_FOR_GETTING_COMPLETED_PROPOSALS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/proposals/freelancer/completed/all`;
+// export const BACKEND_API_ENDPOINT_FOR_GETTING_PROPOSALS_BY_CLIENT_ID = `${hhhBackendHostname}/api/proposals/client/all`;
+
+// ongoing projects related
+// export const BACKEND_API_ENDPOINT_FOR_GETTING_ONGOING_PROJECTS_BY_CLIENT_ID = `${hhhBackendHostname}/api/on-going-projects/client/all`;
+export const BACKEND_API_ENDPOINT_FOR_GETTING_ONGOING_PROJECTS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/on-going-projects/freelancer`;

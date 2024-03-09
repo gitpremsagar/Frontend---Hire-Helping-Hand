@@ -7,10 +7,19 @@ import Section from "./../../../components/UI/Section";
 import { useEffect, useState } from "react";
 import ProjectCardForFreelancer from "../../../components/userDashboard/ProjectCardForFreelancer/ProjectCardForFreelancer";
 import axios from "axios";
+import { BACKEND_API_ENDPOINT_FOR_GETTING_ONGOING_PROJECTS_BY_FREELANCER_ID } from "../../../Services/envVars";
+// import { authSlice } from './../../../redux/authSlice';
+import { useSelector } from "react-redux";
+
 export default function UserDashboardPage(props) {
   const router = useRouter();
+  const freelancer_id = router.query.idusers;
 
-  const { loggedInUserInfo } = props;
+  // const { loggedInUserInfo } = props;
+
+  // get token from redux store
+  const token = useSelector((state) => state.authSlice.jwtToken);
+
   const [onGoingProjects, setOngoingProjects] = useState([
     {
       id: 4,
@@ -37,16 +46,30 @@ export default function UserDashboardPage(props) {
 
   // fetch the ongoing projects from the backend using axios
   useEffect(() => {
-    // FIXME: This is a temporary solution. We will replace this with the actual data from the backend
+    console.log("freelancer_id from url: ", freelancer_id);
+    console.log("token from redux store: ", token);
+    // return if freelancer_id or token is not available
+    if (!freelancer_id || !token) {
+      return;
+    }
+
     axios
-      .get("http://localhost:3000/api/projects")
+      .get(
+        `${BACKEND_API_ENDPOINT_FOR_GETTING_ONGOING_PROJECTS_BY_FREELANCER_ID}/${freelancer_id}`,
+        {
+          headers: {
+            "x-auth-token": token,
+          },
+        }
+      )
       .then((response) => {
-        setOngoingProjects(response.data);
+        console.log("ongoing projects request response.data: ", response.data);
+        // setOngoingProjects(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [freelancer_id, token]);
 
   return (
     <div className="">
