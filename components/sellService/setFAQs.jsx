@@ -3,19 +3,9 @@ import FAQ from "./FAQ";
 import InputText from "../UI/InputText";
 import ButtonPrimary from "../UI/ButtonPrimary";
 import H5 from "../UI/H5";
+import Section from "../UI/Section";
 
 export default function SetFaqs({ proposal, setProposal }) {
-  const [faqs, setFaqs] = useState([]);
-
-  //   update the proposal
-  useEffect(() => {
-    setProposal((prev) => {
-      const updatedProposal = { ...prev };
-      updatedProposal.faqs = faqs;
-      return updatedProposal;
-    });
-  }, [faqs]);
-
   //   refferences for input fields
   const faqQuestionInputRef = useRef();
   const faqAnswerInputRef = useRef();
@@ -26,29 +16,40 @@ export default function SetFaqs({ proposal, setProposal }) {
       question: faqQuestionInputRef.current.value,
       answer: faqAnswerInputRef.current.value,
     };
-    setFaqs([...faqs, newFaq]);
+
+    // update the proposal.faqs[] array
+    setProposal({
+      ...proposal,
+      faqs: [...proposal.faqs, newFaq],
+    });
+
     faqQuestionInputRef.current.value = "";
     faqAnswerInputRef.current.value = "";
   }
 
   function deleteFaq(index) {
-    setFaqs(faqs.filter((faq, i) => i !== index));
+    const newFaqs = proposal.faqs.filter((faq, i) => i !== index);
+    setProposal({
+      ...proposal,
+      faqs: newFaqs,
+    });
   }
 
   return (
-    <div className="text-white">
-      {/* map FAQs */}
-      {faqs &&
-        faqs.map((faq, index) => {
-          return (
-            <FAQ faq={faq} key={index} index={index} deleteFaq={deleteFaq} />
-          );
-        })}
-
+    <Section className="text-white">
       {/* form to add more faqs */}
       <div className="flex flex-col md:gap-2 justify-center">
-        <H5>Add Frequently Asked Questions:</H5>
-        <div className="flex items-center gap-2">
+        <H5 className={`mb-10`}>Add Frequently Asked Questions:</H5>
+        {/* map FAQs */}
+        {proposal.faqs &&
+          proposal.faqs.map((faq, index) => {
+            return (
+              <FAQ faq={faq} key={index} index={index} deleteFaq={deleteFaq} />
+            );
+          })}
+
+        {/* faq form to add new faqs */}
+        <div className="flex items-center gap-2 mt-5">
           <label className="min-w-fit" htmlFor="faqQuestion">
             Question :{" "}
           </label>
@@ -75,6 +76,6 @@ export default function SetFaqs({ proposal, setProposal }) {
 
         <ButtonPrimary onClickHandler={handleAddFaq}>Add FAQ</ButtonPrimary>
       </div>
-    </div>
+    </Section>
   );
 }
