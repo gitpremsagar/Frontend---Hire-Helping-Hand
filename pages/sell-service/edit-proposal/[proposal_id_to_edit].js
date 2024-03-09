@@ -70,6 +70,7 @@ export default function becomeFreelancer() {
     }
 
     async function fetchProposalDetails() {
+      console.log("fetching proposal details");
       try {
         const response = await axios(
           `${envVars.BACKEND_API_ENDPOINT_FOR_PROPOSALS}/${proposal_id_to_edit}`,
@@ -79,8 +80,62 @@ export default function becomeFreelancer() {
             },
           }
         );
-        console.log("response = ", response.data);
-        setProposal(response.data);
+        // console.log("response = ", response.data);
+        // response sample
+        //   {
+        //     "proposal_id": 131,
+        //     "title": "this is test title",
+        //     "description": "test descriton",
+        //     "top_level_category": "Programming & Tech",
+        //     "mid_level_category": "Web Development",
+        //     "price_basic": "4.00",
+        //     "price_medium": null,
+        //     "price_top": null,
+        //     "created_at": "2024-03-08T05:23:07.000Z",
+        //     "updated_at": "2024-03-08T05:28:40.000Z",
+        //     "freelancer_id": 21,
+        //     "thumbnail_links": [],
+        //     "faqs": [],
+        //     "tags": "",
+        //     "requirements_detail": [],
+        //     "delivery_duration": 3,
+        //     "average_rating": null,
+        //     "is_blacklisted": 0,
+        //     "is_top_rated": 0,
+        //     "total_customers_served": null,
+        //     "freelancer_location": null,
+        //     "number_of_clicks": 0,
+        //     "number_of_appearance_in_search": 0,
+        //     "number_of_times_search_term_appear": 0,
+        //     "bottom_level_category": "Front-End Development",
+        //     "mode": "draft",
+        //     "heroImageName": ""
+        // }
+
+        // convert tags string into array
+        response.data.tags = response.data.tags.split(",");
+
+        // update proposal state with fetched proposal details
+        setProposal((prevProposal) => {
+          const newProposal = { ...prevProposal };
+          newProposal.proposalID = response.data.proposal_id;
+          newProposal.proposalTitle = response.data.title;
+          newProposal.proposalDescription = response.data.description;
+          (newProposal.topLevelCategoryID = 1), //response.data.top_level_category;
+            (newProposal.midLevelCategoryID = 1), //response.data.mid_level_category;
+            (newProposal.bottomLevelCategoryID = 1),
+            //response.data.bottom_level_category;
+            (newProposal.proposalCost = response.data.price_basic);
+          newProposal.proposalDeliveryDuration =
+            response.data.delivery_duration;
+          newProposal.heroImageName = response.data.heroImageName;
+          newProposal.extraImagesName = response.data.thumbnail_links;
+          newProposal.requirements = response.data.requirements_detail;
+          newProposal.tags = response.data.tags;
+          newProposal.faqs = response.data.faqs;
+          newProposal.extraServices = response.data.extraServices;
+          return newProposal;
+        });
       } catch (error) {
         // alert("Error: " + error.message);
         console.log(error);
@@ -126,7 +181,7 @@ export default function becomeFreelancer() {
     //create new timer
     const newTimer = setTimeout(() => {
       //is there anything to upload?
-      if (proposal.proposalTitle != "" && proposalUpdateCounter > 2) {
+      if (proposal.proposalTitle != "") {
         console.log("saving changes!");
         // if this is a new proposal then post it otherwise update it
         if (proposal.proposalID === "") {
@@ -171,7 +226,7 @@ export default function becomeFreelancer() {
         return newProposal;
       });
     } catch (e) {
-      alert("Error Occerered: \n" + e.message);
+      // alert("Error Occerered: \n" + e.message);
       console.log(e);
     }
   }
@@ -196,7 +251,7 @@ export default function becomeFreelancer() {
       // proposal updated
       console.log("proposal update response = ", response.data);
     } catch (e) {
-      alert("Error Occerered: \n" + e.message);
+      // alert("Error Occerered: \n" + e.message);
       console.log(e);
     }
   }

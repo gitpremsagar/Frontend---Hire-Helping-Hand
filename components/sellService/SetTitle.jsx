@@ -30,6 +30,7 @@ export default function SetTitle({ proposal, setProposal }) {
         className="w-full"
         onChangeHandler={handleProposalTitleChange}
         inputRef={proposalTitleRef}
+        value={proposal.proposalTitle}
       />
     </FormElementContainer>
   );
