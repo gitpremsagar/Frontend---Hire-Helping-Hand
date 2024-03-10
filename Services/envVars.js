@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 const hhhBackendHostname = "http://localhost:4040";
 
 export const envVars = {
@@ -53,3 +55,14 @@ export const BACKEND_API_ENDPOINT_FOR_GETTING_ACTIVE_PROPOSALS_BY_FREELANCER_ID 
 // ongoing projects related
 // export const BACKEND_API_ENDPOINT_FOR_GETTING_ONGOING_PROJECTS_BY_CLIENT_ID = `${hhhBackendHostname}/api/on-going-projects/client/all`;
 export const BACKEND_API_ENDPOINT_FOR_GETTING_ONGOING_PROJECTS_BY_FREELANCER_ID = `${hhhBackendHostname}/api/on-going-projects/freelancer`;
+
+export const REDIRECT_TO_LOGIN_PAGE_IF_NO_TOKEN_PRESENT = () => {
+  //redirect to login page if token is not present
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      alert("Please login first!");
+      window.location.href = "/login";
+    }
+  }, []);
+};

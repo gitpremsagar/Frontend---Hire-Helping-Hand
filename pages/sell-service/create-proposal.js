@@ -14,6 +14,7 @@ import {
   BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES,
   BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES,
   BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES,
+  REDIRECT_TO_LOGIN_PAGE_IF_NO_TOKEN_PRESENT,
   envVars,
 } from "../../Services/envVars";
 import SetTitle from "../../components/sellService/SetTitle";
@@ -32,6 +33,14 @@ import H1 from "../../components/UI/H1";
 import H6 from "../../components/UI/H6";
 
 export default function becomeFreelancer() {
+  const token = useSelector((state) => state.authSlice.jwtToken);
+  // log token with useEffect
+  useEffect(() => {
+    console.log("token = ", token);
+  }, [token]);
+
+  REDIRECT_TO_LOGIN_PAGE_IF_NO_TOKEN_PRESENT();
+
   const [proposal, setProposal] = useState({
     proposalTitle: "",
     proposalID: "",
@@ -115,7 +124,6 @@ export default function becomeFreelancer() {
   }, [proposal]);
 
   //post this proposal to API
-  const token = useSelector((state) => state.authSlice.jwtToken);
   async function postNewProposalToAPI(mode) {
     console.log("Post called!");
     try {

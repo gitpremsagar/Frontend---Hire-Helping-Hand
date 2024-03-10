@@ -48,8 +48,8 @@ function MyApp({ Component, pageProps }) {
       });
   }
 
+  //verify token before storing it into loggedInUserInfo stateHook
   useEffect(() => {
-    //verify token before storing it into loggedInUserInfo stateHook
     const token = window.localStorage.getItem("token");
     if (token) {
       setJwt(token);

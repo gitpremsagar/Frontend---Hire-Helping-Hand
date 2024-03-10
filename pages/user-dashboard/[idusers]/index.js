@@ -1,6 +1,5 @@
 import Head from "next/head";
 import AsideLeftOfDashboard from "../../../components/userDashboard/AsideLeftOfDashboard";
-import { useRouter } from "next/router";
 import H1 from "./../../../components/UI/H1";
 import Section from "./../../../components/UI/Section";
 
@@ -12,13 +11,10 @@ import { BACKEND_API_ENDPOINT_FOR_GETTING_ONGOING_PROJECTS_BY_FREELANCER_ID } fr
 import { useSelector } from "react-redux";
 
 export default function UserDashboardPage(props) {
-  const router = useRouter();
-  const freelancer_id = router.query.idusers;
-
-  // const { loggedInUserInfo } = props;
-
   // get token from redux store
   const token = useSelector((state) => state.authSlice.jwtToken);
+  // get freelancer_id from redux store
+  const freelancer_id = useSelector((state) => state.authSlice.userid);
 
   const [onGoingProjects, setOngoingProjects] = useState([
     {
@@ -44,10 +40,8 @@ export default function UserDashboardPage(props) {
     },
   ]);
 
-  // fetch the ongoing projects from the backend using axios
+  // fetch the ongoing projects from the backend
   useEffect(() => {
-    console.log("freelancer_id from url: ", freelancer_id);
-    console.log("token from redux store: ", token);
     // return if freelancer_id or token is not available
     if (!freelancer_id || !token) {
       return;

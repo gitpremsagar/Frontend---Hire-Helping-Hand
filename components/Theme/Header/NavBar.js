@@ -107,7 +107,7 @@ export default function Navbar(props) {
               <Link
                 href={
                   loggedInUserInfo
-                    ? `/sell-service/${loggedInUserInfo.idusers}`
+                    ? `/sell-service/create-proposal`
                     : `/sell-service`
                 }
               >

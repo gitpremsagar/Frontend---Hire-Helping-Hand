@@ -21,11 +21,9 @@ export default function ProjectCardForFreelancer({ project }) {
           className="border border-gray-300 rounded p-2 mr-4"
           defaultValue="notStarted"
         >
+          <option value="notStarted">Not Started</option>
           <option value="inProgress">In Progress</option>
           <option value="completed">Completed</option>
-          <option value="notStarted" selected>
-            Not Started
-          </option>
         </select>
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           View Details

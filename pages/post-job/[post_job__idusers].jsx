@@ -15,6 +15,7 @@ import {
   BACKEND_API_ENDPOINT_FOR_TOP_LEVEL_CATEGORIES,
   BACKEND_API_ENDPOINT_FOR_MID_LEVEL_CATEGORIES,
   BACKEND_API_ENDPOINT_FOR_BOTTOM_LEVEL_CATEGORIES,
+  REDIRECT_TO_LOGIN_PAGE_IF_NO_TOKEN_PRESENT,
 } from "../../Services/envVars";
 
 import {
@@ -29,6 +30,8 @@ import ButtonPrimary from "../../components/UI/ButtonPrimary";
 import SetProjectThumbnail from "../../components/post-job/SetProjectThumbnail";
 
 export default function becomeFreelancer() {
+  REDIRECT_TO_LOGIN_PAGE_IF_NO_TOKEN_PRESENT();
+
   const [projectID, setProjectID] = useState(false);
   const [projectUpdateCounter, setProjectUpdateCounter] = useState(0);
   const [timer, setTimer] = useState(null);
