@@ -122,9 +122,7 @@ export default function Navbar(props) {
               {/* FIXME: put user id on link */}
               <Link
                 href={
-                  loggedInUserInfo
-                    ? `/post-job/${loggedInUserInfo.idusers}`
-                    : `/post-job`
+                  loggedInUserInfo ? `/post-job/create-project` : `/post-job`
                 }
               >
                 <a className=" flex items-center">

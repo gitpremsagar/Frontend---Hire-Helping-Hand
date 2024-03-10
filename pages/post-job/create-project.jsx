@@ -25,7 +25,7 @@ import {
 } from "../../redux/categoriesSlice";
 import SetRequiredSkills from "../../components/post-job/SetRequiredSkills";
 import AttachFiles from "../../components/post-job/AttachFiles";
-import SetProjectTags from "./../../components/post-job/SetProjectTags";
+import SetProjectTags from "../../components/post-job/SetProjectTags";
 import ButtonPrimary from "../../components/UI/ButtonPrimary";
 import SetProjectThumbnail from "../../components/post-job/SetProjectThumbnail";
 
@@ -134,7 +134,7 @@ export default function becomeFreelancer() {
   return (
     <div>
       <Head>
-        <title>Post a job</title>
+        <title>Post Job</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -142,13 +142,13 @@ export default function becomeFreelancer() {
         <Section className="flex justify-center items-center min-h-screen bg-gray-900">
           <div className="w-full">
             <div className="bg-gray-800 text-white p-5 sm:p-10 md:p-15 lg:p-20 mb-5 sm:mb-10 md:mb-15 lg:mb-20 rounded-lg overflow-hidden ">
-              <H1 className="text-center">Create New Project</H1>
+              <H1 className="text-center">Create New Project (JOB)</H1>
               <H6
                 className={`text-center mt-2 sm:mt-3 md:mt-4 lg:mt-5 text-yellow-300`}
               >
-                Project is a detailed information of the kind of freelancing
-                service you need and the amount you are willing to pay for the
-                service you need.
+                Project (Job) is a detailed information of the kind of
+                freelancing service you need and the amount you are willing to
+                pay for the service you need.
               </H6>
             </div>
             <form>
