@@ -76,13 +76,16 @@ export default function OngoingProjectsPage(props) {
                 </div>
               ) : (
                 <div>
-                  {activeProposals.map((proposal, index) => {
-                    return (
-                      <div>
-                        <Card__ProposalPreview {...proposal} key={index} />
-                      </div>
-                    );
-                  })}
+                  {/* rendre active proposals */}
+                  {activeProposals.length > 0 ? (
+                    activeProposals.map((proposal) => (
+                      <Card__ProposalPreview key={proposal.id} {...proposal} />
+                    ))
+                  ) : (
+                    <H3 className={`text-center text-green-600`}>
+                      No active proposals found.
+                    </H3>
+                  )}
                 </div>
               )}
             </Section>

@@ -62,7 +62,7 @@ export default function OngoingProjectsPage(props) {
         <div className="col-span-10">
           <main className="">
             <Section>
-              <H3>Following is the list of proposals created by you:</H3>
+              <H3>Draft proposals created by you:</H3>
               {isLoading ? (
                 <div className="min-h-screen flex flex-col gap-10">
                   <Skeleton
@@ -97,7 +97,9 @@ export default function OngoingProjectsPage(props) {
                       ))}
                     </div>
                   ) : (
-                    <p>No draft proposals are available</p>
+                    <H3 className={`text-center text-green-600`}>
+                      You do not have any proposal saved as draft
+                    </H3>
                   )}
                 </div>
               )}

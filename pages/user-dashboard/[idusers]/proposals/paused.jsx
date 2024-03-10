@@ -7,13 +7,13 @@ import axios from "axios";
 import { BACKEND_API_ENDPOINT_FOR_GETTING_PAUSED_PROPOSALS_BY_FREELANCER_ID } from "../../../../Services/envVars";
 import Section from "../../../../components/UI/Section";
 import H3 from "../../../../components/UI/H3";
-import ProposalCard from "../../../../components/proposal-detail/ProposalCard";
 import { Skeleton } from "@mui/material";
 import Card__ProposalPreview from "../../../../components/userDashboard/proposalPreviewCard/Card__ProposalPreview.jsx";
+
 export default function OngoingProjectsPage(props) {
   const router = useRouter();
 
-  const [activeProposals, setActiveProposals] = useState([]);
+  const [pausedProposal, setPausedProposal] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // get userID from the redux store
@@ -28,7 +28,8 @@ export default function OngoingProjectsPage(props) {
       const response = await axios.get(
         `${BACKEND_API_ENDPOINT_FOR_GETTING_PAUSED_PROPOSALS_BY_FREELANCER_ID}/${freelancerID}`
       );
-      setActiveProposals(response.data);
+      console.log("paused proposals = ", response.data);
+      setPausedProposal(response.data);
       setIsLoading(false);
     } catch (error) {
       console.log("Error in fetching paused proposals = ", error.message);
@@ -76,9 +77,19 @@ export default function OngoingProjectsPage(props) {
                 </div>
               ) : (
                 <div>
-                  {activeProposals.map((proposal, index) => {
-                    return <Card__ProposalPreview {...proposal} key={index} />;
-                  })}
+                  {pausedProposal.length > 0 ? (
+                    pausedProposal.map((proposal, index) => {
+                      return (
+                        <div>
+                          <Card__ProposalPreview {...proposal} key={index} />
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="text-center text-green-600">
+                      <H3>None of your proposals is paused.</H3>
+                    </div>
+                  )}
                 </div>
               )}
             </Section>
