@@ -5,8 +5,12 @@ import {
   BASE_URL_FOR_PROPOSAL_IMAGES,
 } from "../../Services/envVars";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export default function HeroImageBox({ proposal, setProposal }) {
+  // get token from the redux store
+  const token = useSelector((state) => state.authSlice.jwtToken);
+
   const [imageURL, setImageURL] = useState(
     proposal.heroImageName === ""
       ? ``
@@ -29,6 +33,8 @@ export default function HeroImageBox({ proposal, setProposal }) {
       // upload the image
       const formData = new FormData();
       formData.append("proposalHeroImage", image);
+      formData.append("proposal_id", proposal.proposalID);
+      formData.append("serial_number", 1);
 
       try {
         const response = await axios(
@@ -37,7 +43,7 @@ export default function HeroImageBox({ proposal, setProposal }) {
             method: "POST",
             data: formData,
             headers: {
-              "x-auth-token": "token", //FIXME: provide auth token
+              "x-auth-token": token,
             },
           }
         );
@@ -59,6 +65,7 @@ export default function HeroImageBox({ proposal, setProposal }) {
 
     fileInput.click();
   }
+
   return (
     <div>
       {isImageAvailable ? (

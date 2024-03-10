@@ -34,10 +34,6 @@ import H6 from "../../components/UI/H6";
 
 export default function becomeFreelancer() {
   const token = useSelector((state) => state.authSlice.jwtToken);
-  // log token with useEffect
-  useEffect(() => {
-    console.log("token = ", token);
-  }, [token]);
 
   REDIRECT_TO_LOGIN_PAGE_IF_NO_TOKEN_PRESENT();
 
