@@ -47,7 +47,7 @@ export default function becomeFreelancer() {
     proposalCost: 0,
     proposalDeliveryDuration: 0,
     heroImageName: "",
-    extraImagesName: [],
+    extraImagesName: ["one", "two"],
     requirements: [],
     tags: [],
     faqs: [],
