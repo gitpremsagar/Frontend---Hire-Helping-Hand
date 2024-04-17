@@ -17,7 +17,8 @@ export default function ProposalImageSection({ proposal, setProposal }) {
           return <ImageBox key={index} imageName={extraImage} />;
         })}
 
-        <UploadImageButton />
+        {/* render upload button */}
+        <UploadImageButton proposal={proposal} setProposal={setProposal} />
       </div>
     </Section>
   );
